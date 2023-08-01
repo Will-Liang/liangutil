@@ -79,3 +79,67 @@ class MySQLUtils:
         except Exception as e:
             return e
 
+
+    def query_data(self, table_name, columns=[], condition=None):
+        """
+        查询数据的方法
+        :param table_name: 表名
+        :param columns: 要查询的列名列表，如果为[]，则查询所有列
+        :param condition: 查询条件，可以为 None
+        :return: 随机返回一条结果，结果是字典
+        """
+        try:
+            cursor = self.conn.cursor()
+
+            if len(columns) == 0:
+                columns_str = "*"
+            else:
+                columns_str = ', '.join(columns)
+
+            sql = f"SELECT {columns_str} FROM {table_name}"
+            if condition:
+                sql += f" WHERE {condition} order by rand() limit 1"
+            cursor.execute(sql)
+            result = cursor.fetchone()[0]
+            cursor.close()
+            return result
+        except:
+            cursor.close()
+            return None
+
+    def query_datas(self, table_name, columns=None, condition=None):
+        """
+        查询数据的方法
+        :param table_name: 表名
+        :param columns: 要查询的列名列表，如果为[]，则查询所有列
+        :param condition: 查询条件，可以为 None
+        :return:查询结果元组，每条记录为一个字典
+        """
+        try:
+            cursor = self.conn.cursor()
+            if columns is None:
+                columns = []
+
+            columns_str = "*" if len(columns) == 0 else ', '.join(columns)
+            sql = f"SELECT {columns_str} FROM {table_name}"
+            if condition:
+                sql += f" WHERE {condition}"
+            cursor.execute(sql)
+            result = cursor.fetchall()
+            cursor.close()
+            return result
+        except Exception as e:
+            print_log("ERROR",e)
+            return None
+        finally:
+            cursor.close()
+
+    def exists_data(self, table_name, columns=None, condition=None):
+        if columns is None:
+            columns = []
+        if condition is None:
+            print_log("WARNING", "You didn't pass in a condition parameter, so it's pointless")
+        datas = self.query_data(table_name, columns, condition)
+        if datas != None:
+            return len(datas) > 0
+
