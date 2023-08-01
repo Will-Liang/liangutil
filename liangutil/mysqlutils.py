@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import pymysql
 
 from liangutil.liangutils import print_log
@@ -103,9 +104,11 @@ class MySQLUtils:
             result = cursor.fetchone()[0]
             cursor.close()
             return result
-        except:
-            cursor.close()
+        except Exception as e:
+            print_log("ERROR", e)
             return None
+        finally:
+            cursor.close()
 
     def query_datas(self, table_name, columns=None, condition=None):
         """

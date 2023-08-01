@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import platform
 import random
 import time
@@ -52,7 +53,7 @@ class RequestUtils:
         return header
 
 
-    # Get请求
+    # Get 请求
     # 返回{
     #   "error": "", 错误信息
     #    "content": "",返回的内容
@@ -70,6 +71,42 @@ class RequestUtils:
                     resp = requests.get(url, headers=header, proxies=proxy,timeout=self.timeout, verify=self.is_ssl_verify)
                 else:
                     resp = requests.get(url, headers=header, proxies=self.proxies, timeout=self.timeout,verify=self.is_ssl_verify)
+                if resp.status_code == 200:
+                    return {"error":"",
+                            "content":resp.json() if is_response_json else resp.text,
+                            "url":resp.url}
+                else:
+                    status_code = resp.status_code
+                    time.sleep(time_sleep)
+
+
+            except Exception as e:
+                return {"error": e,
+                        "content": "",
+                        "url": url}
+
+        return {"error": status_code,
+                "content": "",
+                "url": url}
+
+    #  Post 请求
+    # 返回{
+    #   "error": "", 错误信息
+    #    "content": "",返回的内容
+    #    "url": "" 请求的url
+    # }
+    def post(self, method, url, header="", data=None, retry_count=3, is_response_json=False, time_sleep=1, proxy=None):
+        header = header if header else self.get_header(self.is_choice_agent)
+        status_code = 200
+        while retry_count > 0:
+            retry_count = retry_count - 1
+            try:
+                if proxy == None and self.proxies == None:
+                    resp = requests.post(url,headers=header, data=data, timeout=self.timeout, verify=self.is_ssl_verify)
+                elif proxy != None:
+                    resp = requests.post(url, headers=header, data=data, proxies=proxy,timeout=self.timeout, verify=self.is_ssl_verify)
+                else:
+                    resp = requests.post(url, headers=header, data=data, proxies=self.proxies, timeout=self.timeout,verify=self.is_ssl_verify)
                 if resp.status_code == 200:
                     return {"error":"",
                             "content":resp.json() if is_response_json else resp.text,

@@ -1,4 +1,4 @@
-
+# -*- coding: utf-8 -*-
 from liangutil.liangutils import *
 from liangutil.mysqlutils import MySQLUtils
 

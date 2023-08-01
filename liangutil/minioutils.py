@@ -1,5 +1,5 @@
+# -*- coding: utf-8 -*-
 import json
-
 
 from minio import Minio
 
@@ -15,7 +15,15 @@ class MinIOUtils:
 
 
     # 获取MinIO中的config配置文件
-    def get_configfile(self, bucket_name):
+    def get_configfile(self, bucket_name) -> dict:
+        """
+        获取MinIO中的config配置文件
+        Args:
+            bucket_name: 桶名称
+
+        Returns:
+
+        """
         config = self.minioClient.get_object(bucket_name,"config.json")
         config_json = json.loads(config.data.decode("utf-8"))
 
@@ -25,7 +33,7 @@ class MinIOUtils:
     # 将文件上传至MinIO，并且通知Redis
     def upload_file_to_minio_notify(self, bucket_name: str, file_path: str, current_path: str):
         '''
-        将文件上传至MinIO
+        将文件上传至MinIO(修改后的....)
         :param bucket_name: 桶名称：crawl-data
         :param file_path: 上传时的文件路径
         :param current_path: 文件当前相对路径
