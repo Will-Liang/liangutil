@@ -17,9 +17,12 @@ def is_filepath(path):
 def get_dirpath(path):
     # 是文件路径，需要提取父级目录路径
     if is_filepath(path):
+        # 获取当前操作系统的文件目录分隔符
+        separator = os.sep
+
         # 有父级目录
-        if str(path).rfind(".") != -1 and str(path).rfind("/") != -1:
-            return str(path).rsplit("/", 1)[0]
+        if str(path).rfind(".") != -1 and str(path).rfind(separator) != -1:
+            return str(path).rsplit(separator, 1)[0]
         elif str(path).rfind(".") != -1:
             # 类似 a.txt
             return ""
