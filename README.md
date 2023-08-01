@@ -1,7 +1,5 @@
 # liangutil包
 
-
-
 ![Python](https://img.shields.io/badge/python-3.x-blue.svg)   ![PyPI](https://img.shields.io/pypi/v/liangutil)   ![PyPI - Downloads](https://img.shields.io/pypi/dd/liangutil)   ![GitHub stars](https://img.shields.io/github/stars/Will-Liang/liangutil.svg)
 
 **说明：以Liang开头的类是单独写的类，以Utils结尾的都是基于第三方库封装的。函数详细说明请看代码注释。**
@@ -114,7 +112,9 @@ pip install liangutil
 
 
 
-**2023-08-01** `0.1.0`
+**2023-08-01** `0.1.1`
+
+- 统一了代码注释风格
 
 - mysqlutils 中增加了查询等方法
 - 修复了一些 Bug
