@@ -14,7 +14,33 @@ pip install liangutil
 
 
 
-## 注意
+## 说明
+
+### liangutils
+
+存放一些工具函数
+
+
+
+### requestutils
+
+#### RequestUtils
+
+基于Requests库的封装
+
+#### ChromeUtils
+
+基于selenium库的封装
+
+
+
+### mysqlutils
+
+#### **MySQLUtils**
+
+基于pymysql库的封装
+
+
 
 ### lianglog
 
@@ -33,27 +59,54 @@ pip install liangutil
 
 
 
+### redisutils
+
+#### RedisUtils
+
+基于redis库的封装
+
+
+
+### minioutils
+
+#### MinIOUtils
+
+基于minio库的封装
+
+
+
 # 更新日志
 
 ## 2023年
 
 ### 8月
 
-**2023-08-02** `0.1.1`
+**2023-08-02** 
+
+`0.1.2`
+
+- 更改了RequestUtils中的get、post方法参数列表名称，更符合使用requests库的习惯
+- MySQLUtils增加了 update_datas() 、query_datas_dict_list()
+
+`0.1.1`
 
 - 统一了代码注释风格
 - 新增代码文档
 - 删除了无用函数
 - 改变了某些函数名称
 
-**2023-08-01** `0.1.0`
+**2023-08-01** 
+
+`0.1.0`
 
 - mysqlutils 中增加了查询等方法
 - 修复了一些 Bug
 
 ### 7月
 
-**2023-07-31** `0.0.8`
+**2023-07-31** 
+
+`0.0.8`
 
 - 第一个发布版本
 

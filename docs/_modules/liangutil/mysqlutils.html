@@ -212,7 +212,7 @@
 <span class="sd">            condition(str): 查询条件</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            查询结果(元组)，每条记录为一个字典</span>
+<span class="sd">            查询结果(元组)，每条记录为一个元组</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
@@ -226,6 +226,37 @@
                 <span class="n">sql</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot; WHERE </span><span class="si">{</span><span class="n">condition</span><span class="si">}</span><span class="s2">&quot;</span>
             <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
             <span class="n">result</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+            <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">result</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">print_log</span><span class="p">(</span><span class="s2">&quot;ERROR&quot;</span><span class="p">,</span><span class="n">e</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="MySQLUtils.query_datas_dict_list"><a class="viewcode-back" href="../../liangutil.html#liangutil.mysqlutils.MySQLUtils.query_datas_dict_list">[文档]</a>    <span class="k">def</span> <span class="nf">query_datas_dict_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">table_name</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">condition</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;查询数据</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            table_name(str):表名</span>
+<span class="sd">            columns(list): 要查询的列名列表，如果为[]，则查询所有列</span>
+<span class="sd">            condition(str): 查询条件</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            查询结果: [{},{},{}]</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">cursor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">columns</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">columns</span> <span class="o">=</span> <span class="p">[]</span>
+
+            <span class="n">columns_str</span> <span class="o">=</span> <span class="s2">&quot;*&quot;</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">columns</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">columns</span><span class="p">)</span>
+            <span class="n">sql</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;SELECT </span><span class="si">{</span><span class="n">columns_str</span><span class="si">}</span><span class="s2"> FROM </span><span class="si">{</span><span class="n">table_name</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="k">if</span> <span class="n">condition</span><span class="p">:</span>
+                <span class="n">sql</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot; WHERE </span><span class="si">{</span><span class="n">condition</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fetchall_to_dict_list</span><span class="p">(</span><span class="n">cursor</span><span class="p">)</span>
             <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
             <span class="k">return</span> <span class="n">result</span>
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
@@ -252,8 +283,51 @@
             <span class="n">print_log</span><span class="p">(</span><span class="s2">&quot;WARNING&quot;</span><span class="p">,</span> <span class="s2">&quot;You didn&#39;t pass in a condition parameter, so it&#39;s pointless&quot;</span><span class="p">)</span>
         <span class="n">datas</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">query_data</span><span class="p">(</span><span class="n">table_name</span><span class="p">,</span> <span class="n">columns</span><span class="p">,</span> <span class="n">condition</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">datas</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">datas</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span></div></div>
+            <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">datas</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span></div>
 
+
+<div class="viewcode-block" id="MySQLUtils.update_datas"><a class="viewcode-back" href="../../liangutil.html#liangutil.mysqlutils.MySQLUtils.update_datas">[文档]</a>    <span class="k">def</span> <span class="nf">update_datas</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">table_name</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">condition</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;更新数据</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            table_name(str): 表名</span>
+<span class="sd">            data(dict): 要更新的数据，以字段名为键，字段值为值。</span>
+<span class="sd">            condition(str): 更新条件</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            更新成功返回 &quot;True&quot;，失败返回异常</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">cursor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+            <span class="c1"># 构建 SQL 更新语句</span>
+            <span class="n">set_columns</span> <span class="o">=</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">column</span><span class="si">}</span><span class="s2"> = %s&quot;</span> <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">()])</span>
+            <span class="n">sql</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;UPDATE </span><span class="si">{</span><span class="n">table_name</span><span class="si">}</span><span class="s2"> SET </span><span class="si">{</span><span class="n">set_columns</span><span class="si">}</span><span class="s2">&quot;</span>
+
+            <span class="k">if</span> <span class="n">condition</span><span class="p">:</span>
+                <span class="n">sql</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot; WHERE </span><span class="si">{</span><span class="n">condition</span><span class="si">}</span><span class="s2">&quot;</span>
+
+            <span class="c1"># 执行 SQL 更新</span>
+            <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span>
+
+            <span class="c1"># 提交事务</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">conn</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+            <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+            <span class="k">return</span> <span class="s2">&quot;True&quot;</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">e</span></div>
+
+<div class="viewcode-block" id="MySQLUtils.fetchall_to_dict_list"><a class="viewcode-back" href="../../liangutil.html#liangutil.mysqlutils.MySQLUtils.fetchall_to_dict_list">[文档]</a>    <span class="k">def</span> <span class="nf">fetchall_to_dict_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cursor</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;将pymysql的fetchall查询结果转换为装有dict类型的列表</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            cursor: pymysql游标对象</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            装有字典类型的列表</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">column_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">desc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">desc</span> <span class="ow">in</span> <span class="n">cursor</span><span class="o">.</span><span class="n">description</span><span class="p">]</span>
+        <span class="k">return</span> <span class="p">[</span><span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">column_names</span><span class="p">,</span> <span class="n">row</span><span class="p">))</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()]</span></div></div>
 </pre></div>
 
            </div>
