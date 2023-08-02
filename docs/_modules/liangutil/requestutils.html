@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>liangutil.requestutils &mdash; liangutil 0.1.1 文档</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=dc7ba1a7"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../../_static/translations.js?v=beaddf03"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../../genindex.html" />
+    <link rel="search" title="搜索" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            liangutil
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="搜索文档" aria-label="搜索文档" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">liangutil</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="页面导航">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">模块代码</a></li>
+      <li class="breadcrumb-item active">liangutil.requestutils</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>liangutil.requestutils 源代码</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="kn">import</span> <span class="nn">platform</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="kn">from</span> <span class="nn">selenium.webdriver.chrome.options</span> <span class="kn">import</span> <span class="n">Options</span>
+
+<span class="kn">from</span> <span class="nn">selenium</span> <span class="kn">import</span> <span class="n">webdriver</span>
+
+<span class="kn">from</span> <span class="nn">liangutil.liangutils</span> <span class="kn">import</span> <span class="n">print_log</span><span class="p">,</span> <span class="n">get_nowdatetime</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">requestutils 中封装了爬虫的类以及方法</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="c1"># 封装requests请求</span>
+<div class="viewcode-block" id="RequestUtils"><a class="viewcode-back" href="../../liangutil.html#liangutil.requestutils.RequestUtils">[文档]</a><span class="k">class</span> <span class="nc">RequestUtils</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    RequestUtils 基于 requests 库进行的封装</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="n">is_ssl_verify</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">is_choice_agent</span><span class="p">:</span><span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">proxies</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        初始化 RequestUtils</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            timeout(int): 请求超时时间</span>
+<span class="sd">            is_ssl_verify(bool): 是否验证 SSL 证书</span>
+<span class="sd">            is_choice_agent(bool): 是否随机 USER-AGENT</span>
+<span class="sd">            proxies(dict): 代理字典</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">timeout</span> <span class="o">=</span> <span class="n">timeout</span> <span class="c1"># 请求超时时间</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_ssl_verify</span> <span class="o">=</span> <span class="n">is_ssl_verify</span> <span class="c1"># 是否验证SSL证书</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_choice_agent</span> <span class="o">=</span> <span class="n">is_choice_agent</span> <span class="c1"># 是否随机AGENT</span>
+
+        <span class="c1"># 该参数代理是为了需要用固定ip的爬虫</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">proxies</span> <span class="o">=</span> <span class="n">proxies</span>   <span class="c1"># {&#39;http&#39;: &#39;http://xxx&#39;, &#39;https&#39;: &#39;https://xxx&#39;}</span>
+
+<div class="viewcode-block" id="RequestUtils.get_header"><a class="viewcode-back" href="../../liangutil.html#liangutil.requestutils.RequestUtils.get_header">[文档]</a>    <span class="k">def</span> <span class="nf">get_header</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">is_choice_agent</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;获得 USER-AGENT</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            is_choice_agent(bool): 是否随机 USER-AGENT</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            USER-AGENT</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">header</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="c1"># &quot;Accept&quot;: &quot;text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9&quot;,</span>
+            <span class="s2">&quot;Accept&quot;</span><span class="p">:</span><span class="s2">&quot;*/*&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Accept-Language&quot;</span><span class="p">:</span> <span class="s2">&quot;zh-CN,zh;q=0.9&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Cache-Control&quot;</span><span class="p">:</span> <span class="s2">&quot;max-age=0&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Accept-Encoding&quot;</span><span class="p">:</span> <span class="s2">&quot;gzip, deflate&quot;</span><span class="p">,</span>  <span class="c1"># 使用gzip压缩传输数据让访问更快</span>
+            <span class="s2">&quot;User-Agent&quot;</span><span class="p">:</span> <span class="s2">&quot;Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.122 Safari/537.36&quot;</span><span class="p">,</span>
+            <span class="p">}</span>
+        <span class="k">if</span> <span class="n">is_choice_agent</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">chrome_version</span> <span class="o">=</span> <span class="s2">&quot;Chrome/</span><span class="si">{}</span><span class="s2">.0.</span><span class="si">{}</span><span class="s2">.</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">55</span><span class="p">,</span> <span class="mi">82</span><span class="p">),</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4000</span><span class="p">),</span>
+                                                        <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">150</span><span class="p">))</span>
+            <span class="n">os_type</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;(Windows NT 6.0; U; tr; rv:1.8.1)&quot;</span><span class="p">,</span>
+                       <span class="s2">&quot;(Windows NT 6.1; Win64; x64)&quot;</span>
+                       <span class="s2">&quot;(Windows NT 6.1; WOW64)&quot;</span><span class="p">,</span>
+                       <span class="s2">&quot;(Windows NT 10.0; WOW64)&quot;</span><span class="p">,</span>
+                       <span class="s2">&quot;(X11; Linux x86_64)&quot;</span><span class="p">,</span>
+                       <span class="s2">&quot;(X11; Linux x86_64; rv:2.0b4)&quot;</span><span class="p">,</span>
+                       <span class="s2">&quot;(X11; U; FreeBSD x86_64; en-US)&quot;</span><span class="p">,</span>
+                       <span class="s2">&quot;(X11; Ubuntu; Linux x86_64; rv:24.0)&quot;</span>
+                       <span class="s2">&quot;(Macintosh; Intel Mac OS X 10_12_6)&quot;</span><span class="p">,</span>
+                       <span class="s2">&quot;(Macintosh; U; Intel Mac OS X 10_12_6; en-us)&quot;</span><span class="p">,</span>
+                       <span class="s2">&quot;(Macintosh; U; Intel Mac OS X 10_12_6; ja-jp)&quot;</span><span class="p">,</span>
+                       <span class="p">]</span>
+            <span class="n">browser_type</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Mozilla/5.0&quot;</span><span class="p">,</span>
+                            <span class="p">]</span>
+            <span class="n">ua</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">browser_type</span><span class="p">),</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">os_type</span><span class="p">),</span> <span class="s2">&quot;AppleWebKit/537.36&quot;</span><span class="p">,</span>
+                           <span class="s2">&quot;(KHTML, like Gecko)&quot;</span><span class="p">,</span> <span class="n">chrome_version</span><span class="p">,</span> <span class="s2">&quot;Safari/537.36&quot;</span><span class="p">])</span>
+            <span class="n">header</span><span class="p">[</span><span class="s2">&quot;User-Agent&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ua</span>
+        <span class="k">return</span> <span class="n">header</span></div>
+
+
+
+
+<div class="viewcode-block" id="RequestUtils.get"><a class="viewcode-back" href="../../liangutil.html#liangutil.requestutils.RequestUtils.get">[文档]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">retry_count</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">is_response_json</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">time_sleep</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">proxy</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get 请求</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            url(str): 请求的url</span>
+<span class="sd">            header(str): 请求头</span>
+<span class="sd">            retry_count(int): 重试次数</span>
+<span class="sd">            is_response_json(bool): 返回的是否是json</span>
+<span class="sd">            time_sleep(int): 请求失败后的停止时间</span>
+<span class="sd">            proxy(dict): 代理</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            {&quot;error&quot;: &quot;状态码/异常&quot;, &quot;content&quot;: &quot;网页源码/json&quot;,&quot;url&quot;: &quot;请求的url&quot;}</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">header</span> <span class="o">=</span> <span class="n">header</span> <span class="k">if</span> <span class="n">header</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_header</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">is_choice_agent</span><span class="p">)</span>
+        <span class="n">status_code</span> <span class="o">=</span> <span class="mi">200</span>
+        <span class="k">while</span> <span class="n">retry_count</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">retry_count</span> <span class="o">=</span> <span class="n">retry_count</span> <span class="o">-</span> <span class="mi">1</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">proxy</span> <span class="o">==</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">proxies</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">headers</span><span class="o">=</span><span class="n">header</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">timeout</span><span class="p">,</span> <span class="n">verify</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">is_ssl_verify</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">proxy</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">header</span><span class="p">,</span> <span class="n">proxies</span><span class="o">=</span><span class="n">proxy</span><span class="p">,</span><span class="n">timeout</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">timeout</span><span class="p">,</span> <span class="n">verify</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">is_ssl_verify</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">header</span><span class="p">,</span> <span class="n">proxies</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">proxies</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">timeout</span><span class="p">,</span><span class="n">verify</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">is_ssl_verify</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">resp</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;error&quot;</span><span class="p">:</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;content&quot;</span><span class="p">:</span><span class="n">resp</span><span class="o">.</span><span class="n">json</span><span class="p">()</span> <span class="k">if</span> <span class="n">is_response_json</span> <span class="k">else</span> <span class="n">resp</span><span class="o">.</span><span class="n">text</span><span class="p">,</span>
+                            <span class="s2">&quot;url&quot;</span><span class="p">:</span><span class="n">resp</span><span class="o">.</span><span class="n">url</span><span class="p">}</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">status_code</span> <span class="o">=</span> <span class="n">resp</span><span class="o">.</span><span class="n">status_code</span>
+                    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">time_sleep</span><span class="p">)</span>
+
+
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="n">e</span><span class="p">,</span>
+                        <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="n">url</span><span class="p">}</span>
+
+        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="n">status_code</span><span class="p">,</span>
+                <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="n">url</span><span class="p">}</span></div>
+
+
+<div class="viewcode-block" id="RequestUtils.post"><a class="viewcode-back" href="../../liangutil.html#liangutil.requestutils.RequestUtils.post">[文档]</a>    <span class="k">def</span> <span class="nf">post</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">retry_count</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">is_response_json</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">time_sleep</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">proxy</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Post 请求</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            url(str): 请求的url</span>
+<span class="sd">            header(str): 请求头</span>
+<span class="sd">            data(dict): payload</span>
+<span class="sd">            retry_count(int): 重试次数</span>
+<span class="sd">            is_response_json(bool): 返回的是否是json</span>
+<span class="sd">            time_sleep(int): 请求失败后的停止时间</span>
+<span class="sd">            proxy(dict): 代理</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            {&quot;error&quot;: &quot;状态码/异常&quot;, &quot;content&quot;: &quot;网页源码/json&quot;,&quot;url&quot;: &quot;请求的url&quot;}</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">header</span> <span class="o">=</span> <span class="n">header</span> <span class="k">if</span> <span class="n">header</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_header</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">is_choice_agent</span><span class="p">)</span>
+        <span class="n">status_code</span> <span class="o">=</span> <span class="mi">200</span>
+        <span class="k">while</span> <span class="n">retry_count</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">retry_count</span> <span class="o">=</span> <span class="n">retry_count</span> <span class="o">-</span> <span class="mi">1</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">proxy</span> <span class="o">==</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">proxies</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">headers</span><span class="o">=</span><span class="n">header</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">timeout</span><span class="p">,</span> <span class="n">verify</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">is_ssl_verify</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">proxy</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">header</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">proxies</span><span class="o">=</span><span class="n">proxy</span><span class="p">,</span><span class="n">timeout</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">timeout</span><span class="p">,</span> <span class="n">verify</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">is_ssl_verify</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">header</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">proxies</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">proxies</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">timeout</span><span class="p">,</span><span class="n">verify</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">is_ssl_verify</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">resp</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;error&quot;</span><span class="p">:</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;content&quot;</span><span class="p">:</span><span class="n">resp</span><span class="o">.</span><span class="n">json</span><span class="p">()</span> <span class="k">if</span> <span class="n">is_response_json</span> <span class="k">else</span> <span class="n">resp</span><span class="o">.</span><span class="n">text</span><span class="p">,</span>
+                            <span class="s2">&quot;url&quot;</span><span class="p">:</span><span class="n">resp</span><span class="o">.</span><span class="n">url</span><span class="p">}</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">status_code</span> <span class="o">=</span> <span class="n">resp</span><span class="o">.</span><span class="n">status_code</span>
+                    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">time_sleep</span><span class="p">)</span>
+
+
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="n">e</span><span class="p">,</span>
+                        <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="n">url</span><span class="p">}</span>
+
+        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="n">status_code</span><span class="p">,</span>
+                <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="n">url</span><span class="p">}</span></div></div>
+
+
+<span class="c1"># https://selenium-python.readthedocs.io/page-objects.html</span>
+<span class="c1"># https://www.selenium.dev/zh-cn/documentation/</span>
+<span class="c1"># 封装 selenium</span>
+<div class="viewcode-block" id="ChromeUtils"><a class="viewcode-back" href="../../liangutil.html#liangutil.requestutils.ChromeUtils">[文档]</a><span class="k">class</span> <span class="nc">ChromeUtils</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    ChromeUtils 基于 selenium 库进行的封装</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">is_ssl_verify</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">is_chrome_headless</span><span class="p">:</span><span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">is_undetected_chromedriver</span><span class="p">:</span><span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">proxy</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">timeout</span> <span class="o">=</span> <span class="n">timeout</span>  <span class="c1"># 请求超时时间</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_ssl_verify</span> <span class="o">=</span> <span class="n">is_ssl_verify</span>  <span class="c1"># 是否验证SSL证书</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_chrome_headless</span> <span class="o">=</span> <span class="n">is_chrome_headless</span> <span class="c1"># Linux下 is_chrome_headless为True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_undetected_chromedriver</span> <span class="o">=</span> <span class="n">is_undetected_chromedriver</span>
+
+        <span class="c1"># 该参数代理是为了需要用固定ip的爬虫</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">proxy</span> <span class="o">=</span> <span class="n">proxy</span> <span class="c1"># http://xxxxxx</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">driver</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_chrome_driver</span><span class="p">(</span><span class="n">proxy</span><span class="p">)</span>
+
+
+
+<div class="viewcode-block" id="ChromeUtils.get_chrome_driver"><a class="viewcode-back" href="../../liangutil.html#liangutil.requestutils.ChromeUtils.get_chrome_driver">[文档]</a>    <span class="k">def</span> <span class="nf">get_chrome_driver</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">proxy</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;获得一个chrome驱动</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            proxy(str): 代理</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            chrome驱动</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">chrome_options</span> <span class="o">=</span> <span class="n">Options</span><span class="p">()</span>
+
+            <span class="k">if</span> <span class="n">proxy</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">chrome_options</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--proxy-server=&quot;</span><span class="o">+</span><span class="n">proxy</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">proxy</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">chrome_options</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--proxy-server=&quot;</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">proxy</span><span class="p">)</span>
+
+            <span class="n">chrome_options</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-window-size=1920,1080&quot;</span><span class="p">)</span> <span class="c1"># 设置浏览器窗口的大小为1920x1080像素</span>
+            <span class="n">chrome_options</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--ignore-certificate-errors&#39;</span><span class="p">)</span> <span class="c1"># 忽略证书错误</span>
+            <span class="n">chrome_options</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--disable-gpu&#39;</span><span class="p">)</span> <span class="c1"># 禁用 GPU 硬件加速</span>
+            <span class="c1"># chrome_options.add_argument(&#39;--incognito&#39;) #无痕模式 浏览器不会记录任何浏览历史或者cookie。</span>
+
+            <span class="c1"># 禁止使用 /dev/shm。在某些系统中，Chrome 使用 /dev/shm 临时文件系统来共享数据，</span>
+            <span class="c1"># 但在 Docker 或某些特定配置的系统中，这个文件系统可能会不够用，导致 Chrome 崩溃。</span>
+            <span class="c1"># 这个选项可以让 Chrome 使用其它方式来共享数据，避免崩溃。</span>
+            <span class="n">chrome_options</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--disable-dev-shm-usage&#39;</span><span class="p">)</span>
+            <span class="n">chrome_options</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--hide-scrollbars&#39;</span><span class="p">)</span> <span class="c1"># 隐藏滚动条</span>
+            <span class="n">chrome_options</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--disable-plugins&#39;</span><span class="p">)</span> <span class="c1"># 禁用插件</span>
+            <span class="c1"># chrome_options.add_argument(&#39;blink-settings=imagesEnabled=false&#39;) #不加载图片, 提升速度</span>
+            <span class="c1"># 禁用沙箱。沙箱是 Chrome 用来隔离网页进程的一种安全机制，但在某些情况下，例如在 Docker 中运行 Chrome，沙箱可能会导致问题。这个选项可以禁用沙箱。</span>
+            <span class="n">chrome_options</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--no-sandbox&#39;</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_chrome_headless</span><span class="p">:</span>
+                <span class="n">chrome_options</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--headless&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;Linux&quot;</span><span class="p">:</span>
+                <span class="n">chrome_options</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--headless&#39;</span><span class="p">)</span>
+                <span class="c1"># 单进程模式。Chrome 默认会为每个标签页或插件启动一个新的进程，</span>
+                <span class="c1"># 但在某些情况下，例如内存有限，可能希望所有的标签页都在一个进程中运行。这个选项可以让 Chrome 在单进程模式下运行。</span>
+                <span class="n">chrome_options</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--single-process&#39;</span><span class="p">)</span>
+
+            <span class="c1"># undetected_chromedriver 是一个第三方库</span>
+            <span class="c1"># 它可以规避某些网站对 selenium 的检测，使得你的自动化脚本更不容易被网站识别出来。</span>
+            <span class="c1"># if self.is_undetected_chromedriver:</span>
+            <span class="c1">#     import undetected_chromedriver as uc  # from session not created: This version of ChromeDriver only supports Chrome version 108</span>
+            <span class="c1">#     driver = uc.Chrome(options=chrome_options)</span>
+            <span class="c1"># else:</span>
+            <span class="c1">#     driver = webdriver.Chrome(options=chrome_options)</span>
+            <span class="n">driver</span> <span class="o">=</span> <span class="n">webdriver</span><span class="o">.</span><span class="n">Chrome</span><span class="p">(</span><span class="n">options</span><span class="o">=</span><span class="n">chrome_options</span><span class="p">)</span>
+            <span class="n">driver</span><span class="o">.</span><span class="n">set_page_load_timeout</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">timeout</span><span class="p">)</span> <span class="c1"># 设置页面加载超时时间</span>
+            <span class="n">driver</span><span class="o">.</span><span class="n">set_script_timeout</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">timeout</span><span class="p">)</span> <span class="c1"># 设置脚本执行超时时间。</span>
+
+            <span class="k">return</span> <span class="n">driver</span>
+
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span></div>
+
+
+<div class="viewcode-block" id="ChromeUtils.refresh_chrome"><a class="viewcode-back" href="../../liangutil.html#liangutil.requestutils.ChromeUtils.refresh_chrome">[文档]</a>    <span class="k">def</span> <span class="nf">refresh_chrome</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;重启浏览器</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            重启成功返回True，否则返回False</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">retry_time</span> <span class="o">=</span> <span class="mi">3</span>
+        <span class="n">time_sleep</span> <span class="o">=</span> <span class="mi">10</span>
+        <span class="n">error</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">while</span> <span class="n">retry_time</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">driver</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">driver</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_chrome_driver</span><span class="p">()</span>
+                <span class="k">return</span> <span class="kc">True</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">retry_time</span> <span class="o">-=</span> <span class="mi">1</span>
+                <span class="n">error</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+                <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">time_sleep</span><span class="p">)</span>
+        <span class="n">print_log</span><span class="p">(</span><span class="s2">&quot;ERROR&quot;</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">False</span></div>
+
+
+
+<div class="viewcode-block" id="ChromeUtils.get_page_source"><a class="viewcode-back" href="../../liangutil.html#liangutil.requestutils.ChromeUtils.get_page_source">[文档]</a>    <span class="k">def</span> <span class="nf">get_page_source</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">time_sleep</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;获得网页源码</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            url(str): 请求的url</span>
+<span class="sd">            time_sleep(int): 页面会在time_sleep时间后获得源码</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            {&quot;error&quot;:&quot;异常&quot;,&quot;content&quot;:&quot;网页源码&quot;,&quot;url&quot;:&quot;请求的url&quot;}</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">get_nowdatetime</span><span class="p">()</span><span class="si">}</span><span class="s2"> Get </span><span class="si">{</span><span class="n">url</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">driver</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;error&quot;</span><span class="p">:</span><span class="s2">&quot;ZWChrome 的 driver 为空&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;content&quot;</span><span class="p">:</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;url&quot;</span><span class="p">:</span><span class="n">url</span><span class="p">}</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;Message: timeout:&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">page_source</span><span class="p">:</span>
+                <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">page_source</span><span class="p">,</span>
+                        <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">current_url</span><span class="p">}</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">refresh_chrome</span><span class="p">():</span>
+                <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;重启chrome失败&quot;</span><span class="p">,</span><span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="n">url</span><span class="p">}</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;window.stop()&quot;</span><span class="p">)</span>
+                <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;error&quot;</span><span class="p">:</span><span class="n">e</span><span class="p">,</span>
+                        <span class="s2">&quot;content&quot;</span><span class="p">:</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;url&quot;</span><span class="p">:</span><span class="n">url</span><span class="p">}</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">time_sleep</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">text</span> <span class="o">:=</span> <span class="bp">self</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">page_source</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="n">text</span><span class="p">,</span>
+                    <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">current_url</span><span class="p">}</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;没有获得 page_source&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">current_url</span><span class="p">}</span></div></div>
+
+
+
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2023, LiAng88。</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

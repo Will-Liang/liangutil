@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>liangutil.liangutils &mdash; liangutil 0.1.1 文档</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=dc7ba1a7"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../../_static/translations.js?v=beaddf03"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../../genindex.html" />
+    <link rel="search" title="搜索" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            liangutil
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="搜索文档" aria-label="搜索文档" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">liangutil</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="页面导航">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">模块代码</a></li>
+      <li class="breadcrumb-item active">liangutil.liangutils</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>liangutil.liangutils 源代码</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">traceback</span>
+
+<span class="kn">import</span> <span class="nn">pytz</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">liangutils 中存放一些工具方法</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="is_filepath"><a class="viewcode-back" href="../../liangutil.html#liangutil.liangutils.is_filepath">[文档]</a><span class="k">def</span> <span class="nf">is_filepath</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;判断是否为文件路径</span>
+
+<span class="sd">    相对路径不要使用 ./ 开头</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        path: 路径</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        包含文件名称的路径返回 True，否则返回 False</span>
+
+<span class="sd">    &#39;&quot;&quot;&quot;</span>
+    <span class="n">pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;\.[a-zA-Z]+$&#39;</span>  <span class="c1"># 匹配以.开头，后面跟着至少一个字符的字符串</span>
+    <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">path</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="get_dirpath"><a class="viewcode-back" href="../../liangutil.html#liangutil.liangutils.get_dirpath">[文档]</a><span class="k">def</span> <span class="nf">get_dirpath</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;获得目录路径</span>
+
+<span class="sd">    如果是文件路径，提取父级目录路径（相对路径不要使用 ./ 开头）</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        path: 路径</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        目录路径</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># 是文件路径，需要提取父级目录路径</span>
+    <span class="k">if</span> <span class="n">is_filepath</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+        <span class="c1"># 获取当前操作系统的文件目录分隔符</span>
+        <span class="n">separator</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span>
+
+        <span class="c1"># 有父级目录</span>
+        <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="o">.</span><span class="n">rfind</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span> <span class="ow">and</span> <span class="nb">str</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="o">.</span><span class="n">rfind</span><span class="p">(</span><span class="n">separator</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="n">separator</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="nb">str</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="o">.</span><span class="n">rfind</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="c1"># 类似 a.txt</span>
+            <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">path</span></div>
+
+
+<div class="viewcode-block" id="check_path"><a class="viewcode-back" href="../../liangutil.html#liangutil.liangutils.check_path">[文档]</a><span class="k">def</span> <span class="nf">check_path</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;检查目录是否存在</span>
+
+<span class="sd">    如果目录不存在创建目录</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        path: 路径</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        路径</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">dirpath</span> <span class="o">=</span> <span class="n">get_dirpath</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">dirpath</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">dirpath</span><span class="p">):</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">dirpath</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">path</span></div>
+
+
+<div class="viewcode-block" id="print_log"><a class="viewcode-back" href="../../liangutil.html#liangutil.liangutils.print_log">[文档]</a><span class="k">def</span> <span class="nf">print_log</span><span class="p">(</span><span class="n">level</span><span class="p">,</span> <span class="n">content</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;打印日志</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        level: 日志等级</span>
+<span class="sd">        content: 信息</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">formatted_log</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> EXCEPTION: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">code_location</span><span class="p">(</span><span class="n">depth</span><span class="o">=-</span><span class="mi">2</span><span class="p">),</span> <span class="n">content</span><span class="p">)</span>
+    <span class="n">printlog</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> </span><span class="si">{}</span><span class="s2"> </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">level</span><span class="p">,</span><span class="n">get_nowdatetime</span><span class="p">(),</span><span class="n">formatted_log</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">printlog</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="code_location"><a class="viewcode-back" href="../../liangutil.html#liangutil.liangutils.code_location">[文档]</a><span class="k">def</span> <span class="nf">code_location</span><span class="p">(</span><span class="n">depth</span><span class="o">=-</span><span class="mi">2</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;得到调用该方法的文件名称和 代码行号</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        depth: 如果直接得到调用该方法的代码在哪里，传递-2</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        {调用该方法的pytho文件名} line {行号}</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">stack</span> <span class="o">=</span> <span class="n">traceback</span><span class="o">.</span><span class="n">extract_stack</span><span class="p">()</span>
+    <span class="n">filename</span><span class="p">,</span> <span class="n">lineno</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">stack</span><span class="p">[</span><span class="n">depth</span><span class="p">]</span>
+    <span class="c1"># 在 Python 中，traceback.extract_stack() 函数返回当前的调用栈信息。调用栈是一个包含多个元组的列表，每个元组表示一帧（frame）的信息。每一帧都对应着一次函数调用，包含了函数所在的文件名、行号、函数名等信息。</span>
+    <span class="c1"># 通常，调用栈列表的最后一帧是当前代码所在的位置，也就是 code_location() 函数本身的位置。而在 traceback.extract_stack() 返回的列表中，最后一帧的索引是 -1。而倒数第二帧的索引是 -2，依此类推。</span>
+    <span class="c1"># 所以在代码中的 stack[-2] 就表示获取调用栈列表中倒数第二帧的信息，即 code_location() 函数被调用的位置所在的帧。然后从这个帧中获取文件名和行号信息，最终返回文件名和行号组成的字符串。</span>
+    <span class="c1"># 注意：traceback.extract_stack() 函数会返回完整的调用栈信息，包含当前函数的调用。如果你在其他函数中调用了 code_location()，那么它返回的文件名和行号将是调用它的位置。</span>
+    <span class="k">return</span> <span class="n">filename</span><span class="o">+</span><span class="s2">&quot; line:&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">lineno</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_nowdatetime"><a class="viewcode-back" href="../../liangutil.html#liangutil.liangutils.get_nowdatetime">[文档]</a><span class="k">def</span> <span class="nf">get_nowdatetime</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;获得亚洲上海时区现在的日期时间</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        时间字符串</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">now</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(</span><span class="n">pytz</span><span class="o">.</span><span class="n">timezone</span><span class="p">(</span><span class="s1">&#39;Asia/Shanghai&#39;</span><span class="p">))</span>
+    <span class="n">current_date</span> <span class="o">=</span> <span class="n">now</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">)</span>  <span class="c1"># 2023-04-17</span>
+    <span class="n">current_hour</span> <span class="o">=</span> <span class="n">now</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%H&#39;</span><span class="p">)</span>
+    <span class="n">current_min</span> <span class="o">=</span> <span class="n">now</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%M&#39;</span><span class="p">)</span>
+    <span class="n">current_sec</span> <span class="o">=</span> <span class="n">now</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%S&#39;</span><span class="p">)</span>
+    <span class="n">nowdatetime</span> <span class="o">=</span> <span class="n">current_date</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="n">current_hour</span> <span class="o">+</span> <span class="s2">&quot;:&quot;</span> <span class="o">+</span> <span class="n">current_min</span> <span class="o">+</span> <span class="s2">&quot;:&quot;</span> <span class="o">+</span> <span class="n">current_sec</span>
+    <span class="k">return</span> <span class="n">nowdatetime</span></div>
+
+
+<div class="viewcode-block" id="get_nowtime"><a class="viewcode-back" href="../../liangutil.html#liangutil.liangutils.get_nowtime">[文档]</a><span class="k">def</span> <span class="nf">get_nowtime</span><span class="p">(</span><span class="n">now</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;获得现在的时间</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        now: now = datetime.datetime.now(pytz.timezone(&#39;Asia/Shanghai&#39;))</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        数据字符串</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">current_hour</span> <span class="o">=</span> <span class="n">now</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%H&#39;</span><span class="p">)</span>
+    <span class="n">current_min</span> <span class="o">=</span> <span class="n">now</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%M&#39;</span><span class="p">)</span>
+    <span class="n">current_sec</span> <span class="o">=</span> <span class="n">now</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%S&#39;</span><span class="p">)</span>
+    <span class="n">time</span> <span class="o">=</span> <span class="n">current_hour</span> <span class="o">+</span> <span class="s2">&quot;:&quot;</span> <span class="o">+</span> <span class="n">current_min</span> <span class="o">+</span> <span class="s2">&quot;:&quot;</span> <span class="o">+</span> <span class="n">current_sec</span>
+    <span class="k">return</span> <span class="n">time</span></div>
+
+
+<div class="viewcode-block" id="get_nowdate"><a class="viewcode-back" href="../../liangutil.html#liangutil.liangutils.get_nowdate">[文档]</a><span class="k">def</span> <span class="nf">get_nowdate</span><span class="p">(</span><span class="n">now</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;获得现在的日期</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        now: now = datetime.datetime.now(pytz.timezone(&#39;Asia/Shanghai&#39;))</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        日期字符串</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">current_date</span> <span class="o">=</span> <span class="n">now</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">)</span>  <span class="c1"># 2023-04-17</span>
+    <span class="k">return</span> <span class="n">current_date</span></div>
+
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2023, LiAng88。</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
