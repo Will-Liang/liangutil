@@ -19,4 +19,6 @@ class RedisUtils:
 
         """
         self.redis.xadd(stream_name, data)
+
+    def close(self):
         self.redis.close()

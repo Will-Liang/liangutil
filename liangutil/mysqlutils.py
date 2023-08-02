@@ -143,7 +143,7 @@ class MySQLUtils:
             condition(str): 查询条件
 
         Returns:
-            查询结果(元组)，每条记录为一个字典
+            查询结果(元组)，每条记录为一个元组
 
         """
         try:
@@ -157,6 +157,37 @@ class MySQLUtils:
                 sql += f" WHERE {condition}"
             cursor.execute(sql)
             result = cursor.fetchall()
+            cursor.close()
+            return result
+        except Exception as e:
+            print_log("ERROR",e)
+            return None
+        finally:
+            cursor.close()
+
+    def query_datas_dict_list(self, table_name, columns=None, condition=None):
+        """查询数据
+
+        Args:
+            table_name(str):表名
+            columns(list): 要查询的列名列表，如果为[]，则查询所有列
+            condition(str): 查询条件
+
+        Returns:
+            查询结果 [{},{},{}]
+
+        """
+        try:
+            cursor = self.conn.cursor()
+            if columns is None:
+                columns = []
+
+            columns_str = "*" if len(columns) == 0 else ', '.join(columns)
+            sql = f"SELECT {columns_str} FROM {table_name}"
+            if condition:
+                sql += f" WHERE {condition}"
+            cursor.execute(sql)
+            result = self.fetchall_to_dict_list(cursor)
             cursor.close()
             return result
         except Exception as e:
@@ -185,3 +216,46 @@ class MySQLUtils:
         if datas != None:
             return len(datas) > 0
 
+
+    def update_datas(self, table_name, data, condition=None):
+        """更新数据
+
+        Args:
+            table_name(str): 表名
+            data(dict): 要更新的数据，以字段名为键，字段值为值。
+            condition(str): 更新条件
+
+        Returns:
+            更新成功返回 "True"，失败返回异常
+        """
+        try:
+            cursor = self.conn.cursor()
+
+            # 构建 SQL 更新语句
+            set_columns = ', '.join([f"{column} = %s" for column in data.keys()])
+            sql = f"UPDATE {table_name} SET {set_columns}"
+
+            if condition:
+                sql += f" WHERE {condition}"
+
+            # 执行 SQL 更新
+            cursor.execute(sql, tuple(data.values()))
+
+            # 提交事务
+            self.conn.commit()
+            cursor.close()
+            return "True"
+        except Exception as e:
+            return e
+
+    def fetchall_to_dict_list(self, cursor):
+        """将pymysql的fetchall查询结果转换为装有dict类型的列表
+
+        Args:
+            cursor: pymysql游标对象
+
+        Returns:
+            装有字典类型的列表
+        """
+        column_names = [desc[0] for desc in cursor.description]
+        return [dict(zip(column_names, row)) for row in cursor.fetchall()]

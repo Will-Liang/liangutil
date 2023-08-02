@@ -81,30 +81,30 @@ class RequestUtils:
 
 
 
-    def get(self, url, header="", retry_count=3, is_response_json=False, time_sleep=1, proxy=None):
+    def get(self, url, headers="", retry_count=3, is_response_json=False, time_sleep=1, proxies=None):
         """Get 请求
 
         Args:
             url(str): 请求的url
-            header(str): 请求头
+            headers(str): 请求头
             retry_count(int): 重试次数
             is_response_json(bool): 返回的是否是json
             time_sleep(int): 请求失败后的停止时间
-            proxy(dict): 代理
+            proxies(dict): 代理
 
         Returns:
             {"error": "状态码/异常", "content": "网页源码/json","url": "请求的url"}
 
         """
-        header = header if header else self.get_header(self.is_choice_agent)
+        header = headers if headers else self.get_header(self.is_choice_agent)
         status_code = 200
         while retry_count > 0:
             retry_count = retry_count - 1
             try:
-                if proxy == None and self.proxies == None:
+                if proxies == None and self.proxies == None:
                     resp = requests.get(url,headers=header, timeout=self.timeout, verify=self.is_ssl_verify)
-                elif proxy != None:
-                    resp = requests.get(url, headers=header, proxies=proxy,timeout=self.timeout, verify=self.is_ssl_verify)
+                elif proxies != None:
+                    resp = requests.get(url, headers=header, proxies=proxies,timeout=self.timeout, verify=self.is_ssl_verify)
                 else:
                     resp = requests.get(url, headers=header, proxies=self.proxies, timeout=self.timeout,verify=self.is_ssl_verify)
                 if resp.status_code == 200:
@@ -126,31 +126,31 @@ class RequestUtils:
                 "url": url}
 
 
-    def post(self, url, header="", data=None, retry_count=3, is_response_json=False, time_sleep=1, proxy=None):
+    def post(self, url, headers="", data=None, retry_count=3, is_response_json=False, time_sleep=1, proxies=None):
         """Post 请求
 
         Args:
             url(str): 请求的url
-            header(str): 请求头
+            headers(str): 请求头
             data(dict): payload
             retry_count(int): 重试次数
             is_response_json(bool): 返回的是否是json
             time_sleep(int): 请求失败后的停止时间
-            proxy(dict): 代理
+            proxies(dict): 代理
 
         Returns:
             {"error": "状态码/异常", "content": "网页源码/json","url": "请求的url"}
 
         """
-        header = header if header else self.get_header(self.is_choice_agent)
+        header = headers if headers else self.get_header(self.is_choice_agent)
         status_code = 200
         while retry_count > 0:
             retry_count = retry_count - 1
             try:
-                if proxy == None and self.proxies == None:
+                if proxies == None and self.proxies == None:
                     resp = requests.post(url,headers=header, data=data, timeout=self.timeout, verify=self.is_ssl_verify)
-                elif proxy != None:
-                    resp = requests.post(url, headers=header, data=data, proxies=proxy,timeout=self.timeout, verify=self.is_ssl_verify)
+                elif proxies != None:
+                    resp = requests.post(url, headers=header, data=data, proxies=proxies,timeout=self.timeout, verify=self.is_ssl_verify)
                 else:
                     resp = requests.post(url, headers=header, data=data, proxies=self.proxies, timeout=self.timeout,verify=self.is_ssl_verify)
                 if resp.status_code == 200:
