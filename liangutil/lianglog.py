@@ -4,6 +4,10 @@ from liangutil.mysqlutils import MySQLUtils
 
 
 class LiangLog:
+    """
+    LiangLog 记录日志类
+    """
+
     def __init__(self, name, is_print_console=True,is_record_file=False,is_record_db=False, dir_path=None, db_host=None, db_port=None, db_user=None, db_pass=None, db_name=None):
         # name 程序名称
         self.name = name
@@ -35,33 +39,62 @@ class LiangLog:
                 raise Exception("program_logs 数据表不存在")
 
 
-    # level等级：WARNING, INFO , ERROR
-    # content输出内容
     def print_log(self, level, content):
+        """打印日志到控制台
+
+        Args:
+            level(str): 等级(WARNING, INFO , ERROR)
+            content(str): 日志信息
+
+        """
         formatted_log = "{} EXCEPTION: {}".format(code_location(depth=-4),content)
         log = "{} {} {}".format(level,get_nowdatetime(),formatted_log)
         print(log)
 
 
-    # 将日志输出到文件
+
     def record_log_to_file(self,level, content):
+        """将日志记录到文件
+
+        Args:
+            level(str): 等级(WARNING, INFO , ERROR)
+            content(str): 日志信息
+
+        """
         now = datetime.datetime.now(pytz.timezone('Asia/Shanghai'))
-        file_path = os.path.join(self.dir_path, self.name + "_logs", get_nowdate(now), level+get_nowtime(now)+".log")
+        file_path = os.path.join(
+            self.dir_path,
+            f"{self.name}_logs",
+            get_nowdate(now),
+            level + get_nowtime(now) + ".log",
+        )
         check_path(file_path)
         with open(file_path, "a", encoding="utf-8") as f:
             formatted_log = "{} EXCEPTION: {}".format(code_location(depth=-4), content)
-            log = "{} {} {}".format(level, get_nowdatetime(), formatted_log)
+            log = f"{level} {get_nowdatetime()} {formatted_log}"
             f.write(log+"\n")
 
 
     def record_log_to_db(self, level, content):
-        now = datetime.datetime.now(pytz.timezone('Asia/Shanghai'))
+        """将日志记录到mysql
+
+        Args:
+            level(str): 等级(WARNING, INFO , ERROR)
+            content(str): 日志信息
+
+        """
         formatted_log = "{} EXCEPTION: {}".format(code_location(depth=-4), content)
         self.mysql.insert_data("program_logs", {"datetime":get_nowdatetime(), "level":level, "name":self.name, "content":formatted_log})
 
 
-    # 推荐调用这个方法
     def record_log(self, level, content):
+        """记录日志总方法(推荐使用)
+
+        Args:
+            level(str): 等级(WARNING, INFO , ERROR)
+            content(str): 日志信息
+
+        """
         if self.is_print_console:
             self.print_log(level, content)
         if self.is_record_file:

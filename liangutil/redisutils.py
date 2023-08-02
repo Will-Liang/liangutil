@@ -3,14 +3,20 @@ import redis
 
 
 class RedisUtils:
+    """
+    RedisUtils 基于 redis 库进行封装
+    """
     def __init__(self, host, port, dbnum, password):
         self.redis = redis.Redis(host=host, port=port, db=dbnum, password=password)
 
 
-    # 发布消息到 Stream 队列
-    def enqueue_message(self, message):
-        stream_name = 'minio_file_queue'
-        self.redis.xadd(stream_name, {'path': message})
-        # print(f"入队信息： {path}")
-        # 关闭
+    def enqueue_message(self,stream_name, data):
+        """向Redis流插入数据
+
+        Args:
+            stream_name(str): 流名称
+            data(*):数据
+
+        """
+        self.redis.xadd(stream_name, data)
         self.redis.close()

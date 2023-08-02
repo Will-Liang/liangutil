@@ -6,6 +6,9 @@ import traceback
 
 import pytz
 
+"""
+liangutils 中存放一些工具方法
+"""
 
 def is_filepath(path):
     """判断是否为文件路径
@@ -16,7 +19,7 @@ def is_filepath(path):
         path: 路径
 
     Returns:
-        是文件路径返回 True，否则返回 False
+        包含文件名称的路径返回 True，否则返回 False
 
     '"""
     pattern = r'\.[a-zA-Z]+$'  # 匹配以.开头，后面跟着至少一个字符的字符串
@@ -31,7 +34,8 @@ def get_dirpath(path):
     Args:
         path: 路径
 
-    Returns: 目录路径
+    Returns:
+        目录路径
 
     """
     # 是文件路径，需要提取父级目录路径
@@ -51,7 +55,6 @@ def get_dirpath(path):
         return path
 
 
-
 def check_path(path):
     """检查目录是否存在
 
@@ -61,13 +64,13 @@ def check_path(path):
         path: 路径
 
     Returns:
+        路径
 
     """
     dirpath = get_dirpath(path)
     if dirpath != "" and not os.path.exists(dirpath):
         os.makedirs(dirpath)
     return path
-
 
 
 def print_log(level, content):
@@ -77,14 +80,10 @@ def print_log(level, content):
         level: 日志等级
         content: 信息
 
-    Returns:
-
     """
     formatted_log = "{} EXCEPTION: {}".format(code_location(depth=-2), content)
     printlog = "{} {} {}".format(level,get_nowdatetime(),formatted_log)
     print(printlog)
-
-
 
 
 def code_location(depth=-2):
@@ -93,6 +92,8 @@ def code_location(depth=-2):
     Args:
         depth: 如果直接得到调用该方法的代码在哪里，传递-2
 
+    Returns:
+        {调用该方法的pytho文件名} line {行号}
     """
     stack = traceback.extract_stack()
     filename, lineno, _, _ = stack[depth]
@@ -106,7 +107,8 @@ def code_location(depth=-2):
 def get_nowdatetime():
     """获得亚洲上海时区现在的日期时间
 
-    Returns: 时间字符串
+    Returns:
+        时间字符串
 
     """
     now = datetime.datetime.now(pytz.timezone('Asia/Shanghai'))
@@ -124,7 +126,8 @@ def get_nowtime(now):
     Args:
         now: now = datetime.datetime.now(pytz.timezone('Asia/Shanghai'))
 
-    Returns:数据字符串
+    Returns:
+        数据字符串
 
     """
     current_hour = now.strftime('%H')
@@ -134,14 +137,14 @@ def get_nowtime(now):
     return time
 
 
-
 def get_nowdate(now):
     """获得现在的日期
 
     Args:
         now: now = datetime.datetime.now(pytz.timezone('Asia/Shanghai'))
 
-    Returns:日期字符串
+    Returns:
+        日期字符串
 
     """
     current_date = now.strftime('%Y-%m-%d')  # 2023-04-17

@@ -11,17 +11,43 @@ from selenium import webdriver
 
 from liangutil.liangutils import print_log, get_nowdatetime
 
+"""
+requestutils 中封装了爬虫的类以及方法
+"""
+
 # 封装requests请求
 class RequestUtils:
+    """
+    RequestUtils 基于 requests 库进行的封装
+    """
 
     def __init__(self, timeout:int, is_ssl_verify: bool, is_choice_agent:bool = True, proxies=None):
+        """
+        初始化 RequestUtils
+
+        Args:
+            timeout(int): 请求超时时间
+            is_ssl_verify(bool): 是否验证 SSL 证书
+            is_choice_agent(bool): 是否随机 USER-AGENT
+            proxies(dict): 代理字典
+        """
         self.timeout = timeout # 请求超时时间
         self.is_ssl_verify = is_ssl_verify # 是否验证SSL证书
         self.is_choice_agent = is_choice_agent # 是否随机AGENT
+
         # 该参数代理是为了需要用固定ip的爬虫
         self.proxies = proxies   # {'http': 'http://xxx', 'https': 'https://xxx'}
 
     def get_header(self,is_choice_agent=False):
+        """获得 USER-AGENT
+
+        Args:
+            is_choice_agent(bool): 是否随机 USER-AGENT
+
+        Returns:
+            USER-AGENT
+
+        """
         header = {
             # "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
             "Accept":"*/*",
@@ -53,13 +79,23 @@ class RequestUtils:
         return header
 
 
-    # Get 请求
-    # 返回{
-    #   "error": "", 错误信息
-    #    "content": "",返回的内容
-    #    "url": "" 请求的url
-    # }
+
+
     def get(self, url, header="", retry_count=3, is_response_json=False, time_sleep=1, proxy=None):
+        """Get 请求
+
+        Args:
+            url(str): 请求的url
+            header(str): 请求头
+            retry_count(int): 重试次数
+            is_response_json(bool): 返回的是否是json
+            time_sleep(int): 请求失败后的停止时间
+            proxy(dict): 代理
+
+        Returns:
+            {"error": "状态码/异常", "content": "网页源码/json","url": "请求的url"}
+
+        """
         header = header if header else self.get_header(self.is_choice_agent)
         status_code = 200
         while retry_count > 0:
@@ -89,13 +125,23 @@ class RequestUtils:
                 "content": "",
                 "url": url}
 
-    #  Post 请求
-    # 返回{
-    #   "error": "", 错误信息
-    #    "content": "",返回的内容
-    #    "url": "" 请求的url
-    # }
-    def post(self, method, url, header="", data=None, retry_count=3, is_response_json=False, time_sleep=1, proxy=None):
+
+    def post(self, url, header="", data=None, retry_count=3, is_response_json=False, time_sleep=1, proxy=None):
+        """Post 请求
+
+        Args:
+            url(str): 请求的url
+            header(str): 请求头
+            data(dict): payload
+            retry_count(int): 重试次数
+            is_response_json(bool): 返回的是否是json
+            time_sleep(int): 请求失败后的停止时间
+            proxy(dict): 代理
+
+        Returns:
+            {"error": "状态码/异常", "content": "网页源码/json","url": "请求的url"}
+
+        """
         header = header if header else self.get_header(self.is_choice_agent)
         status_code = 200
         while retry_count > 0:
@@ -130,6 +176,9 @@ class RequestUtils:
 # https://www.selenium.dev/zh-cn/documentation/
 # 封装 selenium
 class ChromeUtils:
+    """
+    ChromeUtils 基于 selenium 库进行的封装
+    """
     def __init__(self, timeout: int, is_ssl_verify: bool=False, is_chrome_headless:bool = False, is_undetected_chromedriver:bool = False, proxy=None):
         self.timeout = timeout  # 请求超时时间
         self.is_ssl_verify = is_ssl_verify  # 是否验证SSL证书
@@ -141,8 +190,17 @@ class ChromeUtils:
         self.driver = self.get_chrome_driver(proxy)
 
 
-    # 获得一个chrome驱动
+
     def get_chrome_driver(self, proxy=None):
+        """获得一个chrome驱动
+
+        Args:
+            proxy(str): 代理
+
+        Returns:
+            chrome驱动
+
+        """
         try:
             chrome_options = Options()
 
@@ -190,8 +248,14 @@ class ChromeUtils:
         except Exception as e:
             return None
 
-    # 重启浏览器
+
     def refresh_chrome(self):
+        """重启浏览器
+
+        Returns:
+            重启成功返回True，否则返回False
+
+        """
         retry_time = 3
         time_sleep = 10
         error = ""
@@ -202,18 +266,29 @@ class ChromeUtils:
                 self.driver = self.get_chrome_driver()
                 return True
             except Exception as e:
-                retry_time = retry_time - 1
+                retry_time -= 1
                 error = str(e)
                 time.sleep(time_sleep)
         print_log("ERROR", error)
         return False
 
 
-    # 获得网页源码
-    def get_page_source(self, url, time_sleep=0):
-        print("{} Get {}".format(get_nowdatetime(), url))
 
-        if self.driver == None:
+    def get_page_source(self, url, time_sleep=0):
+        """获得网页源码
+
+        Args:
+            url(str): 请求的url
+            time_sleep(int): 页面会在time_sleep时间后获得源码
+
+        Returns:
+            {"error":"异常","content":"网页源码","url":"请求的url"}
+
+        """
+
+        print(f"{get_nowdatetime()} Get {url}")
+
+        if self.driver is None:
             return {"error":"ZWChrome 的 driver 为空",
                     "content":"",
                     "url":url}
@@ -226,22 +301,19 @@ class ChromeUtils:
                         "content": self.driver.page_source,
                         "url": self.driver.current_url}
 
-            if self.refresh_chrome():
-                try:
-                    self.driver.get(url)
-                except Exception as e:
-                    self.driver.execute("window.stop()")
-                    return {"error":e,
-                            "content":"",
-                            "url":url}
-            else:
+            if not self.refresh_chrome():
                 return {"error": "重启chrome失败","content": "","url": url}
 
+            try:
+                self.driver.get(url)
+            except Exception as e:
+                self.driver.execute("window.stop()")
+                return {"error":e,
+                        "content":"",
+                        "url":url}
         time.sleep(time_sleep)
 
-        text = self.driver.page_source
-
-        if text:
+        if text := self.driver.page_source:
             return {"error": "",
                     "content": text,
                     "url": self.driver.current_url}

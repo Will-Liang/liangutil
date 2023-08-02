@@ -4,13 +4,25 @@ import pymysql
 from liangutil.liangutils import print_log
 
 
+
 class MySQLUtils:
+    """
+    MySQLUtils 基于 pymysql 库进行封装
+    """
     def __init__(self, host, port, username, password, database):
         self.conn = pymysql.connect(host=host,port=port, user=username, password=password, database=database)
 
 
-    # 检查表是否存在
     def check_table_exist(self, table_name):
+        """根据表名检查表是否存在
+
+        Args:
+            table_name(str):表名
+
+        Returns:
+            存在返回True，否则返回False
+
+        """
         cursor = self.conn.cursor()
         try:
             sql = "show tables like '{}'".format(table_name)
@@ -27,15 +39,18 @@ class MySQLUtils:
             cursor.close()
 
 
-    # 向数据库中插入一条记录
-    # 插入成功返回"True"
     def insert_data(self, table_name, data: dict):
+        """插入一条数据
+
+        Args:
+            table_name(str):表名
+            data(dict):要插入的数据，以字段名为键，字段值为值。
+
+        Returns:
+            插入成功返回"True"，错误返回异常
+
         """
-        向数据库中插入一条记录
-        :param table_name: 表名
-        :param data:(dict)要插入的数据，以字段名为键，字段值为值。
-        :return:
-        """
+
         try:
             cursor = self.conn.cursor()
             # 构建 SQL 插入语句
@@ -52,15 +67,19 @@ class MySQLUtils:
         except Exception as e:
             return e
 
-    # 向数据库中插入多条记录
-    # 插入成功返回 "True"
+
     def insert_datas(self, table_name, data_list: list):
+        """插入一条数据
+
+        Args:
+            table_name(str):表名
+            data(list):要插入的数据列表，以字段名为键，字段值为值。
+
+        Returns:
+            插入成功返回"True"，错误返回异常
+
         """
-        向数据库中插入多条记录
-        :param table_name: 表名
-        :param data_list: (list) 要插入的数据列表，每个元素是一个字典，以字段名为键，字段值为值。
-        :return: 成功返回 "True"
-        """
+
         try:
             cursor = self.conn.cursor()
             columns = ', '.join(data_list[0].keys())  # 假设所有字典的键相同
@@ -82,13 +101,18 @@ class MySQLUtils:
 
 
     def query_data(self, table_name, columns=[], condition=None):
+        """随机查询单条数据
+
+        Args:
+            table_name(str):表名
+            columns(list): 要查询的列名列表，如果为[]，则查询所有列
+            condition(str): 查询条件
+
+        Returns:
+            查询结果
+
         """
-        查询数据的方法
-        :param table_name: 表名
-        :param columns: 要查询的列名列表，如果为[]，则查询所有列
-        :param condition: 查询条件，可以为 None
-        :return: 随机返回一条结果，结果是字典
-        """
+
         try:
             cursor = self.conn.cursor()
 
@@ -111,12 +135,16 @@ class MySQLUtils:
             cursor.close()
 
     def query_datas(self, table_name, columns=None, condition=None):
-        """
-        查询数据的方法
-        :param table_name: 表名
-        :param columns: 要查询的列名列表，如果为[]，则查询所有列
-        :param condition: 查询条件，可以为 None
-        :return:查询结果元组，每条记录为一个字典
+        """查询数据
+
+        Args:
+            table_name(str):表名
+            columns(list): 要查询的列名列表，如果为[]，则查询所有列
+            condition(str): 查询条件
+
+        Returns:
+            查询结果(元组)，每条记录为一个字典
+
         """
         try:
             cursor = self.conn.cursor()
@@ -138,6 +166,17 @@ class MySQLUtils:
             cursor.close()
 
     def exists_data(self, table_name, columns=None, condition=None):
+        """是否存在该数据
+
+        Args:
+            table_name(str):表名
+            columns(list): 要查询的列名列表，如果为[]，则查询所有列
+            condition(str): 查询条件
+
+        Returns:
+            存在True，否则False
+
+        """
         if columns is None:
             columns = []
         if condition is None:
