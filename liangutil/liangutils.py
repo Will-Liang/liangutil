@@ -81,7 +81,7 @@ def print_log(level, content):
         content: 信息
 
     """
-    formatted_log = "{} EXCEPTION: {}".format(code_location(depth=-2), content)
+    formatted_log = "{} EXCEPTION: {}".format(code_location(depth=-3), content)
     printlog = "{} {} {}".format(level,get_nowdatetime(),formatted_log)
     print(printlog)
 

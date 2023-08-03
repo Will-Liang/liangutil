@@ -48,7 +48,7 @@ class LiangLog:
 
         """
         formatted_log = "{} EXCEPTION: {}".format(code_location(depth=-4),content)
-        log = "{} {} {}".format(level,get_nowdatetime(),formatted_log)
+        log = f"{level} {get_nowdatetime()} {formatted_log}"
         print(log)
 
 

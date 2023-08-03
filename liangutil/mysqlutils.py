@@ -24,19 +24,16 @@ class MySQLUtils:
 
         """
         cursor = self.conn.cursor()
-        try:
-            sql = "show tables like '{}'".format(table_name)
-            cursor.execute(sql)
-            result = cursor.fetchone()
-            if result:
-                return True
-            else:
-                return False
 
-        except Exception as e:
-            print_log("ERROR",e)
-        finally:
+        sql = "show tables like '{}'".format(table_name)
+        cursor.execute(sql)
+        result = cursor.fetchone()
+        if result:
             cursor.close()
+            return True
+        else:
+            cursor.close()
+            return False
 
 
     def insert_data(self, table_name, data: dict):
@@ -47,25 +44,19 @@ class MySQLUtils:
             data(dict):要插入的数据，以字段名为键，字段值为值。
 
         Returns:
-            插入成功返回"True"，错误返回异常
+            插入成功返回"True"
 
         """
+        cursor = self.conn.cursor()
+        # 构建 SQL 插入语句
+        columns = ', '.join(data.keys())
+        values = ', '.join(['%s'] * len(data))
+        sql = f"insert into {table_name} ({columns}) values ({values})"
+        cursor.execute(sql, tuple(data.values()))
+        self.conn.commit()
+        cursor.close()
+        return "True"
 
-        try:
-            cursor = self.conn.cursor()
-            # 构建 SQL 插入语句
-            columns = ', '.join(data.keys())
-            values = ', '.join(['%s'] * len(data))
-            sql = f"insert into {table_name} ({columns}) values ({values})"
-
-            cursor.execute(sql, tuple(data.values()))
-
-            self.conn.commit()
-
-            cursor.close()
-            return "True"
-        except Exception as e:
-            return e
 
 
     def insert_datas(self, table_name, data_list: list):
@@ -76,28 +67,22 @@ class MySQLUtils:
             data(list):要插入的数据列表，以字段名为键，字段值为值。
 
         Returns:
-            插入成功返回"True"，错误返回异常
+            插入成功返回"True"
 
         """
 
-        try:
-            cursor = self.conn.cursor()
-            columns = ', '.join(data_list[0].keys())  # 假设所有字典的键相同
-            values_template = ', '.join(['%s'] * len(data_list[0]))
+        cursor = self.conn.cursor()
+        columns = ', '.join(data_list[0].keys())  # 假设所有字典的键相同
+        values_template = ', '.join(['%s'] * len(data_list[0]))
+        # 构建 SQL 批量插入语句
+        sql = f"insert into {table_name} ({columns}) values ({values_template})"
+        # 构建数据列表的值元组
+        values_tuples = [tuple(d.values()) for d in data_list]
+        cursor.executemany(sql, values_tuples)
+        self.conn.commit()
+        cursor.close()
+        return "True"
 
-            # 构建 SQL 批量插入语句
-            sql = f"insert into {table_name} ({columns}) values ({values_template})"
-
-            # 构建数据列表的值元组
-            values_tuples = [tuple(d.values()) for d in data_list]
-
-            cursor.executemany(sql, values_tuples)
-
-            self.conn.commit()
-            cursor.close()
-            return "True"
-        except Exception as e:
-            return e
 
 
     def query_data(self, table_name, columns=[], condition=None):
@@ -112,27 +97,18 @@ class MySQLUtils:
             查询结果
 
         """
-
-        try:
-            cursor = self.conn.cursor()
-
-            if len(columns) == 0:
-                columns_str = "*"
-            else:
-                columns_str = ', '.join(columns)
-
-            sql = f"SELECT {columns_str} FROM {table_name}"
-            if condition:
-                sql += f" WHERE {condition} order by rand() limit 1"
-            cursor.execute(sql)
-            result = cursor.fetchone()[0]
-            cursor.close()
-            return result
-        except Exception as e:
-            print_log("ERROR", e)
-            return None
-        finally:
-            cursor.close()
+        cursor = self.conn.cursor()
+        if len(columns) == 0:
+            columns_str = "*"
+        else:
+            columns_str = ', '.join(columns)
+        sql = f"SELECT {columns_str} FROM {table_name}"
+        if condition:
+            sql += f" WHERE {condition} order by rand() limit 1"
+        cursor.execute(sql)
+        result = cursor.fetchone()
+        cursor.close()
+        return result
 
     def query_datas(self, table_name, columns=None, condition=None):
         """查询数据
@@ -146,24 +122,17 @@ class MySQLUtils:
             查询结果(元组)，每条记录为一个元组
 
         """
-        try:
-            cursor = self.conn.cursor()
-            if columns is None:
-                columns = []
-
-            columns_str = "*" if len(columns) == 0 else ', '.join(columns)
-            sql = f"SELECT {columns_str} FROM {table_name}"
-            if condition:
-                sql += f" WHERE {condition}"
-            cursor.execute(sql)
-            result = cursor.fetchall()
-            cursor.close()
-            return result
-        except Exception as e:
-            print_log("ERROR",e)
-            return None
-        finally:
-            cursor.close()
+        cursor = self.conn.cursor()
+        if columns is None:
+            columns = []
+        columns_str = "*" if len(columns) == 0 else ', '.join(columns)
+        sql = f"SELECT {columns_str} FROM {table_name}"
+        if condition:
+            sql += f" WHERE {condition}"
+        cursor.execute(sql)
+        result = cursor.fetchall()
+        cursor.close()
+        return result
 
     def query_datas_dict_list(self, table_name, columns=None, condition=None):
         """查询数据
@@ -177,24 +146,18 @@ class MySQLUtils:
             查询结果 [{},{},{}]
 
         """
-        try:
-            cursor = self.conn.cursor()
-            if columns is None:
-                columns = []
+        cursor = self.conn.cursor()
+        if columns is None:
+            columns = []
+        columns_str = "*" if len(columns) == 0 else ', '.join(columns)
+        sql = f"SELECT {columns_str} FROM {table_name}"
+        if condition:
+            sql += f" WHERE {condition}"
+        cursor.execute(sql)
+        result = self.fetchall_to_dict_list(cursor)
+        cursor.close()
+        return result
 
-            columns_str = "*" if len(columns) == 0 else ', '.join(columns)
-            sql = f"SELECT {columns_str} FROM {table_name}"
-            if condition:
-                sql += f" WHERE {condition}"
-            cursor.execute(sql)
-            result = self.fetchall_to_dict_list(cursor)
-            cursor.close()
-            return result
-        except Exception as e:
-            print_log("ERROR",e)
-            return None
-        finally:
-            cursor.close()
 
     def exists_data(self, table_name, columns=None, condition=None):
         """是否存在该数据
@@ -211,11 +174,11 @@ class MySQLUtils:
         if columns is None:
             columns = []
         if condition is None:
-            print_log("WARNING", "You didn't pass in a condition parameter, so it's pointless")
+            print("WARNING", " You didn't pass in a condition parameter, so it's pointless")
         datas = self.query_data(table_name, columns, condition)
         if datas != None:
             return len(datas) > 0
-
+        return False
 
     def update_datas(self, table_name, data, condition=None):
         """更新数据
@@ -228,25 +191,18 @@ class MySQLUtils:
         Returns:
             更新成功返回 "True"，失败返回异常
         """
-        try:
-            cursor = self.conn.cursor()
-
-            # 构建 SQL 更新语句
-            set_columns = ', '.join([f"{column} = %s" for column in data.keys()])
-            sql = f"UPDATE {table_name} SET {set_columns}"
-
-            if condition:
-                sql += f" WHERE {condition}"
-
-            # 执行 SQL 更新
-            cursor.execute(sql, tuple(data.values()))
-
-            # 提交事务
-            self.conn.commit()
-            cursor.close()
-            return "True"
-        except Exception as e:
-            return e
+        cursor = self.conn.cursor()
+        # 构建 SQL 更新语句
+        set_columns = ', '.join([f"{column} = %s" for column in data.keys()])
+        sql = f"UPDATE {table_name} SET {set_columns}"
+        if condition:
+            sql += f" WHERE {condition}"
+        # 执行 SQL 更新
+        cursor.execute(sql, tuple(data.values()))
+        # 提交事务
+        self.conn.commit()
+        cursor.close()
+        return "True"
 
     def fetchall_to_dict_list(self, cursor):
         """将pymysql的fetchall查询结果转换为装有dict类型的列表

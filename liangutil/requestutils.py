@@ -201,52 +201,45 @@ class ChromeUtils:
             chrome驱动
 
         """
-        try:
-            chrome_options = Options()
+        chrome_options = Options()
 
-            if proxy != None:
-                chrome_options.add_argument("--proxy-server="+proxy)
-            elif self.proxy != None:
-                chrome_options.add_argument("--proxy-server="+self.proxy)
+        if proxy != None:
+            chrome_options.add_argument("--proxy-server="+proxy)
+        elif self.proxy != None:
+            chrome_options.add_argument("--proxy-server="+self.proxy)
+        chrome_options.add_argument("-window-size=1920,1080") # 设置浏览器窗口的大小为1920x1080像素
+        chrome_options.add_argument('--ignore-certificate-errors') # 忽略证书错误
+        chrome_options.add_argument('--disable-gpu') # 禁用 GPU 硬件加速
+        # chrome_options.add_argument('--incognito') #无痕模式 浏览器不会记录任何浏览历史或者cookie。
+        # 禁止使用 /dev/shm。在某些系统中，Chrome 使用 /dev/shm 临时文件系统来共享数据，
+        # 但在 Docker 或某些特定配置的系统中，这个文件系统可能会不够用，导致 Chrome 崩溃。
+        # 这个选项可以让 Chrome 使用其它方式来共享数据，避免崩溃。
+        chrome_options.add_argument('--disable-dev-shm-usage')
+        chrome_options.add_argument('--hide-scrollbars') # 隐藏滚动条
+        chrome_options.add_argument('--disable-plugins') # 禁用插件
+        # chrome_options.add_argument('blink-settings=imagesEnabled=false') #不加载图片, 提升速度
+        # 禁用沙箱。沙箱是 Chrome 用来隔离网页进程的一种安全机制，但在某些情况下，例如在 Docker 中运行 Chrome，沙箱可能会导致问题。这个选项可以禁用沙箱。
+        chrome_options.add_argument('--no-sandbox')
+        if self.is_chrome_headless:
+            chrome_options.add_argument('--headless')
+        if platform.system() == "Linux":
+            chrome_options.add_argument('--headless')
+            # 单进程模式。Chrome 默认会为每个标签页或插件启动一个新的进程，
+            # 但在某些情况下，例如内存有限，可能希望所有的标签页都在一个进程中运行。这个选项可以让 Chrome 在单进程模式下运行。
+            chrome_options.add_argument('--single-process')
+        # undetected_chromedriver 是一个第三方库
+        # 它可以规避某些网站对 selenium 的检测，使得你的自动化脚本更不容易被网站识别出来。
+        # if self.is_undetected_chromedriver:
+        #     import undetected_chromedriver as uc  # from session not created: This version of ChromeDriver only supports Chrome version 108
+        #     driver = uc.Chrome(options=chrome_options)
+        # else:
+        #     driver = webdriver.Chrome(options=chrome_options)
+        driver = webdriver.Chrome(options=chrome_options)
+        driver.set_page_load_timeout(self.timeout) # 设置页面加载超时时间
+        driver.set_script_timeout(self.timeout) # 设置脚本执行超时时间。
+        return driver
 
-            chrome_options.add_argument("-window-size=1920,1080") # 设置浏览器窗口的大小为1920x1080像素
-            chrome_options.add_argument('--ignore-certificate-errors') # 忽略证书错误
-            chrome_options.add_argument('--disable-gpu') # 禁用 GPU 硬件加速
-            # chrome_options.add_argument('--incognito') #无痕模式 浏览器不会记录任何浏览历史或者cookie。
 
-            # 禁止使用 /dev/shm。在某些系统中，Chrome 使用 /dev/shm 临时文件系统来共享数据，
-            # 但在 Docker 或某些特定配置的系统中，这个文件系统可能会不够用，导致 Chrome 崩溃。
-            # 这个选项可以让 Chrome 使用其它方式来共享数据，避免崩溃。
-            chrome_options.add_argument('--disable-dev-shm-usage')
-            chrome_options.add_argument('--hide-scrollbars') # 隐藏滚动条
-            chrome_options.add_argument('--disable-plugins') # 禁用插件
-            # chrome_options.add_argument('blink-settings=imagesEnabled=false') #不加载图片, 提升速度
-            # 禁用沙箱。沙箱是 Chrome 用来隔离网页进程的一种安全机制，但在某些情况下，例如在 Docker 中运行 Chrome，沙箱可能会导致问题。这个选项可以禁用沙箱。
-            chrome_options.add_argument('--no-sandbox')
-
-            if self.is_chrome_headless:
-                chrome_options.add_argument('--headless')
-            if platform.system() == "Linux":
-                chrome_options.add_argument('--headless')
-                # 单进程模式。Chrome 默认会为每个标签页或插件启动一个新的进程，
-                # 但在某些情况下，例如内存有限，可能希望所有的标签页都在一个进程中运行。这个选项可以让 Chrome 在单进程模式下运行。
-                chrome_options.add_argument('--single-process')
-
-            # undetected_chromedriver 是一个第三方库
-            # 它可以规避某些网站对 selenium 的检测，使得你的自动化脚本更不容易被网站识别出来。
-            # if self.is_undetected_chromedriver:
-            #     import undetected_chromedriver as uc  # from session not created: This version of ChromeDriver only supports Chrome version 108
-            #     driver = uc.Chrome(options=chrome_options)
-            # else:
-            #     driver = webdriver.Chrome(options=chrome_options)
-            driver = webdriver.Chrome(options=chrome_options)
-            driver.set_page_load_timeout(self.timeout) # 设置页面加载超时时间
-            driver.set_script_timeout(self.timeout) # 设置脚本执行超时时间。
-
-            return driver
-
-        except Exception as e:
-            return None
 
 
     def refresh_chrome(self):
@@ -269,7 +262,7 @@ class ChromeUtils:
                 retry_time -= 1
                 error = str(e)
                 time.sleep(time_sleep)
-        print_log("ERROR", error)
+        print("ERROR", str(error))
         return False
 
 
@@ -312,8 +305,8 @@ class ChromeUtils:
                         "content":"",
                         "url":url}
         time.sleep(time_sleep)
-
-        if text := self.driver.page_source:
+        text = self.driver.page_source
+        if text:
             return {"error": "",
                     "content": text,
                     "url": self.driver.current_url}
