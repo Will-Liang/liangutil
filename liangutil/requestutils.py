@@ -237,6 +237,19 @@ class ChromeUtils:
         driver = webdriver.Chrome(options=chrome_options)
         driver.set_page_load_timeout(self.timeout) # 设置页面加载超时时间
         driver.set_script_timeout(self.timeout) # 设置脚本执行超时时间。
+
+        # 隐藏浏览器特征
+        with open('./stealth.min.js') as f:
+            js = f.read()
+        driver.execute_cdp_cmd("Page.addScriptToEvaluateOnNewDocument", {
+            "source": js
+        })
+
+        # 反屏蔽
+        driver.execute_cdp_cmd("Page.addScriptToEvaluateOnNewDocument", {
+            "source": "Object.defineProperty(navigator, 'webdriver', {get: () => undefined})"
+        })
+
         return driver
 
 
