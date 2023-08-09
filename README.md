@@ -81,6 +81,13 @@ pip install liangutil
 
 ### 8月
 
+**2023-08-09**
+
+`0.1.5`
+
+- ChromeUtils中get_page_source()可以使用代理了，重试机制只适用于网页源码返回为 `<html><head></head><body></body></html>` 情况
+- 修复了一些Bug
+
 **2023-08-04**
 
 `0.1.4`
