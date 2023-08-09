@@ -280,54 +280,73 @@ class ChromeUtils:
 
 
 
-    def get_page_source(self, url, time_sleep=0):
+    def get_page_source(self, url, time_sleep=0, retry_count=3, proxy=""):
         """获得网页源码
 
         Args:
             url(str): 请求的url
             time_sleep(int): 页面会在time_sleep时间后获得源码
+            retry_count(int): 重试次数，针对<html><head></head><body></body></html>情况
+            proxy(str): 代理
 
         Returns:
-            {"error":"异常","content":"网页源码","url":"请求的url"}
+            dict:{"error":"异常","content":"网页源码","url":"请求的url"}
 
         """
 
+        # proxy = http://xxxx
+        if proxy != "":
+            if not self.driver is None:
+                self.driver.quit()
+            self.driver = self.get_chrome_driver(proxy)
+
         print(f"{get_nowdatetime()} Get {url}")
 
-        if self.driver is None:
-            return {"error":"ZWChrome 的 driver 为空",
-                    "content":"",
-                    "url":url}
-        try:
-            self.driver.get(url)
 
-        except Exception as e:
-            if str(e).startswith("Message: timeout:") and self.driver.page_source:
-                return {"error": "",
-                        "content": self.driver.page_source,
-                        "url": self.driver.current_url}
-
-            if not self.refresh_chrome():
-                return {"error": "重启chrome失败","content": "","url": url}
-
-            try:
-                self.driver.get(url)
-            except Exception as e:
-                self.driver.execute("window.stop()")
-                return {"error":e,
+        while retry_count:
+            retry_count -= 1
+            if self.driver is None:
+                return {"error":"ZWChrome 的 driver 为空",
                         "content":"",
                         "url":url}
-        time.sleep(time_sleep)
-        text = self.driver.page_source
-        if text:
-            return {"error": "",
-                    "content": text,
-                    "url": self.driver.current_url}
-        else:
-            return {"error": "没有获得 page_source",
-                    "content": "",
-                    "url": self.driver.current_url}
+            try:
+                self.driver.get(url)
+
+            except Exception as e:
+                if str(e).startswith("Message: timeout:") and self.driver.page_source:
+                    return {"error": "",
+                            "content": self.driver.page_source,
+                            "url": self.driver.current_url}
+
+                if not self.refresh_chrome():
+                    return {"error": "重启chrome失败","content": "","url": url}
+
+                try:
+                    self.driver.get(url)
+                except Exception as e:
+                    self.driver.execute("window.stop()")
+                    return {"error":e,
+                            "content":"",
+                            "url":url}
+            time.sleep(time_sleep)
+            text = self.driver.page_source
+            if text == "<html><head></head><body></body></html>":
+                continue
+            if text:
+                return {"error": "",
+                        "content": text,
+                        "url": self.driver.current_url}
+            else:
+                return {"error": "没有获得 page_source",
+                        "content": "",
+                        "url": self.driver.current_url}
 
 
 
+    def close(self):
+        """关闭Chrome驱动
 
+        """
+        if self.driver is not None:
+            self.driver.quit()
+            self.driver = None
