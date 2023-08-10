@@ -81,6 +81,14 @@ pip install liangutil
 
 ### 8月
 
+**2023-08-10**
+
+`0.1.6`
+
+- RequestUtils的 `__init__`增加了`proxy_host`参数
+- RequestUtils中增加了用于下载文件、克隆代码仓库等方法
+- liangutils中增加了uncompress()用于解压文件
+
 **2023-08-09**
 
 `0.1.5`

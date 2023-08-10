@@ -2,8 +2,13 @@
 import datetime
 import os
 import re
+import time
 import traceback
-
+import tarfile
+import zipfile
+import rarfile
+import gzip
+import shutil
 import pytz
 
 """
@@ -19,7 +24,7 @@ def is_filepath(path):
         path: 路径
 
     Returns:
-        包含文件名称的路径返回 True，否则返回 False
+        bool: 包含文件名称的路径返回 True，否则返回 False
 
     '"""
     pattern = r'\.[a-zA-Z]+$'  # 匹配以.开头，后面跟着至少一个字符的字符串
@@ -35,7 +40,7 @@ def get_dirpath(path):
         path: 路径
 
     Returns:
-        目录路径
+        str: 目录路径
 
     """
     # 是文件路径，需要提取父级目录路径
@@ -64,7 +69,7 @@ def check_path(path):
         path: 路径
 
     Returns:
-        路径
+        str: 路径
 
     """
     dirpath = get_dirpath(path)
@@ -93,7 +98,7 @@ def code_location(depth=-2):
         depth: 如果直接得到调用该方法的代码在哪里，传递-2
 
     Returns:
-        {调用该方法的pytho文件名} line {行号}
+        str: {调用该方法的pytho文件名} line {行号}
     """
     stack = traceback.extract_stack()
     filename, lineno, _, _ = stack[depth]
@@ -108,7 +113,7 @@ def get_nowdatetime():
     """获得亚洲上海时区现在的日期时间
 
     Returns:
-        时间字符串
+        str: 时间字符串
 
     """
     now = datetime.datetime.now(pytz.timezone('Asia/Shanghai'))
@@ -127,7 +132,7 @@ def get_nowtime(now):
         now: now = datetime.datetime.now(pytz.timezone('Asia/Shanghai'))
 
     Returns:
-        数据字符串
+        str: 时间字符串
 
     """
     current_hour = now.strftime('%H')
@@ -144,11 +149,57 @@ def get_nowdate(now):
         now: now = datetime.datetime.now(pytz.timezone('Asia/Shanghai'))
 
     Returns:
-        日期字符串
+        str: 日期字符串
 
     """
     current_date = now.strftime('%Y-%m-%d')  # 2023-04-17
     return current_date
 
+
+def uncompress(src_file, dest_dir_path):
+    """解压文件(支持zip,tgz,tar,rar,gz)
+
+    Args:
+        src_file(str): 压缩包
+        dest_dir_path(str): 解压的目录
+
+    Returns:
+        bool: True/False
+    """
+    try:
+        print(get_nowdatetime() + "starting uncompress: " + src_file)
+        if not os.path.exists(dest_dir_path) :
+            os.mkdir(dest_dir_path)
+        if src_file.endswith('.tgz') or src_file.endswith('.tar') :
+            tar = tarfile.open(src_file)
+            for name in tar.getnames():
+                tar.extract(name, dest_dir_path)
+            tar.close()
+        elif src_file.endswith('.zip'):
+            zip_file = zipfile.ZipFile(src_file)
+            for names in zip_file.namelist():
+                zip_file.extract(names, dest_dir_path)
+            zip_file.close()
+        elif src_file.endswith('.rar'):
+            rar = rarfile.RarFile(src_file)
+            rar.extractall(dest_dir_path)
+            rar.close()
+        elif src_file.endswith('.gz'):
+            '''
+            g_file = gzip.GzipFile(src_file)# 创建gzip对象
+            with open(os.path.join(dest_dir_path, os.path.basename(src_file).split(".gz")[0]), "wb") as f:
+                f.write(g_file.read()) # gzip对象用read()打开后，写入open()建立的文件中。  
+            g_file.close()  # 关闭gzip对象  
+            '''
+            with gzip.open(src_file, 'rb') as s_file, open(os.path.join(dest_dir_path, os.path.basename(src_file).split(".gz")[0]), 'wb') as d_file:
+                shutil.copyfileobj(s_file, d_file, 65536)
+        else:
+            print("Incorrect file type")
+            return False
+        print(get_nowdatetime() + ": success uncompress: " + src_file)
+    except Exception as e:
+        print(str(e))
+        return False
+    return True
 
 

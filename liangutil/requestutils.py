@@ -1,15 +1,19 @@
 # -*- coding: utf-8 -*-
+import os
 import platform
 import random
 import time
-
 import requests
+import wget
+import shutil
 
+
+from func_timeout import func_set_timeout, FunctionTimedOut
+from urllib.parse import urlparse
 from selenium.webdriver.chrome.options import Options
-
 from selenium import webdriver
 
-from liangutil.liangutils import print_log, get_nowdatetime
+from liangutil.liangutils import *
 
 """
 requestutils 中封装了爬虫的类以及方法
@@ -21,7 +25,7 @@ class RequestUtils:
     RequestUtils 基于 requests 库进行的封装
     """
 
-    def __init__(self, timeout:int, is_ssl_verify: bool, is_choice_agent:bool = True, proxies=None):
+    def __init__(self, timeout:int, is_ssl_verify: bool, is_choice_agent:bool = True, proxies=None, proxy_host=None):
         """
         初始化 RequestUtils
 
@@ -30,6 +34,7 @@ class RequestUtils:
             is_ssl_verify(bool): 是否验证 SSL 证书
             is_choice_agent(bool): 是否随机 USER-AGENT
             proxies(dict): 代理字典
+            proxy_host(str): 代理
         """
         self.timeout = timeout # 请求超时时间
         self.is_ssl_verify = is_ssl_verify # 是否验证SSL证书
@@ -38,6 +43,8 @@ class RequestUtils:
         # 该参数代理是为了需要用固定ip的爬虫
         self.proxies = proxies   # {'http': 'http://xxx', 'https': 'https://xxx'}
 
+        self.proxy_host = (proxy_host if "://" in proxy_host else "socks5://" + proxy_host) if proxy_host and isinstance(proxy_host,str) else None
+
     def get_header(self,is_choice_agent=False):
         """获得 USER-AGENT
 
@@ -45,7 +52,7 @@ class RequestUtils:
             is_choice_agent(bool): 是否随机 USER-AGENT
 
         Returns:
-            USER-AGENT
+            str: USER-AGENT
 
         """
         header = {
@@ -79,8 +86,6 @@ class RequestUtils:
         return header
 
 
-
-
     def get(self, url, headers="", retry_count=3, is_response_json=False, time_sleep=1, proxies=None):
         """Get 请求
 
@@ -93,7 +98,7 @@ class RequestUtils:
             proxies(dict): 代理
 
         Returns:
-            {"error": "状态码/异常", "content": "网页源码/json","url": "请求的url"}
+            dict: {"error": "状态码/异常", "content": "网页源码/json","url": "请求的url"}
 
         """
         header = headers if headers else self.get_header(self.is_choice_agent)
@@ -139,7 +144,7 @@ class RequestUtils:
             proxies(dict): 代理
 
         Returns:
-            {"error": "状态码/异常", "content": "网页源码/json","url": "请求的url"}
+            dict: {"error": "状态码/异常", "content": "网页源码/json","url": "请求的url"}
 
         """
         header = headers if headers else self.get_header(self.is_choice_agent)
@@ -170,6 +175,125 @@ class RequestUtils:
         return {"error": status_code,
                 "content": "",
                 "url": url}
+
+
+    def file_download_once(self, url, file=""):
+        """从指定URL下载单个文件的方法
+
+        Args:
+            url(str): url
+            file(str): 文件名
+
+        Returns:
+            True/False
+        """
+        if file:
+            wget.download(url, file)
+            return True
+        else:
+            if self.proxies:
+                return requests.get(url, headers=self.get_header(), proxies=self.proxies, stream=True,
+                                    timeout=self.timeout)  # stream=True
+            else:
+                return requests.get(url, headers=self.get_header(), stream=True, timeout=self.timeout)  # stream=True
+
+
+    def file_download_github(self, github_author, github_project, file_path):
+        """下载代码仓库
+
+        Args:
+            github_author(str):项目作者
+            github_project(str):项目名称
+            file_path(str):存放到那里
+
+        Returns:
+            bool: True/False
+        """
+        if self.proxy_host:
+            status = os.system("cd " + file_path + " && git config --global http.proxy " + \
+                               self.proxy_host + " && git config --global https.proxy " + \
+                               self.proxy_host + " && git clone https://github.com/" + github_author + "/" + github_project + ".git")
+        else:
+            status = os.system("cd " + file_path + " && git config --global --unset http.proxy " + \
+                               " && git config --global --unset https.proxy " + \
+                               " && git clone https://github.com/" + github_author + "/" + github_project + ".git")
+        if status == 0:
+            return True
+        return False
+
+    def file_download(self, url="", file_path="", file_name="", is_zip_extract=False, retry=3, is_wget=False,
+                      github_author="", github_project=""):
+        """下载文件主方法(推荐调用)
+
+        Args:
+            url(str): url
+            file_path(str): 文件存放在哪里
+            file_name(str): 文件名称
+            is_zip_extract(bool): 是否解压
+            retry(int): 重试次数
+            is_wget(bool): 是否用wget
+            github_author(str): 项目作者
+            github_project(str): 项目名称
+
+        Returns:
+            bool: True/False
+        """
+        file_name = os.path.basename(urlparse(url).path) if file_name == "" else file_name
+        file_path = os.getcwd() if file_path == "" else file_path
+
+        try:
+            if is_wget:
+                while retry > 0:
+                    try:
+                        print("DOWNLOAD %s from %s %s" % (file_name, url, retry))
+                        if os.path.exists(os.path.join(file_path, file_name)):
+                            os.remove(os.path.join(file_path, file_name))
+                        if self.file_download_once(url=url, file=os.path.join(file_path, file_name)):
+                            # 解压文件
+                            if is_zip_extract == True:
+                                uncompress(src_file=os.path.join(file_path, file_name), dest_dir_path=file_path)
+                            return True
+                    except Exception as e:
+                        print("[DOWNLOAD ERROR] %s error:%s" % (url, repr(e)))
+                    retry = retry - 1
+
+            elif github_author:
+                while retry > 0:
+                    try:
+                        src = str(github_author + github_project)
+                        print("DOWNLOAD github from %s %s" % (src, retry))
+                        if os.path.exists(os.path.join(file_path, github_project)):
+                            shutil.rmtree(os.path.join(file_path, github_project))
+                        if self.file_download_github(github_author=github_author, github_project=github_project, file_path=file_path):
+                            return True
+                    except Exception as e:
+                        print("[DOWNLOAD ERROR] %s error:%s" % (url, repr(e)))
+                    retry = retry - 1
+
+            else:
+                while retry > 0:
+                    try:
+                        print("DOWNLOAD %s from %s %s" % (file_name, url, retry))
+
+                        r = self.file_download_once(url=url)
+                        if r.status_code == 200:
+                            with open(os.path.join(file_path, file_name), 'wb') as f:
+                                shutil.copyfileobj(r.raw, f) if r.headers[
+                                                                    "content-type"] == "application/x-zip-compressed" else f.write(
+                                    r.content)
+                            if is_zip_extract == True:
+                                uncompress(src_file=os.path.join(file_path, file_name), des_dir_path=file_path)
+                            return True
+                        else:
+                            print(r.status_code)
+                    except Exception as e:
+                        print("[DOWNLOAD ERROR] %s error:%s" % (url, repr(e)))
+                    retry = retry - 1
+
+        except Exception as e:
+            print(repr(e))
+        return False
+
 
 
 # https://selenium-python.readthedocs.io/page-objects.html
@@ -259,7 +383,7 @@ class ChromeUtils:
         """重启浏览器
 
         Returns:
-            重启成功返回True，否则返回False
+            bool: 重启成功返回True，否则返回False
 
         """
         retry_time = 3
@@ -290,7 +414,7 @@ class ChromeUtils:
             proxy(str): 代理
 
         Returns:
-            dict:{"error":"异常","content":"网页源码","url":"请求的url"}
+            dict: {"error":"异常","content":"网页源码","url":"请求的url"}
 
         """
 
