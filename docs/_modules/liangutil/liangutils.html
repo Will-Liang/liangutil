@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>liangutil.liangutils &mdash; liangutil 0.1.5 文档</title>
+  <title>liangutil.liangutils &mdash; liangutil 0.1.6 文档</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -12,7 +12,7 @@
   
         <script src="../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=976351cf"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=a02915e1"></script>
         <script src="../../_static/doctools.js?v=888ff710"></script>
         <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
         <script src="../../_static/translations.js?v=beaddf03"></script>
@@ -71,8 +71,13 @@
 <span class="kn">import</span> <span class="nn">datetime</span>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">import</span> <span class="nn">traceback</span>
-
+<span class="kn">import</span> <span class="nn">tarfile</span>
+<span class="kn">import</span> <span class="nn">zipfile</span>
+<span class="kn">import</span> <span class="nn">rarfile</span>
+<span class="kn">import</span> <span class="nn">gzip</span>
+<span class="kn">import</span> <span class="nn">shutil</span>
 <span class="kn">import</span> <span class="nn">pytz</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
@@ -88,7 +93,7 @@
 <span class="sd">        path: 路径</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        包含文件名称的路径返回 True，否则返回 False</span>
+<span class="sd">        bool: 包含文件名称的路径返回 True，否则返回 False</span>
 
 <span class="sd">    &#39;&quot;&quot;&quot;</span>
     <span class="n">pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;\.[a-zA-Z]+$&#39;</span>  <span class="c1"># 匹配以.开头，后面跟着至少一个字符的字符串</span>
@@ -104,7 +109,7 @@
 <span class="sd">        path: 路径</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        目录路径</span>
+<span class="sd">        str: 目录路径</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># 是文件路径，需要提取父级目录路径</span>
@@ -133,7 +138,7 @@
 <span class="sd">        path: 路径</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        路径</span>
+<span class="sd">        str: 路径</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">dirpath</span> <span class="o">=</span> <span class="n">get_dirpath</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
@@ -162,7 +167,7 @@
 <span class="sd">        depth: 如果直接得到调用该方法的代码在哪里，传递-2</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        {调用该方法的pytho文件名} line {行号}</span>
+<span class="sd">        str: {调用该方法的pytho文件名} line {行号}</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">stack</span> <span class="o">=</span> <span class="n">traceback</span><span class="o">.</span><span class="n">extract_stack</span><span class="p">()</span>
     <span class="n">filename</span><span class="p">,</span> <span class="n">lineno</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">stack</span><span class="p">[</span><span class="n">depth</span><span class="p">]</span>
@@ -177,7 +182,7 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;获得亚洲上海时区现在的日期时间</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        时间字符串</span>
+<span class="sd">        str: 时间字符串</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">now</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(</span><span class="n">pytz</span><span class="o">.</span><span class="n">timezone</span><span class="p">(</span><span class="s1">&#39;Asia/Shanghai&#39;</span><span class="p">))</span>
@@ -196,7 +201,7 @@
 <span class="sd">        now: now = datetime.datetime.now(pytz.timezone(&#39;Asia/Shanghai&#39;))</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        数据字符串</span>
+<span class="sd">        str: 时间字符串</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">current_hour</span> <span class="o">=</span> <span class="n">now</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%H&#39;</span><span class="p">)</span>
@@ -213,12 +218,58 @@
 <span class="sd">        now: now = datetime.datetime.now(pytz.timezone(&#39;Asia/Shanghai&#39;))</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        日期字符串</span>
+<span class="sd">        str: 日期字符串</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">current_date</span> <span class="o">=</span> <span class="n">now</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">)</span>  <span class="c1"># 2023-04-17</span>
     <span class="k">return</span> <span class="n">current_date</span></div>
 
+
+<div class="viewcode-block" id="uncompress"><a class="viewcode-back" href="../../liangutil.html#liangutil.liangutils.uncompress">[文档]</a><span class="k">def</span> <span class="nf">uncompress</span><span class="p">(</span><span class="n">src_file</span><span class="p">,</span> <span class="n">dest_dir_path</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;解压文件(支持zip,tgz,tar,rar,gz)</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        src_file(str): 压缩包</span>
+<span class="sd">        dest_dir_path(str): 解压的目录</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        bool: True/False</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">get_nowdatetime</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;starting uncompress: &quot;</span> <span class="o">+</span> <span class="n">src_file</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">dest_dir_path</span><span class="p">)</span> <span class="p">:</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">dest_dir_path</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">src_file</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.tgz&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">src_file</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.tar&#39;</span><span class="p">)</span> <span class="p">:</span>
+            <span class="n">tar</span> <span class="o">=</span> <span class="n">tarfile</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">src_file</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">tar</span><span class="o">.</span><span class="n">getnames</span><span class="p">():</span>
+                <span class="n">tar</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">dest_dir_path</span><span class="p">)</span>
+            <span class="n">tar</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="n">src_file</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.zip&#39;</span><span class="p">):</span>
+            <span class="n">zip_file</span> <span class="o">=</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="n">src_file</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">names</span> <span class="ow">in</span> <span class="n">zip_file</span><span class="o">.</span><span class="n">namelist</span><span class="p">():</span>
+                <span class="n">zip_file</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="n">names</span><span class="p">,</span> <span class="n">dest_dir_path</span><span class="p">)</span>
+            <span class="n">zip_file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="n">src_file</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.rar&#39;</span><span class="p">):</span>
+            <span class="n">rar</span> <span class="o">=</span> <span class="n">rarfile</span><span class="o">.</span><span class="n">RarFile</span><span class="p">(</span><span class="n">src_file</span><span class="p">)</span>
+            <span class="n">rar</span><span class="o">.</span><span class="n">extractall</span><span class="p">(</span><span class="n">dest_dir_path</span><span class="p">)</span>
+            <span class="n">rar</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="n">src_file</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.gz&#39;</span><span class="p">):</span>
+<span class="w">            </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">            g_file = gzip.GzipFile(src_file)# 创建gzip对象</span>
+<span class="sd">            with open(os.path.join(dest_dir_path, os.path.basename(src_file).split(&quot;.gz&quot;)[0]), &quot;wb&quot;) as f:</span>
+<span class="sd">                f.write(g_file.read()) # gzip对象用read()打开后，写入open()建立的文件中。  </span>
+<span class="sd">            g_file.close()  # 关闭gzip对象  </span>
+<span class="sd">            &#39;&#39;&#39;</span>
+            <span class="k">with</span> <span class="n">gzip</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">src_file</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">s_file</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dest_dir_path</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">src_file</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.gz&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]),</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">d_file</span><span class="p">:</span>
+                <span class="n">shutil</span><span class="o">.</span><span class="n">copyfileobj</span><span class="p">(</span><span class="n">s_file</span><span class="p">,</span> <span class="n">d_file</span><span class="p">,</span> <span class="mi">65536</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Incorrect file type&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">get_nowdatetime</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;: success uncompress: &quot;</span> <span class="o">+</span> <span class="n">src_file</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+        <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">return</span> <span class="kc">True</span></div>
 
 
 </pre></div>

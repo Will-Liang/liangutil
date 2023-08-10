@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>liangutil package &mdash; liangutil 0.1.5 文档</title>
+  <title>liangutil package &mdash; liangutil 0.1.6 文档</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -13,7 +13,7 @@
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=976351cf"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=a02915e1"></script>
         <script src="_static/doctools.js?v=888ff710"></script>
         <script src="_static/sphinx_highlight.js?v=4825356b"></script>
         <script src="_static/translations.js?v=beaddf03"></script>
@@ -64,6 +64,7 @@
 <li><a class="reference internal" href="#liangutil.liangutils.get_nowtime"><code class="docutils literal notranslate"><span class="pre">get_nowtime()</span></code></a></li>
 <li><a class="reference internal" href="#liangutil.liangutils.is_filepath"><code class="docutils literal notranslate"><span class="pre">is_filepath()</span></code></a></li>
 <li><a class="reference internal" href="#liangutil.liangutils.print_log"><code class="docutils literal notranslate"><span class="pre">print_log()</span></code></a></li>
+<li><a class="reference internal" href="#liangutil.liangutils.uncompress"><code class="docutils literal notranslate"><span class="pre">uncompress()</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#module-liangutil.minioutils">liangutil.minioutils module</a><ul>
@@ -106,6 +107,9 @@
 </ul>
 </li>
 <li><a class="reference internal" href="#liangutil.requestutils.RequestUtils"><code class="docutils literal notranslate"><span class="pre">RequestUtils</span></code></a><ul>
+<li><a class="reference internal" href="#liangutil.requestutils.RequestUtils.file_download"><code class="docutils literal notranslate"><span class="pre">RequestUtils.file_download()</span></code></a></li>
+<li><a class="reference internal" href="#liangutil.requestutils.RequestUtils.file_download_github"><code class="docutils literal notranslate"><span class="pre">RequestUtils.file_download_github()</span></code></a></li>
+<li><a class="reference internal" href="#liangutil.requestutils.RequestUtils.file_download_once"><code class="docutils literal notranslate"><span class="pre">RequestUtils.file_download_once()</span></code></a></li>
 <li><a class="reference internal" href="#liangutil.requestutils.RequestUtils.get"><code class="docutils literal notranslate"><span class="pre">RequestUtils.get()</span></code></a></li>
 <li><a class="reference internal" href="#liangutil.requestutils.RequestUtils.get_header"><code class="docutils literal notranslate"><span class="pre">RequestUtils.get_header()</span></code></a></li>
 <li><a class="reference internal" href="#liangutil.requestutils.RequestUtils.post"><code class="docutils literal notranslate"><span class="pre">RequestUtils.post()</span></code></a></li>
@@ -227,6 +231,9 @@
 <dt class="field-even">返回<span class="colon">:</span></dt>
 <dd class="field-even"><p>路径</p>
 </dd>
+<dt class="field-odd">返回类型<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
 </dl>
 </dd></dl>
 
@@ -240,6 +247,9 @@
 </dd>
 <dt class="field-even">返回<span class="colon">:</span></dt>
 <dd class="field-even"><p>{调用该方法的pytho文件名} line {行号}</p>
+</dd>
+<dt class="field-odd">返回类型<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
 </dd>
 </dl>
 </dd></dl>
@@ -256,6 +266,9 @@
 <dt class="field-even">返回<span class="colon">:</span></dt>
 <dd class="field-even"><p>目录路径</p>
 </dd>
+<dt class="field-odd">返回类型<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
 </dl>
 </dd></dl>
 
@@ -270,6 +283,9 @@
 <dt class="field-even">返回<span class="colon">:</span></dt>
 <dd class="field-even"><p>日期字符串</p>
 </dd>
+<dt class="field-odd">返回类型<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
 </dl>
 </dd></dl>
 
@@ -280,6 +296,9 @@
 <dl class="field-list simple">
 <dt class="field-odd">返回<span class="colon">:</span></dt>
 <dd class="field-odd"><p>时间字符串</p>
+</dd>
+<dt class="field-even">返回类型<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
 </dd>
 </dl>
 </dd></dl>
@@ -293,7 +312,10 @@
 <dd class="field-odd"><p><strong>now</strong> – now = datetime.datetime.now(pytz.timezone(‘Asia/Shanghai’))</p>
 </dd>
 <dt class="field-even">返回<span class="colon">:</span></dt>
-<dd class="field-even"><p>数据字符串</p>
+<dd class="field-even"><p>时间字符串</p>
+</dd>
+<dt class="field-odd">返回类型<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
 </dd>
 </dl>
 </dd></dl>
@@ -310,6 +332,9 @@
 <dt class="field-even">返回<span class="colon">:</span></dt>
 <dd class="field-even"><p>包含文件名称的路径返回 True，否则返回 False</p>
 </dd>
+<dt class="field-odd">返回类型<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
 </dl>
 <p>‘</p>
 </dd></dl>
@@ -324,6 +349,26 @@
 <li><p><strong>level</strong> – 日志等级</p></li>
 <li><p><strong>content</strong> – 信息</p></li>
 </ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="liangutil.liangutils.uncompress">
+<span class="sig-prename descclassname"><span class="pre">liangutil.liangutils.</span></span><span class="sig-name descname"><span class="pre">uncompress</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">src_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dest_dir_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/liangutils.html#uncompress"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.liangutils.uncompress" title="永久链接至目标"></a></dt>
+<dd><p>解压文件(支持zip,tgz,tar,rar,gz)</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>src_file</strong> (<em>str</em>) – 压缩包</p></li>
+<li><p><strong>dest_dir_path</strong> (<em>str</em>) – 解压的目录</p></li>
+</ul>
+</dd>
+<dt class="field-even">返回<span class="colon">:</span></dt>
+<dd class="field-even"><p>True/False</p>
+</dd>
+<dt class="field-odd">返回类型<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
 </dd>
 </dl>
 </dd></dl>
@@ -572,7 +617,6 @@
 <dt class="sig sig-object py" id="liangutil.requestutils.ChromeUtils.close">
 <span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/requestutils.html#ChromeUtils.close"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.requestutils.ChromeUtils.close" title="永久链接至目标"></a></dt>
 <dd><p>关闭Chrome驱动</p>
-<p>Returns:</p>
 </dd></dl>
 
 <dl class="py method">
@@ -598,14 +642,15 @@
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>url</strong> (<em>str</em>) – 请求的url</p></li>
 <li><p><strong>time_sleep</strong> (<em>int</em>) – 页面会在time_sleep时间后获得源码</p></li>
+<li><p><strong>retry_count</strong> (<em>int</em>) – 重试次数，针对&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;/body&gt;&lt;/html&gt;情况</p></li>
 <li><p><strong>proxy</strong> (<em>str</em>) – 代理</p></li>
 </ul>
 </dd>
 <dt class="field-even">返回<span class="colon">:</span></dt>
-<dd class="field-even"><p>“异常”,”content”:”网页源码”,”url”:”请求的url”}</p>
+<dd class="field-even"><p>{“error”:”异常”,”content”:”网页源码”,”url”:”请求的url”}</p>
 </dd>
 <dt class="field-odd">返回类型<span class="colon">:</span></dt>
-<dd class="field-odd"><p>{“error”</p>
+<dd class="field-odd"><p>dict</p>
 </dd>
 </dl>
 </dd></dl>
@@ -618,6 +663,9 @@
 <dt class="field-odd">返回<span class="colon">:</span></dt>
 <dd class="field-odd"><p>重启成功返回True，否则返回False</p>
 </dd>
+<dt class="field-even">返回类型<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool</p>
+</dd>
 </dl>
 </dd></dl>
 
@@ -625,9 +673,73 @@
 
 <dl class="py class">
 <dt class="sig sig-object py" id="liangutil.requestutils.RequestUtils">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">liangutil.requestutils.</span></span><span class="sig-name descname"><span class="pre">RequestUtils</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_ssl_verify</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_choice_agent</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">proxies</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/requestutils.html#RequestUtils"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.requestutils.RequestUtils" title="永久链接至目标"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">liangutil.requestutils.</span></span><span class="sig-name descname"><span class="pre">RequestUtils</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_ssl_verify</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_choice_agent</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">proxies</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">proxy_host</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/requestutils.html#RequestUtils"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.requestutils.RequestUtils" title="永久链接至目标"></a></dt>
 <dd><p>基类：<code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>RequestUtils 基于 requests 库进行的封装</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="liangutil.requestutils.RequestUtils.file_download">
+<span class="sig-name descname"><span class="pre">file_download</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_zip_extract</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">retry</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_wget</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">github_author</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">github_project</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/requestutils.html#RequestUtils.file_download"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.requestutils.RequestUtils.file_download" title="永久链接至目标"></a></dt>
+<dd><p>下载文件主方法(推荐调用)</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>url</strong> (<em>str</em>) – url</p></li>
+<li><p><strong>file_path</strong> (<em>str</em>) – 文件存放在哪里</p></li>
+<li><p><strong>file_name</strong> (<em>str</em>) – 文件名称</p></li>
+<li><p><strong>is_zip_extract</strong> (<em>bool</em>) – 是否解压</p></li>
+<li><p><strong>retry</strong> (<em>int</em>) – 重试次数</p></li>
+<li><p><strong>is_wget</strong> (<em>bool</em>) – 是否用wget</p></li>
+<li><p><strong>github_author</strong> (<em>str</em>) – 项目作者</p></li>
+<li><p><strong>github_project</strong> (<em>str</em>) – 项目名称</p></li>
+</ul>
+</dd>
+<dt class="field-even">返回<span class="colon">:</span></dt>
+<dd class="field-even"><p>True/False</p>
+</dd>
+<dt class="field-odd">返回类型<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="liangutil.requestutils.RequestUtils.file_download_github">
+<span class="sig-name descname"><span class="pre">file_download_github</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">github_author</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">github_project</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/requestutils.html#RequestUtils.file_download_github"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.requestutils.RequestUtils.file_download_github" title="永久链接至目标"></a></dt>
+<dd><p>下载代码仓库</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>github_author</strong> (<em>str</em>) – 项目作者</p></li>
+<li><p><strong>github_project</strong> (<em>str</em>) – 项目名称</p></li>
+<li><p><strong>file_path</strong> (<em>str</em>) – 存放到那里</p></li>
+</ul>
+</dd>
+<dt class="field-even">返回<span class="colon">:</span></dt>
+<dd class="field-even"><p>True/False</p>
+</dd>
+<dt class="field-odd">返回类型<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="liangutil.requestutils.RequestUtils.file_download_once">
+<span class="sig-name descname"><span class="pre">file_download_once</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/requestutils.html#RequestUtils.file_download_once"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.requestutils.RequestUtils.file_download_once" title="永久链接至目标"></a></dt>
+<dd><p>从指定URL下载单个文件的方法</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>url</strong> (<em>str</em>) – url</p></li>
+<li><p><strong>file</strong> (<em>str</em>) – 文件名</p></li>
+</ul>
+</dd>
+<dt class="field-even">返回<span class="colon">:</span></dt>
+<dd class="field-even"><p>True/False</p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="liangutil.requestutils.RequestUtils.get">
 <span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">headers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">retry_count</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_response_json</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_sleep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">proxies</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/requestutils.html#RequestUtils.get"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.requestutils.RequestUtils.get" title="永久链接至目标"></a></dt>
@@ -644,10 +756,10 @@
 </ul>
 </dd>
 <dt class="field-even">返回<span class="colon">:</span></dt>
-<dd class="field-even"><p>“状态码/异常”, “content”: “网页源码/json”,”url”: “请求的url”}</p>
+<dd class="field-even"><p>{“error”: “状态码/异常”, “content”: “网页源码/json”,”url”: “请求的url”}</p>
 </dd>
 <dt class="field-odd">返回类型<span class="colon">:</span></dt>
-<dd class="field-odd"><p>{“error”</p>
+<dd class="field-odd"><p>dict</p>
 </dd>
 </dl>
 </dd></dl>
@@ -662,6 +774,9 @@
 </dd>
 <dt class="field-even">返回<span class="colon">:</span></dt>
 <dd class="field-even"><p>USER-AGENT</p>
+</dd>
+<dt class="field-odd">返回类型<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
 </dd>
 </dl>
 </dd></dl>
@@ -683,10 +798,10 @@
 </ul>
 </dd>
 <dt class="field-even">返回<span class="colon">:</span></dt>
-<dd class="field-even"><p>“状态码/异常”, “content”: “网页源码/json”,”url”: “请求的url”}</p>
+<dd class="field-even"><p>{“error”: “状态码/异常”, “content”: “网页源码/json”,”url”: “请求的url”}</p>
 </dd>
 <dt class="field-odd">返回类型<span class="colon">:</span></dt>
-<dd class="field-odd"><p>{“error”</p>
+<dd class="field-odd"><p>dict</p>
 </dd>
 </dl>
 </dd></dl>

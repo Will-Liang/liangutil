@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>liangutil.requestutils &mdash; liangutil 0.1.5 文档</title>
+  <title>liangutil.requestutils &mdash; liangutil 0.1.6 文档</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -12,7 +12,7 @@
   
         <script src="../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=976351cf"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=a02915e1"></script>
         <script src="../../_static/doctools.js?v=888ff710"></script>
         <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
         <script src="../../_static/translations.js?v=beaddf03"></script>
@@ -68,17 +68,21 @@
              
   <h1>liangutil.requestutils 源代码</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">platform</span>
 <span class="kn">import</span> <span class="nn">random</span>
 <span class="kn">import</span> <span class="nn">time</span>
-
 <span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">wget</span>
+<span class="kn">import</span> <span class="nn">shutil</span>
 
+
+<span class="kn">from</span> <span class="nn">func_timeout</span> <span class="kn">import</span> <span class="n">func_set_timeout</span><span class="p">,</span> <span class="n">FunctionTimedOut</span>
+<span class="kn">from</span> <span class="nn">urllib.parse</span> <span class="kn">import</span> <span class="n">urlparse</span>
 <span class="kn">from</span> <span class="nn">selenium.webdriver.chrome.options</span> <span class="kn">import</span> <span class="n">Options</span>
-
 <span class="kn">from</span> <span class="nn">selenium</span> <span class="kn">import</span> <span class="n">webdriver</span>
 
-<span class="kn">from</span> <span class="nn">liangutil.liangutils</span> <span class="kn">import</span> <span class="n">print_log</span><span class="p">,</span> <span class="n">get_nowdatetime</span>
+<span class="kn">from</span> <span class="nn">liangutil.liangutils</span> <span class="kn">import</span> <span class="o">*</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">requestutils 中封装了爬虫的类以及方法</span>
@@ -90,7 +94,7 @@
 <span class="sd">    RequestUtils 基于 requests 库进行的封装</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="n">is_ssl_verify</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">is_choice_agent</span><span class="p">:</span><span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">proxies</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="n">is_ssl_verify</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">is_choice_agent</span><span class="p">:</span><span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">proxies</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">proxy_host</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        初始化 RequestUtils</span>
 
@@ -99,6 +103,7 @@
 <span class="sd">            is_ssl_verify(bool): 是否验证 SSL 证书</span>
 <span class="sd">            is_choice_agent(bool): 是否随机 USER-AGENT</span>
 <span class="sd">            proxies(dict): 代理字典</span>
+<span class="sd">            proxy_host(str): 代理</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">timeout</span> <span class="o">=</span> <span class="n">timeout</span> <span class="c1"># 请求超时时间</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">is_ssl_verify</span> <span class="o">=</span> <span class="n">is_ssl_verify</span> <span class="c1"># 是否验证SSL证书</span>
@@ -107,6 +112,8 @@
         <span class="c1"># 该参数代理是为了需要用固定ip的爬虫</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">proxies</span> <span class="o">=</span> <span class="n">proxies</span>   <span class="c1"># {&#39;http&#39;: &#39;http://xxx&#39;, &#39;https&#39;: &#39;https://xxx&#39;}</span>
 
+        <span class="bp">self</span><span class="o">.</span><span class="n">proxy_host</span> <span class="o">=</span> <span class="p">(</span><span class="n">proxy_host</span> <span class="k">if</span> <span class="s2">&quot;://&quot;</span> <span class="ow">in</span> <span class="n">proxy_host</span> <span class="k">else</span> <span class="s2">&quot;socks5://&quot;</span> <span class="o">+</span> <span class="n">proxy_host</span><span class="p">)</span> <span class="k">if</span> <span class="n">proxy_host</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">proxy_host</span><span class="p">,</span><span class="nb">str</span><span class="p">)</span> <span class="k">else</span> <span class="kc">None</span>
+
 <div class="viewcode-block" id="RequestUtils.get_header"><a class="viewcode-back" href="../../liangutil.html#liangutil.requestutils.RequestUtils.get_header">[文档]</a>    <span class="k">def</span> <span class="nf">get_header</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">is_choice_agent</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;获得 USER-AGENT</span>
 
@@ -114,7 +121,7 @@
 <span class="sd">            is_choice_agent(bool): 是否随机 USER-AGENT</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            USER-AGENT</span>
+<span class="sd">            str: USER-AGENT</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">header</span> <span class="o">=</span> <span class="p">{</span>
@@ -148,8 +155,6 @@
         <span class="k">return</span> <span class="n">header</span></div>
 
 
-
-
 <div class="viewcode-block" id="RequestUtils.get"><a class="viewcode-back" href="../../liangutil.html#liangutil.requestutils.RequestUtils.get">[文档]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">retry_count</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">is_response_json</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">time_sleep</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">proxies</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Get 请求</span>
 
@@ -162,7 +167,7 @@
 <span class="sd">            proxies(dict): 代理</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            {&quot;error&quot;: &quot;状态码/异常&quot;, &quot;content&quot;: &quot;网页源码/json&quot;,&quot;url&quot;: &quot;请求的url&quot;}</span>
+<span class="sd">            dict: {&quot;error&quot;: &quot;状态码/异常&quot;, &quot;content&quot;: &quot;网页源码/json&quot;,&quot;url&quot;: &quot;请求的url&quot;}</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">header</span> <span class="o">=</span> <span class="n">headers</span> <span class="k">if</span> <span class="n">headers</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_header</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">is_choice_agent</span><span class="p">)</span>
@@ -208,7 +213,7 @@
 <span class="sd">            proxies(dict): 代理</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            {&quot;error&quot;: &quot;状态码/异常&quot;, &quot;content&quot;: &quot;网页源码/json&quot;,&quot;url&quot;: &quot;请求的url&quot;}</span>
+<span class="sd">            dict: {&quot;error&quot;: &quot;状态码/异常&quot;, &quot;content&quot;: &quot;网页源码/json&quot;,&quot;url&quot;: &quot;请求的url&quot;}</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">header</span> <span class="o">=</span> <span class="n">headers</span> <span class="k">if</span> <span class="n">headers</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_header</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">is_choice_agent</span><span class="p">)</span>
@@ -238,7 +243,126 @@
 
         <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="n">status_code</span><span class="p">,</span>
                 <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="n">url</span><span class="p">}</span></div></div>
+                <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="n">url</span><span class="p">}</span></div>
+
+
+<div class="viewcode-block" id="RequestUtils.file_download_once"><a class="viewcode-back" href="../../liangutil.html#liangutil.requestutils.RequestUtils.file_download_once">[文档]</a>    <span class="k">def</span> <span class="nf">file_download_once</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;从指定URL下载单个文件的方法</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            url(str): url</span>
+<span class="sd">            file(str): 文件名</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            True/False</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">file</span><span class="p">:</span>
+            <span class="n">wget</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">proxies</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">get_header</span><span class="p">(),</span> <span class="n">proxies</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">proxies</span><span class="p">,</span> <span class="n">stream</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                    <span class="n">timeout</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">timeout</span><span class="p">)</span>  <span class="c1"># stream=True</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">get_header</span><span class="p">(),</span> <span class="n">stream</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">timeout</span><span class="p">)</span>  <span class="c1"># stream=True</span></div>
+
+
+<div class="viewcode-block" id="RequestUtils.file_download_github"><a class="viewcode-back" href="../../liangutil.html#liangutil.requestutils.RequestUtils.file_download_github">[文档]</a>    <span class="k">def</span> <span class="nf">file_download_github</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">github_author</span><span class="p">,</span> <span class="n">github_project</span><span class="p">,</span> <span class="n">file_path</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;下载代码仓库</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            github_author(str):项目作者</span>
+<span class="sd">            github_project(str):项目名称</span>
+<span class="sd">            file_path(str):存放到那里</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            bool: True/False</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">proxy_host</span><span class="p">:</span>
+            <span class="n">status</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s2">&quot;cd &quot;</span> <span class="o">+</span> <span class="n">file_path</span> <span class="o">+</span> <span class="s2">&quot; &amp;&amp; git config --global http.proxy &quot;</span> <span class="o">+</span> \
+                               <span class="bp">self</span><span class="o">.</span><span class="n">proxy_host</span> <span class="o">+</span> <span class="s2">&quot; &amp;&amp; git config --global https.proxy &quot;</span> <span class="o">+</span> \
+                               <span class="bp">self</span><span class="o">.</span><span class="n">proxy_host</span> <span class="o">+</span> <span class="s2">&quot; &amp;&amp; git clone https://github.com/&quot;</span> <span class="o">+</span> <span class="n">github_author</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">github_project</span> <span class="o">+</span> <span class="s2">&quot;.git&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">status</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s2">&quot;cd &quot;</span> <span class="o">+</span> <span class="n">file_path</span> <span class="o">+</span> <span class="s2">&quot; &amp;&amp; git config --global --unset http.proxy &quot;</span> <span class="o">+</span> \
+                               <span class="s2">&quot; &amp;&amp; git config --global --unset https.proxy &quot;</span> <span class="o">+</span> \
+                               <span class="s2">&quot; &amp;&amp; git clone https://github.com/&quot;</span> <span class="o">+</span> <span class="n">github_author</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">github_project</span> <span class="o">+</span> <span class="s2">&quot;.git&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">status</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="kc">False</span></div>
+
+<div class="viewcode-block" id="RequestUtils.file_download"><a class="viewcode-back" href="../../liangutil.html#liangutil.requestutils.RequestUtils.file_download">[文档]</a>    <span class="k">def</span> <span class="nf">file_download</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">file_path</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">file_name</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">is_zip_extract</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">retry</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">is_wget</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                      <span class="n">github_author</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">github_project</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;下载文件主方法(推荐调用)</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            url(str): url</span>
+<span class="sd">            file_path(str): 文件存放在哪里</span>
+<span class="sd">            file_name(str): 文件名称</span>
+<span class="sd">            is_zip_extract(bool): 是否解压</span>
+<span class="sd">            retry(int): 重试次数</span>
+<span class="sd">            is_wget(bool): 是否用wget</span>
+<span class="sd">            github_author(str): 项目作者</span>
+<span class="sd">            github_project(str): 项目名称</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            bool: True/False</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">file_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">urlparse</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">path</span><span class="p">)</span> <span class="k">if</span> <span class="n">file_name</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span> <span class="k">else</span> <span class="n">file_name</span>
+        <span class="n">file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span> <span class="k">if</span> <span class="n">file_path</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span> <span class="k">else</span> <span class="n">file_path</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">is_wget</span><span class="p">:</span>
+                <span class="k">while</span> <span class="n">retry</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;DOWNLOAD </span><span class="si">%s</span><span class="s2"> from </span><span class="si">%s</span><span class="s2"> </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">retry</span><span class="p">))</span>
+                        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">file_name</span><span class="p">)):</span>
+                            <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">file_name</span><span class="p">))</span>
+                        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_download_once</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">file_name</span><span class="p">)):</span>
+                            <span class="c1"># 解压文件</span>
+                            <span class="k">if</span> <span class="n">is_zip_extract</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+                                <span class="n">uncompress</span><span class="p">(</span><span class="n">src_file</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">file_name</span><span class="p">),</span> <span class="n">dest_dir_path</span><span class="o">=</span><span class="n">file_path</span><span class="p">)</span>
+                            <span class="k">return</span> <span class="kc">True</span>
+                    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;[DOWNLOAD ERROR] </span><span class="si">%s</span><span class="s2"> error:</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="nb">repr</span><span class="p">(</span><span class="n">e</span><span class="p">)))</span>
+                    <span class="n">retry</span> <span class="o">=</span> <span class="n">retry</span> <span class="o">-</span> <span class="mi">1</span>
+
+            <span class="k">elif</span> <span class="n">github_author</span><span class="p">:</span>
+                <span class="k">while</span> <span class="n">retry</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="n">src</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">github_author</span> <span class="o">+</span> <span class="n">github_project</span><span class="p">)</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;DOWNLOAD github from </span><span class="si">%s</span><span class="s2"> </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">retry</span><span class="p">))</span>
+                        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">github_project</span><span class="p">)):</span>
+                            <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">github_project</span><span class="p">))</span>
+                        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_download_github</span><span class="p">(</span><span class="n">github_author</span><span class="o">=</span><span class="n">github_author</span><span class="p">,</span> <span class="n">github_project</span><span class="o">=</span><span class="n">github_project</span><span class="p">,</span> <span class="n">file_path</span><span class="o">=</span><span class="n">file_path</span><span class="p">):</span>
+                            <span class="k">return</span> <span class="kc">True</span>
+                    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;[DOWNLOAD ERROR] </span><span class="si">%s</span><span class="s2"> error:</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="nb">repr</span><span class="p">(</span><span class="n">e</span><span class="p">)))</span>
+                    <span class="n">retry</span> <span class="o">=</span> <span class="n">retry</span> <span class="o">-</span> <span class="mi">1</span>
+
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">while</span> <span class="n">retry</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;DOWNLOAD </span><span class="si">%s</span><span class="s2"> from </span><span class="si">%s</span><span class="s2"> </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">retry</span><span class="p">))</span>
+
+                        <span class="n">r</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_download_once</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
+                            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">file_name</span><span class="p">),</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                                <span class="n">shutil</span><span class="o">.</span><span class="n">copyfileobj</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">raw</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span> <span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span>
+                                                                    <span class="s2">&quot;content-type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;application/x-zip-compressed&quot;</span> <span class="k">else</span> <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span>
+                                    <span class="n">r</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+                            <span class="k">if</span> <span class="n">is_zip_extract</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+                                <span class="n">uncompress</span><span class="p">(</span><span class="n">src_file</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">file_name</span><span class="p">),</span> <span class="n">des_dir_path</span><span class="o">=</span><span class="n">file_path</span><span class="p">)</span>
+                            <span class="k">return</span> <span class="kc">True</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
+                    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;[DOWNLOAD ERROR] </span><span class="si">%s</span><span class="s2"> error:</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="nb">repr</span><span class="p">(</span><span class="n">e</span><span class="p">)))</span>
+                    <span class="n">retry</span> <span class="o">=</span> <span class="n">retry</span> <span class="o">-</span> <span class="mi">1</span>
+
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+        <span class="k">return</span> <span class="kc">False</span></div></div>
+
 
 
 <span class="c1"># https://selenium-python.readthedocs.io/page-objects.html</span>
@@ -328,7 +452,7 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;重启浏览器</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            重启成功返回True，否则返回False</span>
+<span class="sd">            bool: 重启成功返回True，否则返回False</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">retry_time</span> <span class="o">=</span> <span class="mi">3</span>
@@ -355,10 +479,11 @@
 <span class="sd">        Args:</span>
 <span class="sd">            url(str): 请求的url</span>
 <span class="sd">            time_sleep(int): 页面会在time_sleep时间后获得源码</span>
+<span class="sd">            retry_count(int): 重试次数，针对&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;/body&gt;&lt;/html&gt;情况</span>
 <span class="sd">            proxy(str): 代理</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            {&quot;error&quot;:&quot;异常&quot;,&quot;content&quot;:&quot;网页源码&quot;,&quot;url&quot;:&quot;请求的url&quot;}</span>
+<span class="sd">            dict: {&quot;error&quot;:&quot;异常&quot;,&quot;content&quot;:&quot;网页源码&quot;,&quot;url&quot;:&quot;请求的url&quot;}</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
 
@@ -413,8 +538,6 @@
 
 <div class="viewcode-block" id="ChromeUtils.close"><a class="viewcode-back" href="../../liangutil.html#liangutil.requestutils.ChromeUtils.close">[文档]</a>    <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;关闭Chrome驱动</span>
-
-<span class="sd">        Returns:</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">driver</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
