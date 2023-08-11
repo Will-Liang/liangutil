@@ -45,6 +45,12 @@
               <div class="local-toc"><ul>
 <li><a class="reference internal" href="#">liangutil package</a><ul>
 <li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-liangutil.kafkautils">liangutil.kafkautils module</a><ul>
+<li><a class="reference internal" href="#liangutil.kafkautils.kafka_callback"><code class="docutils literal notranslate"><span class="pre">kafka_callback()</span></code></a></li>
+<li><a class="reference internal" href="#liangutil.kafkautils.kafka_consumer"><code class="docutils literal notranslate"><span class="pre">kafka_consumer()</span></code></a></li>
+<li><a class="reference internal" href="#liangutil.kafkautils.kafka_producer"><code class="docutils literal notranslate"><span class="pre">kafka_producer()</span></code></a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#module-liangutil.lianglog">liangutil.lianglog module</a><ul>
 <li><a class="reference internal" href="#liangutil.lianglog.LiangLog"><code class="docutils literal notranslate"><span class="pre">LiangLog</span></code></a><ul>
 <li><a class="reference internal" href="#liangutil.lianglog.LiangLog.print_log"><code class="docutils literal notranslate"><span class="pre">LiangLog.print_log()</span></code></a></li>
@@ -150,6 +156,55 @@
 <h1>liangutil package<a class="headerlink" href="#liangutil-package" title="此标题的永久链接"></a></h1>
 <section id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="此标题的永久链接"></a></h2>
+</section>
+<section id="module-liangutil.kafkautils">
+<span id="liangutil-kafkautils-module"></span><h2>liangutil.kafkautils module<a class="headerlink" href="#module-liangutil.kafkautils" title="此标题的永久链接"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="liangutil.kafkautils.kafka_callback">
+<span class="sig-prename descclassname"><span class="pre">liangutil.kafkautils.</span></span><span class="sig-name descname"><span class="pre">kafka_callback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">err</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">msg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/kafkautils.html#kafka_callback"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.kafkautils.kafka_callback" title="永久链接至目标"></a></dt>
+<dd><p>kafka的回调函数(不要直接调用)</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="liangutil.kafkautils.kafka_consumer">
+<span class="sig-prename descclassname"><span class="pre">liangutil.kafkautils.</span></span><span class="sig-name descname"><span class="pre">kafka_consumer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">broker_ips</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">topics</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_offset_reset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'earliest'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message_limit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/kafkautils.html#kafka_consumer"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.kafkautils.kafka_consumer" title="永久链接至目标"></a></dt>
+<dd><p>Kafka消费者</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>broker_ips</strong> (<em>list</em>) – Kafka broker IP 地址列表</p></li>
+<li><p><strong>topics</strong> (<em>list</em>) – 要订阅的 Kafka 主题列表</p></li>
+<li><p><strong>group_id</strong> (<em>str</em>) – 消费者组 ID</p></li>
+<li><p><strong>auto_offset_reset</strong> (<em>str</em>) – 从主题开始的位置消费，可选值为 ‘earliest’ 或 ‘latest’。</p></li>
+<li><p><strong>timeout</strong> (<em>int</em>) – 消费者轮询超时时间</p></li>
+<li><p><strong>message_limit</strong> (<em>int</em>) – 需要处理的消息数量限制</p></li>
+</ul>
+</dd>
+<dt class="field-even">返回<span class="colon">:</span></dt>
+<dd class="field-even"><p>消费者收到的记录列表，每个记录为一个字典，包含 key, value, topic, partition, offset 信息。</p>
+</dd>
+<dt class="field-odd">返回类型<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="liangutil.kafkautils.kafka_producer">
+<span class="sig-prename descclassname"><span class="pre">liangutil.kafkautils.</span></span><span class="sig-name descname"><span class="pre">kafka_producer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">topic</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">broker_ips</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/kafkautils.html#kafka_producer"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.kafkautils.kafka_producer" title="永久链接至目标"></a></dt>
+<dd><p>向kafka发送消息</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>topic</strong> (<em>str</em>) – 将要发送的 Kafka 主题</p></li>
+<li><p><strong>message</strong> (<em>str</em>) – 要发送的消息</p></li>
+<li><p><strong>key</strong> (<em>str</em>) – 用于分区的键</p></li>
+<li><p><strong>broker_ips</strong> (<em>list</em>) – Kafka broker IP 地址列表</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 <section id="module-liangutil.lianglog">
 <span id="liangutil-lianglog-module"></span><h2>liangutil.lianglog module<a class="headerlink" href="#module-liangutil.lianglog" title="此标题的永久链接"></a></h2>

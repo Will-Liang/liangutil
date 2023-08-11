@@ -85,6 +85,12 @@ pip install liangutil
 
 ### 8月
 
+**2023-08-11**
+
+`0.1.7`
+
+- 增加了kafkautils.py，包含基本的kafka操作
+
 **2023-08-10**
 
 `0.1.6`
