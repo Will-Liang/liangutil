@@ -448,7 +448,7 @@ class ChromeUtils:
                 try:
                     self.driver.get(url)
                 except Exception as e:
-                    self.driver.execute("window.stop()")
+                    self.driver.execute_script("window.stop()")
                     return {"error":e,
                             "content":"",
                             "url":url}
@@ -465,6 +465,9 @@ class ChromeUtils:
                         "content": "",
                         "url": self.driver.current_url}
 
+        return {"error": "",
+         "content": "",
+         "url": self.driver.current_url}
 
 
     def close(self):

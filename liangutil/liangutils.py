@@ -203,3 +203,20 @@ def uncompress(src_file, dest_dir_path):
     return True
 
 
+def find_all_files(directory):
+    """根据目录寻找该目录下的所有子文件
+
+    Args:
+        directory(str):目录路径
+
+    Returns:
+        list: 子文件路径
+    """
+    file_paths = []
+
+    for root, _, files in os.walk(directory):
+        for file in files:
+            file_path = os.path.join(root, file)
+            file_paths.append(file_path)
+
+    return file_paths
