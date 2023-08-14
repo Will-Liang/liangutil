@@ -85,6 +85,13 @@ pip install liangutil
 
 ### 8月
 
+**2023-08-13**
+
+`0.1.8`
+
+- liangutils中增加了find_all_files()用于获得目录下的所有子文件
+- 修复了一些Bug
+
 **2023-08-11**
 
 `0.1.7`
@@ -138,7 +145,7 @@ pip install liangutil
 `0.1.0`
 
 - mysqlutils 中增加了查询等方法
-- 修复了一些 Bug
+- 修复了一些Bug
 
 ### 7月
 

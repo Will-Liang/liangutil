@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>liangutil.liangutils &mdash; liangutil 0.1.6 文档</title>
+  <title>liangutil.liangutils &mdash; liangutil 0.1.8 文档</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -12,7 +12,7 @@
   
         <script src="../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=a02915e1"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=588c7d6d"></script>
         <script src="../../_static/doctools.js?v=888ff710"></script>
         <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
         <script src="../../_static/translations.js?v=beaddf03"></script>
@@ -272,6 +272,23 @@
     <span class="k">return</span> <span class="kc">True</span></div>
 
 
+<div class="viewcode-block" id="find_all_files"><a class="viewcode-back" href="../../liangutil.html#liangutil.liangutils.find_all_files">[文档]</a><span class="k">def</span> <span class="nf">find_all_files</span><span class="p">(</span><span class="n">directory</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;根据目录寻找该目录下的所有子文件</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        directory(str):目录路径</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        list: 子文件路径</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">file_paths</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">root</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">files</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">directory</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
+            <span class="n">file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span>
+            <span class="n">file_paths</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">file_paths</span></div>
 </pre></div>
 
            </div>

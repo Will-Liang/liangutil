@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>liangutil.requestutils &mdash; liangutil 0.1.6 文档</title>
+  <title>liangutil.requestutils &mdash; liangutil 0.1.8 文档</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -12,7 +12,7 @@
   
         <script src="../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=a02915e1"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=588c7d6d"></script>
         <script src="../../_static/doctools.js?v=888ff710"></script>
         <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
         <script src="../../_static/translations.js?v=beaddf03"></script>
@@ -517,7 +517,7 @@
                 <span class="k">try</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
                 <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;window.stop()&quot;</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">execute_script</span><span class="p">(</span><span class="s2">&quot;window.stop()&quot;</span><span class="p">)</span>
                     <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;error&quot;</span><span class="p">:</span><span class="n">e</span><span class="p">,</span>
                             <span class="s2">&quot;content&quot;</span><span class="p">:</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
                             <span class="s2">&quot;url&quot;</span><span class="p">:</span><span class="n">url</span><span class="p">}</span>
@@ -532,8 +532,11 @@
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;没有获得 page_source&quot;</span><span class="p">,</span>
                         <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-                        <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">current_url</span><span class="p">}</span></div>
+                        <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">current_url</span><span class="p">}</span>
 
+        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">current_url</span><span class="p">}</span></div>
 
 
 <div class="viewcode-block" id="ChromeUtils.close"><a class="viewcode-back" href="../../liangutil.html#liangutil.requestutils.ChromeUtils.close">[文档]</a>    <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
