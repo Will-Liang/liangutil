@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import datetime
 import os
+import random
 import re
 import time
 import traceback
@@ -220,3 +221,19 @@ def find_all_files(directory):
             file_paths.append(file_path)
 
     return file_paths
+
+
+def random_sleep(lower_bound:int, upper_bound:int):
+    """随机睡眠若干秒
+
+    Args:
+        lower_bound(int):最少睡眠秒数
+        upper_bound(int):最多睡眠秒数
+
+    """
+    random_sleep_time = random.uniform(lower_bound, upper_bound)
+    print(f"随机等待时间：{random_sleep_time:.2f}秒")
+    time.sleep(random_sleep_time)
+    print("随机等待时间结束")
+
+

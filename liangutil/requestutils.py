@@ -10,6 +10,7 @@ import shutil
 
 from func_timeout import func_set_timeout, FunctionTimedOut
 from urllib.parse import urlparse
+from urllib.parse import urlencode, urljoin
 from selenium.webdriver.chrome.options import Options
 from selenium import webdriver
 
@@ -455,6 +456,7 @@ class ChromeUtils:
             time.sleep(time_sleep)
             text = self.driver.page_source
             if text == "<html><head></head><body></body></html>":
+                print("当前获得的网页源码: <html><head></head><body></body></html>")
                 continue
             if text:
                 return {"error": "",
@@ -477,3 +479,17 @@ class ChromeUtils:
         if self.driver is not None:
             self.driver.quit()
             self.driver = None
+
+
+def build_url(base_url: str, params: dict):
+    """构建url，将参数拼接在url后面
+
+        Args:
+            base_url(str):目录路径
+            params(dict):参数
+
+        Returns:
+            str: url
+    """
+    query_string = urlencode(params)
+    return urljoin(base_url, '?' + query_string)
