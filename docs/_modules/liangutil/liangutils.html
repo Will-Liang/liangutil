@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>liangutil.liangutils &mdash; liangutil 0.1.9 文档</title>
+  <title>liangutil.liangutils &mdash; liangutil 0.1.10 文档</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -12,7 +12,7 @@
   
         <script src="../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=4a4a4177"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=bdd39a68"></script>
         <script src="../../_static/doctools.js?v=888ff710"></script>
         <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
         <script src="../../_static/translations.js?v=beaddf03"></script>
@@ -69,6 +69,7 @@
   <h1>liangutil.liangutils 源代码</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">random</span>
 <span class="kn">import</span> <span class="nn">re</span>
@@ -84,6 +85,7 @@
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">liangutils 中存放一些工具方法</span>
 <span class="sd">&quot;&quot;&quot;</span>
+
 
 <div class="viewcode-block" id="is_filepath"><a class="viewcode-back" href="../../liangutil.html#liangutil.liangutils.is_filepath">[文档]</a><span class="k">def</span> <span class="nf">is_filepath</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;判断是否为文件路径</span>
@@ -157,7 +159,7 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">formatted_log</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> EXCEPTION: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">code_location</span><span class="p">(</span><span class="n">depth</span><span class="o">=-</span><span class="mi">3</span><span class="p">),</span> <span class="n">content</span><span class="p">)</span>
-    <span class="n">printlog</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> </span><span class="si">{}</span><span class="s2"> </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">level</span><span class="p">,</span><span class="n">get_nowdatetime</span><span class="p">(),</span><span class="n">formatted_log</span><span class="p">)</span>
+    <span class="n">printlog</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> </span><span class="si">{}</span><span class="s2"> </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">level</span><span class="p">,</span> <span class="n">get_nowdatetime</span><span class="p">(),</span> <span class="n">formatted_log</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">printlog</span><span class="p">)</span></div>
 
 
@@ -176,7 +178,7 @@
     <span class="c1"># 通常，调用栈列表的最后一帧是当前代码所在的位置，也就是 code_location() 函数本身的位置。而在 traceback.extract_stack() 返回的列表中，最后一帧的索引是 -1。而倒数第二帧的索引是 -2，依此类推。</span>
     <span class="c1"># 所以在代码中的 stack[-2] 就表示获取调用栈列表中倒数第二帧的信息，即 code_location() 函数被调用的位置所在的帧。然后从这个帧中获取文件名和行号信息，最终返回文件名和行号组成的字符串。</span>
     <span class="c1"># 注意：traceback.extract_stack() 函数会返回完整的调用栈信息，包含当前函数的调用。如果你在其他函数中调用了 code_location()，那么它返回的文件名和行号将是调用它的位置。</span>
-    <span class="k">return</span> <span class="n">filename</span><span class="o">+</span><span class="s2">&quot; line:&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">lineno</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">filename</span> <span class="o">+</span> <span class="s2">&quot; line:&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">lineno</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="get_nowdatetime"><a class="viewcode-back" href="../../liangutil.html#liangutil.liangutils.get_nowdatetime">[文档]</a><span class="k">def</span> <span class="nf">get_nowdatetime</span><span class="p">():</span>
@@ -191,7 +193,9 @@
     <span class="n">current_hour</span> <span class="o">=</span> <span class="n">now</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%H&#39;</span><span class="p">)</span>
     <span class="n">current_min</span> <span class="o">=</span> <span class="n">now</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%M&#39;</span><span class="p">)</span>
     <span class="n">current_sec</span> <span class="o">=</span> <span class="n">now</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%S&#39;</span><span class="p">)</span>
-    <span class="n">nowdatetime</span> <span class="o">=</span> <span class="n">current_date</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="n">current_hour</span> <span class="o">+</span> <span class="s2">&quot;:&quot;</span> <span class="o">+</span> <span class="n">current_min</span> <span class="o">+</span> <span class="s2">&quot;:&quot;</span> <span class="o">+</span> <span class="n">current_sec</span>
+    <span class="n">nowdatetime</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">current_date</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="n">current_hour</span> <span class="o">+</span> <span class="s2">&quot;:&quot;</span> <span class="o">+</span> <span class="n">current_min</span> <span class="o">+</span> <span class="s2">&quot;:&quot;</span> <span class="o">+</span> <span class="n">current_sec</span>
+    <span class="p">)</span>
     <span class="k">return</span> <span class="n">nowdatetime</span></div>
 
 
@@ -238,9 +242,9 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">get_nowdatetime</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;starting uncompress: &quot;</span> <span class="o">+</span> <span class="n">src_file</span><span class="p">)</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">dest_dir_path</span><span class="p">)</span> <span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">dest_dir_path</span><span class="p">):</span>
             <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">dest_dir_path</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">src_file</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.tgz&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">src_file</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.tar&#39;</span><span class="p">)</span> <span class="p">:</span>
+        <span class="k">if</span> <span class="n">src_file</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.tgz&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">src_file</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.tar&#39;</span><span class="p">):</span>
             <span class="n">tar</span> <span class="o">=</span> <span class="n">tarfile</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">src_file</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">tar</span><span class="o">.</span><span class="n">getnames</span><span class="p">():</span>
                 <span class="n">tar</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">dest_dir_path</span><span class="p">)</span>
@@ -258,10 +262,13 @@
 <span class="w">            </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">            g_file = gzip.GzipFile(src_file)# 创建gzip对象</span>
 <span class="sd">            with open(os.path.join(dest_dir_path, os.path.basename(src_file).split(&quot;.gz&quot;)[0]), &quot;wb&quot;) as f:</span>
-<span class="sd">                f.write(g_file.read()) # gzip对象用read()打开后，写入open()建立的文件中。  </span>
-<span class="sd">            g_file.close()  # 关闭gzip对象  </span>
+<span class="sd">                f.write(g_file.read()) # gzip对象用read()打开后，写入open()建立的文件中。</span>
+<span class="sd">            g_file.close()  # 关闭gzip对象</span>
 <span class="sd">            &#39;&#39;&#39;</span>
-            <span class="k">with</span> <span class="n">gzip</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">src_file</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">s_file</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dest_dir_path</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">src_file</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.gz&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]),</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">d_file</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">gzip</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">src_file</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">s_file</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dest_dir_path</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">src_file</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.gz&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]),</span>
+                <span class="s1">&#39;wb&#39;</span><span class="p">,</span>
+            <span class="p">)</span> <span class="k">as</span> <span class="n">d_file</span><span class="p">:</span>
                 <span class="n">shutil</span><span class="o">.</span><span class="n">copyfileobj</span><span class="p">(</span><span class="n">s_file</span><span class="p">,</span> <span class="n">d_file</span><span class="p">,</span> <span class="mi">65536</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Incorrect file type&quot;</span><span class="p">)</span>
@@ -292,7 +299,7 @@
     <span class="k">return</span> <span class="n">file_paths</span></div>
 
 
-<div class="viewcode-block" id="random_sleep"><a class="viewcode-back" href="../../liangutil.html#liangutil.liangutils.random_sleep">[文档]</a><span class="k">def</span> <span class="nf">random_sleep</span><span class="p">(</span><span class="n">lower_bound</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="n">upper_bound</span><span class="p">:</span><span class="nb">int</span><span class="p">):</span>
+<div class="viewcode-block" id="random_sleep"><a class="viewcode-back" href="../../liangutil.html#liangutil.liangutils.random_sleep">[文档]</a><span class="k">def</span> <span class="nf">random_sleep</span><span class="p">(</span><span class="n">lower_bound</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">upper_bound</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;随机睡眠若干秒</span>
 
 <span class="sd">    Args:</span>
@@ -304,6 +311,117 @@
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;随机等待时间：</span><span class="si">{</span><span class="n">random_sleep_time</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">秒&quot;</span><span class="p">)</span>
     <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">random_sleep_time</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;随机等待时间结束&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="file_to_json"><a class="viewcode-back" href="../../liangutil.html#liangutil.liangutils.file_to_json">[文档]</a><span class="k">def</span> <span class="nf">file_to_json</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;读取json文件</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        file_path(str): 文件路径</span>
+<span class="sd">        encoding(str): 编码格式</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dict: 正确情况</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="n">encoding</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+        <span class="k">return</span> <span class="kc">None</span></div>
+
+
+<div class="viewcode-block" id="file_to_json_line"><a class="viewcode-back" href="../../liangutil.html#liangutil.liangutils.file_to_json_line">[文档]</a><span class="k">def</span> <span class="nf">file_to_json_line</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;逐行读取每行都是json的文件</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        file_path(str): 文件路径</span>
+<span class="sd">        encoding(str): 编码格式</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        list: [{},{},{}]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">all_line</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="n">encoding</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">line</span><span class="p">:</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="n">all_line</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()))</span>
+                    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">all_line</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+        <span class="k">return</span> <span class="kc">None</span></div>
+
+
+<div class="viewcode-block" id="json_to_line_file"><a class="viewcode-back" href="../../liangutil.html#liangutil.liangutils.json_to_line_file">[文档]</a><span class="k">def</span> <span class="nf">json_to_line_file</span><span class="p">(</span><span class="n">outputfile</span><span class="p">,</span> <span class="n">all_line</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;将一个列表中的每个dict逐行写入文件</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        outputfile(str):输出文件路径</span>
+<span class="sd">        all_line(list):存储dict的list</span>
+<span class="sd">        encoding(str):编码格式</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        bool: True/False</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">outputfile</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="n">encoding</span><span class="p">)</span> <span class="k">as</span> <span class="n">f_output</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">ip</span> <span class="ow">in</span> <span class="n">all_line</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">f_output</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">ip</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;json_to_line_file(): &quot;</span> <span class="o">+</span> <span class="n">outputfile</span> <span class="o">+</span> <span class="s2">&quot;, is OK!&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+        <span class="k">return</span> <span class="kc">False</span></div>
+
+
+<div class="viewcode-block" id="json_to_file"><a class="viewcode-back" href="../../liangutil.html#liangutil.liangutils.json_to_file">[文档]</a><span class="k">def</span> <span class="nf">json_to_file</span><span class="p">(</span><span class="n">outputfile</span><span class="p">,</span> <span class="n">json_data</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;将json写入文件</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        outputfile(str):输出文件路径</span>
+<span class="sd">        json_data(dict):json数据</span>
+<span class="sd">        encoding(str):编码格式</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        bool: True/False</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">outputfile</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="n">encoding</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">json_data</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;json_to_file: &quot;</span> <span class="o">+</span> <span class="n">outputfile</span> <span class="o">+</span> <span class="s2">&quot;, is OK!&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+        <span class="k">return</span> <span class="kc">False</span></div>
+
+
+<div class="viewcode-block" id="json_to_file_format"><a class="viewcode-back" href="../../liangutil.html#liangutil.liangutils.json_to_file_format">[文档]</a><span class="k">def</span> <span class="nf">json_to_file_format</span><span class="p">(</span><span class="n">outputfile</span><span class="p">,</span> <span class="n">json_data</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;将json格式化写入文件</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        outputfile(str):输出文件路径</span>
+<span class="sd">        json_data(dict):json数据</span>
+<span class="sd">        encoding(str):编码格式</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        bool: True/False</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">outputfile</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="n">encoding</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">json_data</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ensure_ascii</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;json_to_file_format: &quot;</span> <span class="o">+</span> <span class="n">outputfile</span> <span class="o">+</span> <span class="s2">&quot;, is OK!&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+        <span class="k">return</span> <span class="kc">False</span></div>
 
 
 </pre></div>

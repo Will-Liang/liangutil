@@ -36,14 +36,6 @@ liangutil.minioutils module
    :undoc-members:
    :show-inheritance:
 
-liangutil.mysqlutils module
----------------------------
-
-.. automodule:: liangutil.mysqlutils
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
 liangutil.redisutils module
 ---------------------------
 

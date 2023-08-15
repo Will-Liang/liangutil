@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>liangutil.minioutils &mdash; liangutil 0.1.9 文档</title>
+  <title>liangutil.minioutils &mdash; liangutil 0.1.10 文档</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -12,7 +12,7 @@
   
         <script src="../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=4a4a4177"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=bdd39a68"></script>
         <script src="../../_static/doctools.js?v=888ff710"></script>
         <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
         <script src="../../_static/translations.js?v=beaddf03"></script>
@@ -76,12 +76,8 @@
 
 
 <div class="viewcode-block" id="MinIOUtils"><a class="viewcode-back" href="../../liangutil.html#liangutil.minioutils.MinIOUtils">[文档]</a><span class="k">class</span> <span class="nc">MinIOUtils</span><span class="p">:</span>
-
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ip_port</span><span class="p">,</span> <span class="n">access_key</span><span class="p">,</span> <span class="n">secret_key</span><span class="p">):</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">minioClient</span> <span class="o">=</span> <span class="n">Minio</span><span class="p">(</span><span class="n">ip_port</span><span class="p">,</span> <span class="n">access_key</span><span class="p">,</span>
-                            <span class="n">secret_key</span><span class="p">,</span> <span class="n">secure</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-
+        <span class="bp">self</span><span class="o">.</span><span class="n">minioClient</span> <span class="o">=</span> <span class="n">Minio</span><span class="p">(</span><span class="n">ip_port</span><span class="p">,</span> <span class="n">access_key</span><span class="p">,</span> <span class="n">secret_key</span><span class="p">,</span> <span class="n">secure</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
     <span class="c1"># 获取MinIO中的config配置文件</span>
 <div class="viewcode-block" id="MinIOUtils.get_jsonfile"><a class="viewcode-back" href="../../liangutil.html#liangutil.minioutils.MinIOUtils.get_jsonfile">[文档]</a>    <span class="k">def</span> <span class="nf">get_jsonfile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bucket_name</span><span class="p">,</span> <span class="n">filepath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
@@ -95,9 +91,8 @@
 <span class="sd">            dict</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">json_file</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">minioClient</span><span class="o">.</span><span class="n">get_object</span><span class="p">(</span><span class="n">bucket_name</span><span class="p">,</span><span class="n">filepath</span><span class="p">)</span>
+        <span class="n">json_file</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">minioClient</span><span class="o">.</span><span class="n">get_object</span><span class="p">(</span><span class="n">bucket_name</span><span class="p">,</span> <span class="n">filepath</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">json_file</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">))</span></div>
-
 
 <div class="viewcode-block" id="MinIOUtils.upload_file_to_minio"><a class="viewcode-back" href="../../liangutil.html#liangutil.minioutils.MinIOUtils.upload_file_to_minio">[文档]</a>    <span class="k">def</span> <span class="nf">upload_file_to_minio</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bucket_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">file_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">current_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;将文件上传至MinIO</span>
@@ -114,8 +109,6 @@
             <span class="nb">print</span><span class="p">(</span><span class="n">current_path</span><span class="p">,</span> <span class="s2">&quot;上传成功, MinIO的路径：&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">bucket_name</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">file_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;出错了&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span></div></div>
-
-
 </pre></div>
 
            </div>

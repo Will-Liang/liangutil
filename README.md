@@ -87,6 +87,12 @@ pip install liangutil
 
 **2023-08-15**
 
+`0.1.10`
+
+- liangutils中增加了关于json操作相关函数
+- RequestUtils中的get()和post()对于参数进行了调整
+- 格式化代码风格
+
 `0.1.9`
 
 - liangutils中增加了random_sleep()用于随机睡眠若干秒

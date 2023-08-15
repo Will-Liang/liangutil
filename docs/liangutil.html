@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>liangutil package &mdash; liangutil 0.1.9 文档</title>
+  <title>liangutil package &mdash; liangutil 0.1.10 文档</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -13,7 +13,7 @@
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=4a4a4177"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=bdd39a68"></script>
         <script src="_static/doctools.js?v=888ff710"></script>
         <script src="_static/sphinx_highlight.js?v=4825356b"></script>
         <script src="_static/translations.js?v=beaddf03"></script>
@@ -64,12 +64,17 @@
 <li><a class="reference internal" href="#module-liangutil.liangutils">liangutil.liangutils module</a><ul>
 <li><a class="reference internal" href="#liangutil.liangutils.check_path"><code class="docutils literal notranslate"><span class="pre">check_path()</span></code></a></li>
 <li><a class="reference internal" href="#liangutil.liangutils.code_location"><code class="docutils literal notranslate"><span class="pre">code_location()</span></code></a></li>
+<li><a class="reference internal" href="#liangutil.liangutils.file_to_json"><code class="docutils literal notranslate"><span class="pre">file_to_json()</span></code></a></li>
+<li><a class="reference internal" href="#liangutil.liangutils.file_to_json_line"><code class="docutils literal notranslate"><span class="pre">file_to_json_line()</span></code></a></li>
 <li><a class="reference internal" href="#liangutil.liangutils.find_all_files"><code class="docutils literal notranslate"><span class="pre">find_all_files()</span></code></a></li>
 <li><a class="reference internal" href="#liangutil.liangutils.get_dirpath"><code class="docutils literal notranslate"><span class="pre">get_dirpath()</span></code></a></li>
 <li><a class="reference internal" href="#liangutil.liangutils.get_nowdate"><code class="docutils literal notranslate"><span class="pre">get_nowdate()</span></code></a></li>
 <li><a class="reference internal" href="#liangutil.liangutils.get_nowdatetime"><code class="docutils literal notranslate"><span class="pre">get_nowdatetime()</span></code></a></li>
 <li><a class="reference internal" href="#liangutil.liangutils.get_nowtime"><code class="docutils literal notranslate"><span class="pre">get_nowtime()</span></code></a></li>
 <li><a class="reference internal" href="#liangutil.liangutils.is_filepath"><code class="docutils literal notranslate"><span class="pre">is_filepath()</span></code></a></li>
+<li><a class="reference internal" href="#liangutil.liangutils.json_to_file"><code class="docutils literal notranslate"><span class="pre">json_to_file()</span></code></a></li>
+<li><a class="reference internal" href="#liangutil.liangutils.json_to_file_format"><code class="docutils literal notranslate"><span class="pre">json_to_file_format()</span></code></a></li>
+<li><a class="reference internal" href="#liangutil.liangutils.json_to_line_file"><code class="docutils literal notranslate"><span class="pre">json_to_line_file()</span></code></a></li>
 <li><a class="reference internal" href="#liangutil.liangutils.print_log"><code class="docutils literal notranslate"><span class="pre">print_log()</span></code></a></li>
 <li><a class="reference internal" href="#liangutil.liangutils.random_sleep"><code class="docutils literal notranslate"><span class="pre">random_sleep()</span></code></a></li>
 <li><a class="reference internal" href="#liangutil.liangutils.uncompress"><code class="docutils literal notranslate"><span class="pre">uncompress()</span></code></a></li>
@@ -79,21 +84,6 @@
 <li><a class="reference internal" href="#liangutil.minioutils.MinIOUtils"><code class="docutils literal notranslate"><span class="pre">MinIOUtils</span></code></a><ul>
 <li><a class="reference internal" href="#liangutil.minioutils.MinIOUtils.get_jsonfile"><code class="docutils literal notranslate"><span class="pre">MinIOUtils.get_jsonfile()</span></code></a></li>
 <li><a class="reference internal" href="#liangutil.minioutils.MinIOUtils.upload_file_to_minio"><code class="docutils literal notranslate"><span class="pre">MinIOUtils.upload_file_to_minio()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="reference internal" href="#module-liangutil.mysqlutils">liangutil.mysqlutils module</a><ul>
-<li><a class="reference internal" href="#liangutil.mysqlutils.MySQLUtils"><code class="docutils literal notranslate"><span class="pre">MySQLUtils</span></code></a><ul>
-<li><a class="reference internal" href="#liangutil.mysqlutils.MySQLUtils.check_table_exist"><code class="docutils literal notranslate"><span class="pre">MySQLUtils.check_table_exist()</span></code></a></li>
-<li><a class="reference internal" href="#liangutil.mysqlutils.MySQLUtils.exists_data"><code class="docutils literal notranslate"><span class="pre">MySQLUtils.exists_data()</span></code></a></li>
-<li><a class="reference internal" href="#liangutil.mysqlutils.MySQLUtils.fetchall_to_dict_list"><code class="docutils literal notranslate"><span class="pre">MySQLUtils.fetchall_to_dict_list()</span></code></a></li>
-<li><a class="reference internal" href="#liangutil.mysqlutils.MySQLUtils.insert_data"><code class="docutils literal notranslate"><span class="pre">MySQLUtils.insert_data()</span></code></a></li>
-<li><a class="reference internal" href="#liangutil.mysqlutils.MySQLUtils.insert_datas"><code class="docutils literal notranslate"><span class="pre">MySQLUtils.insert_datas()</span></code></a></li>
-<li><a class="reference internal" href="#liangutil.mysqlutils.MySQLUtils.query_data"><code class="docutils literal notranslate"><span class="pre">MySQLUtils.query_data()</span></code></a></li>
-<li><a class="reference internal" href="#liangutil.mysqlutils.MySQLUtils.query_datas"><code class="docutils literal notranslate"><span class="pre">MySQLUtils.query_datas()</span></code></a></li>
-<li><a class="reference internal" href="#liangutil.mysqlutils.MySQLUtils.query_datas_dict_list"><code class="docutils literal notranslate"><span class="pre">MySQLUtils.query_datas_dict_list()</span></code></a></li>
-<li><a class="reference internal" href="#liangutil.mysqlutils.MySQLUtils.update_datas"><code class="docutils literal notranslate"><span class="pre">MySQLUtils.update_datas()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -313,6 +303,46 @@
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="liangutil.liangutils.file_to_json">
+<span class="sig-prename descclassname"><span class="pre">liangutil.liangutils.</span></span><span class="sig-name descname"><span class="pre">file_to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'utf-8'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/liangutils.html#file_to_json"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.liangutils.file_to_json" title="永久链接至目标"></a></dt>
+<dd><p>读取json文件</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file_path</strong> (<em>str</em>) – 文件路径</p></li>
+<li><p><strong>encoding</strong> (<em>str</em>) – 编码格式</p></li>
+</ul>
+</dd>
+<dt class="field-even">返回<span class="colon">:</span></dt>
+<dd class="field-even"><p>正确情况</p>
+</dd>
+<dt class="field-odd">返回类型<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="liangutil.liangutils.file_to_json_line">
+<span class="sig-prename descclassname"><span class="pre">liangutil.liangutils.</span></span><span class="sig-name descname"><span class="pre">file_to_json_line</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'utf-8'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/liangutils.html#file_to_json_line"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.liangutils.file_to_json_line" title="永久链接至目标"></a></dt>
+<dd><p>逐行读取每行都是json的文件</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file_path</strong> (<em>str</em>) – 文件路径</p></li>
+<li><p><strong>encoding</strong> (<em>str</em>) – 编码格式</p></li>
+</ul>
+</dd>
+<dt class="field-even">返回<span class="colon">:</span></dt>
+<dd class="field-even"><p>[{},{},{}]</p>
+</dd>
+<dt class="field-odd">返回类型<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="liangutil.liangutils.find_all_files">
 <span class="sig-prename descclassname"><span class="pre">liangutil.liangutils.</span></span><span class="sig-name descname"><span class="pre">find_all_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/liangutils.html#find_all_files"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.liangutils.find_all_files" title="永久链接至目标"></a></dt>
 <dd><p>根据目录寻找该目录下的所有子文件</p>
@@ -415,6 +445,69 @@
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="liangutil.liangutils.json_to_file">
+<span class="sig-prename descclassname"><span class="pre">liangutil.liangutils.</span></span><span class="sig-name descname"><span class="pre">json_to_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">outputfile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">json_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'utf-8'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/liangutils.html#json_to_file"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.liangutils.json_to_file" title="永久链接至目标"></a></dt>
+<dd><p>将json写入文件</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>outputfile</strong> (<em>str</em>) – 输出文件路径</p></li>
+<li><p><strong>json_data</strong> (<em>dict</em>) – json数据</p></li>
+<li><p><strong>encoding</strong> (<em>str</em>) – 编码格式</p></li>
+</ul>
+</dd>
+<dt class="field-even">返回<span class="colon">:</span></dt>
+<dd class="field-even"><p>True/False</p>
+</dd>
+<dt class="field-odd">返回类型<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="liangutil.liangutils.json_to_file_format">
+<span class="sig-prename descclassname"><span class="pre">liangutil.liangutils.</span></span><span class="sig-name descname"><span class="pre">json_to_file_format</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">outputfile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">json_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'utf-8'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/liangutils.html#json_to_file_format"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.liangutils.json_to_file_format" title="永久链接至目标"></a></dt>
+<dd><p>将json格式化写入文件</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>outputfile</strong> (<em>str</em>) – 输出文件路径</p></li>
+<li><p><strong>json_data</strong> (<em>dict</em>) – json数据</p></li>
+<li><p><strong>encoding</strong> (<em>str</em>) – 编码格式</p></li>
+</ul>
+</dd>
+<dt class="field-even">返回<span class="colon">:</span></dt>
+<dd class="field-even"><p>True/False</p>
+</dd>
+<dt class="field-odd">返回类型<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="liangutil.liangutils.json_to_line_file">
+<span class="sig-prename descclassname"><span class="pre">liangutil.liangutils.</span></span><span class="sig-name descname"><span class="pre">json_to_line_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">outputfile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_line</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'utf-8'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/liangutils.html#json_to_line_file"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.liangutils.json_to_line_file" title="永久链接至目标"></a></dt>
+<dd><p>将一个列表中的每个dict逐行写入文件</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>outputfile</strong> (<em>str</em>) – 输出文件路径</p></li>
+<li><p><strong>all_line</strong> (<em>list</em>) – 存储dict的list</p></li>
+<li><p><strong>encoding</strong> (<em>str</em>) – 编码格式</p></li>
+</ul>
+</dd>
+<dt class="field-even">返回<span class="colon">:</span></dt>
+<dd class="field-even"><p>True/False</p>
+</dd>
+<dt class="field-odd">返回类型<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="liangutil.liangutils.print_log">
 <span class="sig-prename descclassname"><span class="pre">liangutil.liangutils.</span></span><span class="sig-name descname"><span class="pre">print_log</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">content</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/liangutils.html#print_log"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.liangutils.print_log" title="永久链接至目标"></a></dt>
 <dd><p>打印日志</p>
@@ -497,168 +590,6 @@
 <li><p><strong>file_path</strong> (<em>str</em>) – 上传到MinIO的文件路径</p></li>
 <li><p><strong>current_path</strong> (<em>str</em>) – 文件当前相对路径</p></li>
 </ul>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
-</section>
-<section id="module-liangutil.mysqlutils">
-<span id="liangutil-mysqlutils-module"></span><h2>liangutil.mysqlutils module<a class="headerlink" href="#module-liangutil.mysqlutils" title="此标题的永久链接"></a></h2>
-<dl class="py class">
-<dt class="sig sig-object py" id="liangutil.mysqlutils.MySQLUtils">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">liangutil.mysqlutils.</span></span><span class="sig-name descname"><span class="pre">MySQLUtils</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">host</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">username</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">database</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/mysqlutils.html#MySQLUtils"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.mysqlutils.MySQLUtils" title="永久链接至目标"></a></dt>
-<dd><p>基类：<code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>MySQLUtils 基于 pymysql 库进行封装</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="liangutil.mysqlutils.MySQLUtils.check_table_exist">
-<span class="sig-name descname"><span class="pre">check_table_exist</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">table_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/mysqlutils.html#MySQLUtils.check_table_exist"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.mysqlutils.MySQLUtils.check_table_exist" title="永久链接至目标"></a></dt>
-<dd><p>根据表名检查表是否存在</p>
-<dl class="field-list simple">
-<dt class="field-odd">参数<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>table_name</strong> (<em>str</em>) – 表名</p>
-</dd>
-<dt class="field-even">返回<span class="colon">:</span></dt>
-<dd class="field-even"><p>存在返回True，否则返回False</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="liangutil.mysqlutils.MySQLUtils.exists_data">
-<span class="sig-name descname"><span class="pre">exists_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">table_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">condition</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/mysqlutils.html#MySQLUtils.exists_data"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.mysqlutils.MySQLUtils.exists_data" title="永久链接至目标"></a></dt>
-<dd><p>是否存在该数据</p>
-<dl class="field-list simple">
-<dt class="field-odd">参数<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>table_name</strong> (<em>str</em>) – 表名</p></li>
-<li><p><strong>columns</strong> (<em>list</em>) – 要查询的列名列表，如果为[]，则查询所有列</p></li>
-<li><p><strong>condition</strong> (<em>str</em>) – 查询条件</p></li>
-</ul>
-</dd>
-<dt class="field-even">返回<span class="colon">:</span></dt>
-<dd class="field-even"><p>存在True，否则False</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="liangutil.mysqlutils.MySQLUtils.fetchall_to_dict_list">
-<span class="sig-name descname"><span class="pre">fetchall_to_dict_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cursor</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/mysqlutils.html#MySQLUtils.fetchall_to_dict_list"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.mysqlutils.MySQLUtils.fetchall_to_dict_list" title="永久链接至目标"></a></dt>
-<dd><p>将pymysql的fetchall查询结果转换为装有dict类型的列表</p>
-<dl class="field-list simple">
-<dt class="field-odd">参数<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>cursor</strong> – pymysql游标对象</p>
-</dd>
-<dt class="field-even">返回<span class="colon">:</span></dt>
-<dd class="field-even"><p>装有字典类型的列表</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="liangutil.mysqlutils.MySQLUtils.insert_data">
-<span class="sig-name descname"><span class="pre">insert_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">table_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/mysqlutils.html#MySQLUtils.insert_data"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.mysqlutils.MySQLUtils.insert_data" title="永久链接至目标"></a></dt>
-<dd><p>插入一条数据</p>
-<dl class="field-list simple">
-<dt class="field-odd">参数<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>table_name</strong> (<em>str</em>) – 表名</p></li>
-<li><p><strong>data</strong> (<em>dict</em>) – 要插入的数据，以字段名为键，字段值为值。</p></li>
-</ul>
-</dd>
-<dt class="field-even">返回<span class="colon">:</span></dt>
-<dd class="field-even"><p>插入成功返回”True”</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="liangutil.mysqlutils.MySQLUtils.insert_datas">
-<span class="sig-name descname"><span class="pre">insert_datas</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">table_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_list</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/mysqlutils.html#MySQLUtils.insert_datas"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.mysqlutils.MySQLUtils.insert_datas" title="永久链接至目标"></a></dt>
-<dd><p>插入一条数据</p>
-<dl class="field-list simple">
-<dt class="field-odd">参数<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>table_name</strong> (<em>str</em>) – 表名</p></li>
-<li><p><strong>data</strong> (<em>list</em>) – 要插入的数据列表，以字段名为键，字段值为值。</p></li>
-</ul>
-</dd>
-<dt class="field-even">返回<span class="colon">:</span></dt>
-<dd class="field-even"><p>插入成功返回”True”</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="liangutil.mysqlutils.MySQLUtils.query_data">
-<span class="sig-name descname"><span class="pre">query_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">table_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">condition</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/mysqlutils.html#MySQLUtils.query_data"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.mysqlutils.MySQLUtils.query_data" title="永久链接至目标"></a></dt>
-<dd><p>随机查询单条数据</p>
-<dl class="field-list simple">
-<dt class="field-odd">参数<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>table_name</strong> (<em>str</em>) – 表名</p></li>
-<li><p><strong>columns</strong> (<em>list</em>) – 要查询的列名列表，如果为[]，则查询所有列</p></li>
-<li><p><strong>condition</strong> (<em>str</em>) – 查询条件</p></li>
-</ul>
-</dd>
-<dt class="field-even">返回<span class="colon">:</span></dt>
-<dd class="field-even"><p>查询结果</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="liangutil.mysqlutils.MySQLUtils.query_datas">
-<span class="sig-name descname"><span class="pre">query_datas</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">table_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">condition</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/mysqlutils.html#MySQLUtils.query_datas"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.mysqlutils.MySQLUtils.query_datas" title="永久链接至目标"></a></dt>
-<dd><p>查询数据</p>
-<dl class="field-list simple">
-<dt class="field-odd">参数<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>table_name</strong> (<em>str</em>) – 表名</p></li>
-<li><p><strong>columns</strong> (<em>list</em>) – 要查询的列名列表，如果为[]，则查询所有列</p></li>
-<li><p><strong>condition</strong> (<em>str</em>) – 查询条件</p></li>
-</ul>
-</dd>
-<dt class="field-even">返回<span class="colon">:</span></dt>
-<dd class="field-even"><p>查询结果(元组)，每条记录为一个元组</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="liangutil.mysqlutils.MySQLUtils.query_datas_dict_list">
-<span class="sig-name descname"><span class="pre">query_datas_dict_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">table_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">condition</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/mysqlutils.html#MySQLUtils.query_datas_dict_list"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.mysqlutils.MySQLUtils.query_datas_dict_list" title="永久链接至目标"></a></dt>
-<dd><p>查询数据</p>
-<dl class="field-list simple">
-<dt class="field-odd">参数<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>table_name</strong> (<em>str</em>) – 表名</p></li>
-<li><p><strong>columns</strong> (<em>list</em>) – 要查询的列名列表，如果为[]，则查询所有列</p></li>
-<li><p><strong>condition</strong> (<em>str</em>) – 查询条件</p></li>
-</ul>
-</dd>
-<dt class="field-even">返回<span class="colon">:</span></dt>
-<dd class="field-even"><p>查询结果 [{},{},{}]</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="liangutil.mysqlutils.MySQLUtils.update_datas">
-<span class="sig-name descname"><span class="pre">update_datas</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">table_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">condition</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/mysqlutils.html#MySQLUtils.update_datas"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.mysqlutils.MySQLUtils.update_datas" title="永久链接至目标"></a></dt>
-<dd><p>更新数据</p>
-<dl class="field-list simple">
-<dt class="field-odd">参数<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>table_name</strong> (<em>str</em>) – 表名</p></li>
-<li><p><strong>data</strong> (<em>dict</em>) – 要更新的数据，以字段名为键，字段值为值。</p></li>
-<li><p><strong>condition</strong> (<em>str</em>) – 更新条件</p></li>
-</ul>
-</dd>
-<dt class="field-even">返回<span class="colon">:</span></dt>
-<dd class="field-even"><p>更新成功返回 “True”，失败返回异常</p>
 </dd>
 </dl>
 </dd></dl>
@@ -831,13 +762,15 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="liangutil.requestutils.RequestUtils.get">
-<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">headers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">retry_count</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_response_json</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_sleep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">proxies</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/requestutils.html#RequestUtils.get"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.requestutils.RequestUtils.get" title="永久链接至目标"></a></dt>
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">headers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">retry_count</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_response_json</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_sleep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">proxies</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/requestutils.html#RequestUtils.get"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.requestutils.RequestUtils.get" title="永久链接至目标"></a></dt>
 <dd><p>Get 请求</p>
 <dl class="field-list simple">
 <dt class="field-odd">参数<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>url</strong> (<em>str</em>) – 请求的url</p></li>
 <li><p><strong>headers</strong> (<em>str</em>) – 请求头</p></li>
+<li><p><strong>params</strong> (<em>dict</em>) – 设置到请求头的参数</p></li>
+<li><p><strong>auth</strong> (<em>tuple</em>) – 用于http认证的</p></li>
 <li><p><strong>retry_count</strong> (<em>int</em>) – 重试次数</p></li>
 <li><p><strong>is_response_json</strong> (<em>bool</em>) – 返回的是否是json</p></li>
 <li><p><strong>time_sleep</strong> (<em>int</em>) – 请求失败后的停止时间</p></li>
@@ -872,7 +805,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="liangutil.requestutils.RequestUtils.post">
-<span class="sig-name descname"><span class="pre">post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">headers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">retry_count</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_response_json</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_sleep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">proxies</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/requestutils.html#RequestUtils.post"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.requestutils.RequestUtils.post" title="永久链接至目标"></a></dt>
+<span class="sig-name descname"><span class="pre">post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">headers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">retry_count</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_response_json</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_sleep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">proxies</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/requestutils.html#RequestUtils.post"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.requestutils.RequestUtils.post" title="永久链接至目标"></a></dt>
 <dd><p>Post 请求</p>
 <dl class="field-list simple">
 <dt class="field-odd">参数<span class="colon">:</span></dt>
@@ -880,6 +813,8 @@
 <li><p><strong>url</strong> (<em>str</em>) – 请求的url</p></li>
 <li><p><strong>headers</strong> (<em>str</em>) – 请求头</p></li>
 <li><p><strong>data</strong> (<em>dict</em>) – payload</p></li>
+<li><p><strong>params</strong> (<em>dict</em>) – 设置到请求头的参数</p></li>
+<li><p><strong>auth</strong> (<em>tuple</em>) – 用于http认证的</p></li>
 <li><p><strong>retry_count</strong> (<em>int</em>) – 重试次数</p></li>
 <li><p><strong>is_response_json</strong> (<em>bool</em>) – 返回的是否是json</p></li>
 <li><p><strong>time_sleep</strong> (<em>int</em>) – 请求失败后的停止时间</p></li>
