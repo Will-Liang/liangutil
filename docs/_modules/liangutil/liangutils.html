@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>liangutil.liangutils &mdash; liangutil 0.1.8 文档</title>
+  <title>liangutil.liangutils &mdash; liangutil 0.1.9 文档</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -12,7 +12,7 @@
   
         <script src="../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=588c7d6d"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=4a4a4177"></script>
         <script src="../../_static/doctools.js?v=888ff710"></script>
         <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
         <script src="../../_static/translations.js?v=beaddf03"></script>
@@ -70,6 +70,7 @@
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="kn">import</span> <span class="nn">datetime</span>
 <span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">random</span>
 <span class="kn">import</span> <span class="nn">re</span>
 <span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">import</span> <span class="nn">traceback</span>
@@ -289,6 +290,22 @@
             <span class="n">file_paths</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">file_paths</span></div>
+
+
+<div class="viewcode-block" id="random_sleep"><a class="viewcode-back" href="../../liangutil.html#liangutil.liangutils.random_sleep">[文档]</a><span class="k">def</span> <span class="nf">random_sleep</span><span class="p">(</span><span class="n">lower_bound</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="n">upper_bound</span><span class="p">:</span><span class="nb">int</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;随机睡眠若干秒</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        lower_bound(int):最少睡眠秒数</span>
+<span class="sd">        upper_bound(int):最多睡眠秒数</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">random_sleep_time</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">lower_bound</span><span class="p">,</span> <span class="n">upper_bound</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;随机等待时间：</span><span class="si">{</span><span class="n">random_sleep_time</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">秒&quot;</span><span class="p">)</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">random_sleep_time</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;随机等待时间结束&quot;</span><span class="p">)</span></div>
+
+
 </pre></div>
 
            </div>

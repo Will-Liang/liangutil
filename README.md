@@ -85,6 +85,13 @@ pip install liangutil
 
 ### 8月
 
+**2023-08-15**
+
+`0.1.9`
+
+- liangutils中增加了random_sleep()用于随机睡眠若干秒
+- requestutils中增加了build_url()用于拼接url和参数
+
 **2023-08-13**
 
 `0.1.8`

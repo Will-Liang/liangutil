@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>liangutil package &mdash; liangutil 0.1.8 文档</title>
+  <title>liangutil package &mdash; liangutil 0.1.9 文档</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -13,7 +13,7 @@
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=588c7d6d"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=4a4a4177"></script>
         <script src="_static/doctools.js?v=888ff710"></script>
         <script src="_static/sphinx_highlight.js?v=4825356b"></script>
         <script src="_static/translations.js?v=beaddf03"></script>
@@ -71,6 +71,7 @@
 <li><a class="reference internal" href="#liangutil.liangutils.get_nowtime"><code class="docutils literal notranslate"><span class="pre">get_nowtime()</span></code></a></li>
 <li><a class="reference internal" href="#liangutil.liangutils.is_filepath"><code class="docutils literal notranslate"><span class="pre">is_filepath()</span></code></a></li>
 <li><a class="reference internal" href="#liangutil.liangutils.print_log"><code class="docutils literal notranslate"><span class="pre">print_log()</span></code></a></li>
+<li><a class="reference internal" href="#liangutil.liangutils.random_sleep"><code class="docutils literal notranslate"><span class="pre">random_sleep()</span></code></a></li>
 <li><a class="reference internal" href="#liangutil.liangutils.uncompress"><code class="docutils literal notranslate"><span class="pre">uncompress()</span></code></a></li>
 </ul>
 </li>
@@ -122,6 +123,7 @@
 <li><a class="reference internal" href="#liangutil.requestutils.RequestUtils.post"><code class="docutils literal notranslate"><span class="pre">RequestUtils.post()</span></code></a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#liangutil.requestutils.build_url"><code class="docutils literal notranslate"><span class="pre">build_url()</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#module-liangutil">Module contents</a></li>
@@ -421,6 +423,20 @@
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>level</strong> – 日志等级</p></li>
 <li><p><strong>content</strong> – 信息</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="liangutil.liangutils.random_sleep">
+<span class="sig-prename descclassname"><span class="pre">liangutil.liangutils.</span></span><span class="sig-name descname"><span class="pre">random_sleep</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lower_bound</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">upper_bound</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/liangutils.html#random_sleep"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.liangutils.random_sleep" title="永久链接至目标"></a></dt>
+<dd><p>随机睡眠若干秒</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lower_bound</strong> (<em>int</em>) – 最少睡眠秒数</p></li>
+<li><p><strong>upper_bound</strong> (<em>int</em>) – 最多睡眠秒数</p></li>
 </ul>
 </dd>
 </dl>
@@ -879,6 +895,26 @@
 </dl>
 </dd></dl>
 
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="liangutil.requestutils.build_url">
+<span class="sig-prename descclassname"><span class="pre">liangutil.requestutils.</span></span><span class="sig-name descname"><span class="pre">build_url</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base_url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/requestutils.html#build_url"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.requestutils.build_url" title="永久链接至目标"></a></dt>
+<dd><p>构建url，将参数拼接在url后面</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>base_url</strong> (<em>str</em>) – 目录路径</p></li>
+<li><p><strong>params</strong> (<em>dict</em>) – 参数</p></li>
+</ul>
+</dd>
+<dt class="field-even">返回<span class="colon">:</span></dt>
+<dd class="field-even"><p>url</p>
+</dd>
+<dt class="field-odd">返回类型<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
 </dd></dl>
 
 </section>
