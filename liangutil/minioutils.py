@@ -7,12 +7,8 @@ from liangutil.redisutils import RedisUtils
 
 
 class MinIOUtils:
-
     def __init__(self, ip_port, access_key, secret_key):
-
-        self.minioClient = Minio(ip_port, access_key,
-                            secret_key, secure=False)
-
+        self.minioClient = Minio(ip_port, access_key, secret_key, secure=False)
 
     # 获取MinIO中的config配置文件
     def get_jsonfile(self, bucket_name, filepath) -> dict:
@@ -26,9 +22,8 @@ class MinIOUtils:
             dict
 
         """
-        json_file = self.minioClient.get_object(bucket_name,filepath)
+        json_file = self.minioClient.get_object(bucket_name, filepath)
         return json.loads(json_file.data.decode("utf-8"))
-
 
     def upload_file_to_minio(self, bucket_name: str, file_path: str, current_path: str):
         """将文件上传至MinIO
@@ -45,5 +40,3 @@ class MinIOUtils:
             print(current_path, "上传成功, MinIO的路径：", f"{bucket_name}/{file_path}")
         except Exception as e:
             print("出错了", e)
-
-

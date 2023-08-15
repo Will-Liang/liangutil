@@ -4,15 +4,16 @@ from confluent_kafka import Producer, Consumer
 from liangutil.liangutils import get_nowdatetime
 
 
-
 def kafka_callback(err, msg):
-    """kafka的回调函数(不要直接调用)
-
-    """
+    """kafka的回调函数(不要直接调用)"""
     if err is not None:
         print("Failed to deliver message: {0} || {1}".format(err, get_nowdatetime()))
     else:
-        print("Message produced success in : {0} || {1}".format(msg.topic(), get_nowdatetime()))
+        print(
+            "Message produced success in : {0} || {1}".format(
+                msg.topic(), get_nowdatetime()
+            )
+        )
 
 
 def kafka_producer(topic, message, key, broker_ips):
@@ -29,17 +30,27 @@ def kafka_producer(topic, message, key, broker_ips):
     bootstrap_servers = ','.join(broker_ips)
 
     # 创建 Kafka 配置和生产者实例
-    conf = {
-        'bootstrap.servers': bootstrap_servers
-    }
+    conf = {'bootstrap.servers': bootstrap_servers}
     p = Producer(conf)
     # 生产并发送消息
-    p.produce(topic,value=message.encode('utf-8'), key=key.encode('utf-8'), callback=kafka_callback)
+    p.produce(
+        topic,
+        value=message.encode('utf-8'),
+        key=key.encode('utf-8'),
+        callback=kafka_callback,
+    )
     # 等待未完成的消息，确保所有消息都已发送
     p.flush(timeout=30)
 
 
-def kafka_consumer(broker_ips, topics, group_id, auto_offset_reset='earliest', timeout=1, message_limit=1):
+def kafka_consumer(
+    broker_ips,
+    topics,
+    group_id,
+    auto_offset_reset='earliest',
+    timeout=1,
+    message_limit=1,
+):
     """Kafka消费者
 
     Args:
@@ -57,7 +68,7 @@ def kafka_consumer(broker_ips, topics, group_id, auto_offset_reset='earliest', t
     conf = {
         'bootstrap.servers': ','.join(broker_ips),
         'group.id': group_id,
-        'auto.offset.reset': auto_offset_reset
+        'auto.offset.reset': auto_offset_reset,
     }
 
     # 创建消费者
@@ -86,7 +97,7 @@ def kafka_consumer(broker_ips, topics, group_id, auto_offset_reset='earliest', t
                 'value': msg.value(),
                 'topic': msg.topic(),
                 'partition': msg.partition(),
-                'offset': msg.offset()
+                'offset': msg.offset(),
             }
             messages.append(record)
             processed_messages += 1

@@ -20,13 +20,21 @@ from liangutil.liangutils import *
 requestutils 中封装了爬虫的类以及方法
 """
 
+
 # 封装requests请求
 class RequestUtils:
     """
     RequestUtils 基于 requests 库进行的封装
     """
 
-    def __init__(self, timeout:int, is_ssl_verify: bool, is_choice_agent:bool = True, proxies=None, proxy_host=None):
+    def __init__(
+        self,
+        timeout: int,
+        is_ssl_verify: bool,
+        is_choice_agent: bool = True,
+        proxies=None,
+        proxy_host=None,
+    ):
         """
         初始化 RequestUtils
 
@@ -37,16 +45,20 @@ class RequestUtils:
             proxies(dict): 代理字典
             proxy_host(str): 代理
         """
-        self.timeout = timeout # 请求超时时间
-        self.is_ssl_verify = is_ssl_verify # 是否验证SSL证书
-        self.is_choice_agent = is_choice_agent # 是否随机AGENT
+        self.timeout = timeout  # 请求超时时间
+        self.is_ssl_verify = is_ssl_verify  # 是否验证SSL证书
+        self.is_choice_agent = is_choice_agent  # 是否随机AGENT
 
         # 该参数代理是为了需要用固定ip的爬虫
-        self.proxies = proxies   # {'http': 'http://xxx', 'https': 'https://xxx'}
+        self.proxies = proxies  # {'http': 'http://xxx', 'https': 'https://xxx'}
 
-        self.proxy_host = (proxy_host if "://" in proxy_host else "socks5://" + proxy_host) if proxy_host and isinstance(proxy_host,str) else None
+        self.proxy_host = (
+            (proxy_host if "://" in proxy_host else "socks5://" + proxy_host)
+            if proxy_host and isinstance(proxy_host, str)
+            else None
+        )
 
-    def get_header(self,is_choice_agent=False):
+    def get_header(self, is_choice_agent=False):
         """获得 USER-AGENT
 
         Args:
@@ -58,41 +70,62 @@ class RequestUtils:
         """
         header = {
             # "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
-            "Accept":"*/*",
+            "Accept": "*/*",
             "Accept-Language": "zh-CN,zh;q=0.9",
             "Cache-Control": "max-age=0",
             "Accept-Encoding": "gzip, deflate",  # 使用gzip压缩传输数据让访问更快
             "User-Agent": "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.122 Safari/537.36",
-            }
+        }
         if is_choice_agent == True:
-            chrome_version = "Chrome/{}.0.{}.{}".format(random.randint(55, 82), random.randint(0, 4000),
-                                                        random.randint(0, 150))
-            os_type = ["(Windows NT 6.0; U; tr; rv:1.8.1)",
-                       "(Windows NT 6.1; Win64; x64)"
-                       "(Windows NT 6.1; WOW64)",
-                       "(Windows NT 10.0; WOW64)",
-                       "(X11; Linux x86_64)",
-                       "(X11; Linux x86_64; rv:2.0b4)",
-                       "(X11; U; FreeBSD x86_64; en-US)",
-                       "(X11; Ubuntu; Linux x86_64; rv:24.0)"
-                       "(Macintosh; Intel Mac OS X 10_12_6)",
-                       "(Macintosh; U; Intel Mac OS X 10_12_6; en-us)",
-                       "(Macintosh; U; Intel Mac OS X 10_12_6; ja-jp)",
-                       ]
-            browser_type = ["Mozilla/5.0",
-                            ]
-            ua = " ".join([random.choice(browser_type), random.choice(os_type), "AppleWebKit/537.36",
-                           "(KHTML, like Gecko)", chrome_version, "Safari/537.36"])
+            chrome_version = "Chrome/{}.0.{}.{}".format(
+                random.randint(55, 82), random.randint(0, 4000), random.randint(0, 150)
+            )
+            os_type = [
+                "(Windows NT 6.0; U; tr; rv:1.8.1)",
+                "(Windows NT 6.1; Win64; x64)" "(Windows NT 6.1; WOW64)",
+                "(Windows NT 10.0; WOW64)",
+                "(X11; Linux x86_64)",
+                "(X11; Linux x86_64; rv:2.0b4)",
+                "(X11; U; FreeBSD x86_64; en-US)",
+                "(X11; Ubuntu; Linux x86_64; rv:24.0)"
+                "(Macintosh; Intel Mac OS X 10_12_6)",
+                "(Macintosh; U; Intel Mac OS X 10_12_6; en-us)",
+                "(Macintosh; U; Intel Mac OS X 10_12_6; ja-jp)",
+            ]
+            browser_type = [
+                "Mozilla/5.0",
+            ]
+            ua = " ".join(
+                [
+                    random.choice(browser_type),
+                    random.choice(os_type),
+                    "AppleWebKit/537.36",
+                    "(KHTML, like Gecko)",
+                    chrome_version,
+                    "Safari/537.36",
+                ]
+            )
             header["User-Agent"] = ua
         return header
 
-
-    def get(self, url, headers="", retry_count=3, is_response_json=False, time_sleep=1, proxies=None):
+    def get(
+        self,
+        url,
+        headers="",
+        params=None,
+        auth=None,
+        retry_count=3,
+        is_response_json=False,
+        time_sleep=1,
+        proxies=None,
+    ):
         """Get 请求
 
         Args:
             url(str): 请求的url
             headers(str): 请求头
+            params(dict): 设置到请求头的参数
+            auth(tuple): 用于http认证的
             retry_count(int): 重试次数
             is_response_json(bool): 返回的是否是json
             time_sleep(int): 请求失败后的停止时间
@@ -108,37 +141,69 @@ class RequestUtils:
             retry_count = retry_count - 1
             try:
                 if proxies == None and self.proxies == None:
-                    resp = requests.get(url,headers=header, timeout=self.timeout, verify=self.is_ssl_verify)
+                    resp = requests.get(
+                        url,
+                        headers=header,
+                        json=params,
+                        auth=auth,
+                        timeout=self.timeout,
+                        verify=self.is_ssl_verify,
+                    )
                 elif proxies != None:
-                    resp = requests.get(url, headers=header, proxies=proxies,timeout=self.timeout, verify=self.is_ssl_verify)
+                    resp = requests.get(
+                        url,
+                        headers=header,
+                        json=params,
+                        auth=auth,
+                        proxies=proxies,
+                        timeout=self.timeout,
+                        verify=self.is_ssl_verify,
+                    )
                 else:
-                    resp = requests.get(url, headers=header, proxies=self.proxies, timeout=self.timeout,verify=self.is_ssl_verify)
+                    resp = requests.get(
+                        url,
+                        headers=header,
+                        json=params,
+                        auth=auth,
+                        proxies=self.proxies,
+                        timeout=self.timeout,
+                        verify=self.is_ssl_verify,
+                    )
                 if resp.status_code == 200:
-                    return {"error":"",
-                            "content":resp.json() if is_response_json else resp.text,
-                            "url":resp.url}
+                    return {
+                        "error": "",
+                        "content": resp.json() if is_response_json else resp.text,
+                        "url": resp.url,
+                    }
                 else:
                     status_code = resp.status_code
                     time.sleep(time_sleep)
 
-
             except Exception as e:
-                return {"error": e,
-                        "content": "",
-                        "url": url}
+                return {"error": e, "content": "", "url": url}
 
-        return {"error": status_code,
-                "content": "",
-                "url": url}
+        return {"error": status_code, "content": "", "url": url}
 
-
-    def post(self, url, headers="", data=None, retry_count=3, is_response_json=False, time_sleep=1, proxies=None):
+    def post(
+        self,
+        url,
+        headers="",
+        data=None,
+        params=None,
+        auth=None,
+        retry_count=3,
+        is_response_json=False,
+        time_sleep=1,
+        proxies=None,
+    ):
         """Post 请求
 
         Args:
             url(str): 请求的url
             headers(str): 请求头
             data(dict): payload
+            params(dict): 设置到请求头的参数
+            auth(tuple): 用于http认证的
             retry_count(int): 重试次数
             is_response_json(bool): 返回的是否是json
             time_sleep(int): 请求失败后的停止时间
@@ -154,29 +219,51 @@ class RequestUtils:
             retry_count = retry_count - 1
             try:
                 if proxies == None and self.proxies == None:
-                    resp = requests.post(url,headers=header, data=data, timeout=self.timeout, verify=self.is_ssl_verify)
+                    resp = requests.post(
+                        url,
+                        headers=header,
+                        data=data,
+                        json=params,
+                        auth=auth,
+                        timeout=self.timeout,
+                        verify=self.is_ssl_verify,
+                    )
                 elif proxies != None:
-                    resp = requests.post(url, headers=header, data=data, proxies=proxies,timeout=self.timeout, verify=self.is_ssl_verify)
+                    resp = requests.post(
+                        url,
+                        headers=header,
+                        data=data,
+                        json=params,
+                        auth=auth,
+                        proxies=proxies,
+                        timeout=self.timeout,
+                        verify=self.is_ssl_verify,
+                    )
                 else:
-                    resp = requests.post(url, headers=header, data=data, proxies=self.proxies, timeout=self.timeout,verify=self.is_ssl_verify)
+                    resp = requests.post(
+                        url,
+                        headers=header,
+                        data=data,
+                        json=params,
+                        auth=auth,
+                        proxies=self.proxies,
+                        timeout=self.timeout,
+                        verify=self.is_ssl_verify,
+                    )
                 if resp.status_code == 200:
-                    return {"error":"",
-                            "content":resp.json() if is_response_json else resp.text,
-                            "url":resp.url}
+                    return {
+                        "error": "",
+                        "content": resp.json() if is_response_json else resp.text,
+                        "url": resp.url,
+                    }
                 else:
                     status_code = resp.status_code
                     time.sleep(time_sleep)
 
-
             except Exception as e:
-                return {"error": e,
-                        "content": "",
-                        "url": url}
+                return {"error": e, "content": "", "url": url}
 
-        return {"error": status_code,
-                "content": "",
-                "url": url}
-
+        return {"error": status_code, "content": "", "url": url}
 
     def file_download_once(self, url, file=""):
         """从指定URL下载单个文件的方法
@@ -193,11 +280,17 @@ class RequestUtils:
             return True
         else:
             if self.proxies:
-                return requests.get(url, headers=self.get_header(), proxies=self.proxies, stream=True,
-                                    timeout=self.timeout)  # stream=True
+                return requests.get(
+                    url,
+                    headers=self.get_header(),
+                    proxies=self.proxies,
+                    stream=True,
+                    timeout=self.timeout,
+                )  # stream=True
             else:
-                return requests.get(url, headers=self.get_header(), stream=True, timeout=self.timeout)  # stream=True
-
+                return requests.get(
+                    url, headers=self.get_header(), stream=True, timeout=self.timeout
+                )  # stream=True
 
     def file_download_github(self, github_author, github_project, file_path):
         """下载代码仓库
@@ -211,19 +304,46 @@ class RequestUtils:
             bool: True/False
         """
         if self.proxy_host:
-            status = os.system("cd " + file_path + " && git config --global http.proxy " + \
-                               self.proxy_host + " && git config --global https.proxy " + \
-                               self.proxy_host + " && git clone https://github.com/" + github_author + "/" + github_project + ".git")
+            status = os.system(
+                "cd "
+                + file_path
+                + " && git config --global http.proxy "
+                + self.proxy_host
+                + " && git config --global https.proxy "
+                + self.proxy_host
+                + " && git clone https://github.com/"
+                + github_author
+                + "/"
+                + github_project
+                + ".git"
+            )
         else:
-            status = os.system("cd " + file_path + " && git config --global --unset http.proxy " + \
-                               " && git config --global --unset https.proxy " + \
-                               " && git clone https://github.com/" + github_author + "/" + github_project + ".git")
+            status = os.system(
+                "cd "
+                + file_path
+                + " && git config --global --unset http.proxy "
+                + " && git config --global --unset https.proxy "
+                + " && git clone https://github.com/"
+                + github_author
+                + "/"
+                + github_project
+                + ".git"
+            )
         if status == 0:
             return True
         return False
 
-    def file_download(self, url="", file_path="", file_name="", is_zip_extract=False, retry=3, is_wget=False,
-                      github_author="", github_project=""):
+    def file_download(
+        self,
+        url="",
+        file_path="",
+        file_name="",
+        is_zip_extract=False,
+        retry=3,
+        is_wget=False,
+        github_author="",
+        github_project="",
+    ):
         """下载文件主方法(推荐调用)
 
         Args:
@@ -239,7 +359,9 @@ class RequestUtils:
         Returns:
             bool: True/False
         """
-        file_name = os.path.basename(urlparse(url).path) if file_name == "" else file_name
+        file_name = (
+            os.path.basename(urlparse(url).path) if file_name == "" else file_name
+        )
         file_path = os.getcwd() if file_path == "" else file_path
 
         try:
@@ -249,10 +371,15 @@ class RequestUtils:
                         print("DOWNLOAD %s from %s %s" % (file_name, url, retry))
                         if os.path.exists(os.path.join(file_path, file_name)):
                             os.remove(os.path.join(file_path, file_name))
-                        if self.file_download_once(url=url, file=os.path.join(file_path, file_name)):
+                        if self.file_download_once(
+                            url=url, file=os.path.join(file_path, file_name)
+                        ):
                             # 解压文件
                             if is_zip_extract == True:
-                                uncompress(src_file=os.path.join(file_path, file_name), dest_dir_path=file_path)
+                                uncompress(
+                                    src_file=os.path.join(file_path, file_name),
+                                    dest_dir_path=file_path,
+                                )
                             return True
                     except Exception as e:
                         print("[DOWNLOAD ERROR] %s error:%s" % (url, repr(e)))
@@ -265,7 +392,11 @@ class RequestUtils:
                         print("DOWNLOAD github from %s %s" % (src, retry))
                         if os.path.exists(os.path.join(file_path, github_project)):
                             shutil.rmtree(os.path.join(file_path, github_project))
-                        if self.file_download_github(github_author=github_author, github_project=github_project, file_path=file_path):
+                        if self.file_download_github(
+                            github_author=github_author,
+                            github_project=github_project,
+                            file_path=file_path,
+                        ):
                             return True
                     except Exception as e:
                         print("[DOWNLOAD ERROR] %s error:%s" % (url, repr(e)))
@@ -280,10 +411,15 @@ class RequestUtils:
                         if r.status_code == 200:
                             with open(os.path.join(file_path, file_name), 'wb') as f:
                                 shutil.copyfileobj(r.raw, f) if r.headers[
-                                                                    "content-type"] == "application/x-zip-compressed" else f.write(
-                                    r.content)
+                                    "content-type"
+                                ] == "application/x-zip-compressed" else f.write(
+                                    r.content
+                                )
                             if is_zip_extract == True:
-                                uncompress(src_file=os.path.join(file_path, file_name), des_dir_path=file_path)
+                                uncompress(
+                                    src_file=os.path.join(file_path, file_name),
+                                    des_dir_path=file_path,
+                                )
                             return True
                         else:
                             print(r.status_code)
@@ -296,7 +432,6 @@ class RequestUtils:
         return False
 
 
-
 # https://selenium-python.readthedocs.io/page-objects.html
 # https://www.selenium.dev/zh-cn/documentation/
 # 封装 selenium
@@ -304,17 +439,23 @@ class ChromeUtils:
     """
     ChromeUtils 基于 selenium 库进行的封装
     """
-    def __init__(self, timeout: int, is_ssl_verify: bool=False, is_chrome_headless:bool = False, is_undetected_chromedriver:bool = False, proxy=None):
+
+    def __init__(
+        self,
+        timeout: int,
+        is_ssl_verify: bool = False,
+        is_chrome_headless: bool = False,
+        is_undetected_chromedriver: bool = False,
+        proxy=None,
+    ):
         self.timeout = timeout  # 请求超时时间
         self.is_ssl_verify = is_ssl_verify  # 是否验证SSL证书
-        self.is_chrome_headless = is_chrome_headless # Linux下 is_chrome_headless为True
+        self.is_chrome_headless = is_chrome_headless  # Linux下 is_chrome_headless为True
         self.is_undetected_chromedriver = is_undetected_chromedriver
 
         # 该参数代理是为了需要用固定ip的爬虫
-        self.proxy = proxy # http://xxxxxx
+        self.proxy = proxy  # http://xxxxxx
         self.driver = self.get_chrome_driver(proxy)
-
-
 
     def get_chrome_driver(self, proxy=None):
         """获得一个chrome驱动
@@ -329,19 +470,19 @@ class ChromeUtils:
         chrome_options = Options()
 
         if proxy != None:
-            chrome_options.add_argument("--proxy-server="+proxy)
+            chrome_options.add_argument("--proxy-server=" + proxy)
         elif self.proxy != None:
-            chrome_options.add_argument("--proxy-server="+self.proxy)
-        chrome_options.add_argument("-window-size=1920,1080") # 设置浏览器窗口的大小为1920x1080像素
-        chrome_options.add_argument('--ignore-certificate-errors') # 忽略证书错误
-        chrome_options.add_argument('--disable-gpu') # 禁用 GPU 硬件加速
+            chrome_options.add_argument("--proxy-server=" + self.proxy)
+        chrome_options.add_argument("-window-size=1920,1080")  # 设置浏览器窗口的大小为1920x1080像素
+        chrome_options.add_argument('--ignore-certificate-errors')  # 忽略证书错误
+        chrome_options.add_argument('--disable-gpu')  # 禁用 GPU 硬件加速
         # chrome_options.add_argument('--incognito') #无痕模式 浏览器不会记录任何浏览历史或者cookie。
         # 禁止使用 /dev/shm。在某些系统中，Chrome 使用 /dev/shm 临时文件系统来共享数据，
         # 但在 Docker 或某些特定配置的系统中，这个文件系统可能会不够用，导致 Chrome 崩溃。
         # 这个选项可以让 Chrome 使用其它方式来共享数据，避免崩溃。
         chrome_options.add_argument('--disable-dev-shm-usage')
-        chrome_options.add_argument('--hide-scrollbars') # 隐藏滚动条
-        chrome_options.add_argument('--disable-plugins') # 禁用插件
+        chrome_options.add_argument('--hide-scrollbars')  # 隐藏滚动条
+        chrome_options.add_argument('--disable-plugins')  # 禁用插件
         # chrome_options.add_argument('blink-settings=imagesEnabled=false') #不加载图片, 提升速度
         # 禁用沙箱。沙箱是 Chrome 用来隔离网页进程的一种安全机制，但在某些情况下，例如在 Docker 中运行 Chrome，沙箱可能会导致问题。这个选项可以禁用沙箱。
         chrome_options.add_argument('--no-sandbox')
@@ -360,25 +501,23 @@ class ChromeUtils:
         # else:
         #     driver = webdriver.Chrome(options=chrome_options)
         driver = webdriver.Chrome(options=chrome_options)
-        driver.set_page_load_timeout(self.timeout) # 设置页面加载超时时间
-        driver.set_script_timeout(self.timeout) # 设置脚本执行超时时间。
+        driver.set_page_load_timeout(self.timeout)  # 设置页面加载超时时间
+        driver.set_script_timeout(self.timeout)  # 设置脚本执行超时时间。
 
         # 隐藏浏览器特征
         with open('./stealth.min.js') as f:
             js = f.read()
-        driver.execute_cdp_cmd("Page.addScriptToEvaluateOnNewDocument", {
-            "source": js
-        })
+        driver.execute_cdp_cmd("Page.addScriptToEvaluateOnNewDocument", {"source": js})
 
         # 反屏蔽
-        driver.execute_cdp_cmd("Page.addScriptToEvaluateOnNewDocument", {
-            "source": "Object.defineProperty(navigator, 'webdriver', {get: () => undefined})"
-        })
+        driver.execute_cdp_cmd(
+            "Page.addScriptToEvaluateOnNewDocument",
+            {
+                "source": "Object.defineProperty(navigator, 'webdriver', {get: () => undefined})"
+            },
+        )
 
         return driver
-
-
-
 
     def refresh_chrome(self):
         """重启浏览器
@@ -403,8 +542,6 @@ class ChromeUtils:
         print("ERROR", str(error))
         return False
 
-
-
     def get_page_source(self, url, time_sleep=0, retry_count=3, proxy=""):
         """获得网页源码
 
@@ -427,55 +564,47 @@ class ChromeUtils:
 
         print(f"{get_nowdatetime()} Get {url}")
 
-
         while retry_count:
             retry_count -= 1
             if self.driver is None:
-                return {"error":"ZWChrome 的 driver 为空",
-                        "content":"",
-                        "url":url}
+                return {"error": "ZWChrome 的 driver 为空", "content": "", "url": url}
             try:
                 self.driver.get(url)
 
             except Exception as e:
                 if str(e).startswith("Message: timeout:") and self.driver.page_source:
-                    return {"error": "",
-                            "content": self.driver.page_source,
-                            "url": self.driver.current_url}
+                    return {
+                        "error": "",
+                        "content": self.driver.page_source,
+                        "url": self.driver.current_url,
+                    }
 
                 if not self.refresh_chrome():
-                    return {"error": "重启chrome失败","content": "","url": url}
+                    return {"error": "重启chrome失败", "content": "", "url": url}
 
                 try:
                     self.driver.get(url)
                 except Exception as e:
                     self.driver.execute_script("window.stop()")
-                    return {"error":e,
-                            "content":"",
-                            "url":url}
+                    return {"error": e, "content": "", "url": url}
             time.sleep(time_sleep)
             text = self.driver.page_source
             if text == "<html><head></head><body></body></html>":
                 print("当前获得的网页源码: <html><head></head><body></body></html>")
                 continue
             if text:
-                return {"error": "",
-                        "content": text,
-                        "url": self.driver.current_url}
+                return {"error": "", "content": text, "url": self.driver.current_url}
             else:
-                return {"error": "没有获得 page_source",
-                        "content": "",
-                        "url": self.driver.current_url}
+                return {
+                    "error": "没有获得 page_source",
+                    "content": "",
+                    "url": self.driver.current_url,
+                }
 
-        return {"error": "",
-         "content": "",
-         "url": self.driver.current_url}
-
+        return {"error": "", "content": "", "url": self.driver.current_url}
 
     def close(self):
-        """关闭Chrome驱动
-
-        """
+        """关闭Chrome驱动"""
         if self.driver is not None:
             self.driver.quit()
             self.driver = None
@@ -484,12 +613,12 @@ class ChromeUtils:
 def build_url(base_url: str, params: dict):
     """构建url，将参数拼接在url后面
 
-        Args:
-            base_url(str):目录路径
-            params(dict):参数
+    Args:
+        base_url(str):目录路径
+        params(dict):参数
 
-        Returns:
-            str: url
+    Returns:
+        str: url
     """
     query_string = urlencode(params)
     return urljoin(base_url, '?' + query_string)

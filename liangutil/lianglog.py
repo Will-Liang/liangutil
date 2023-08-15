@@ -8,7 +8,19 @@ class LiangLog:
     LiangLog 记录日志类
     """
 
-    def __init__(self, name, is_print_console=True,is_record_file=False,is_record_db=False, dir_path=None, db_host=None, db_port=None, db_user=None, db_pass=None, db_name=None):
+    def __init__(
+        self,
+        name,
+        is_print_console=True,
+        is_record_file=False,
+        is_record_db=False,
+        dir_path=None,
+        db_host=None,
+        db_port=None,
+        db_user=None,
+        db_pass=None,
+        db_name=None,
+    ):
         # name 程序名称
         self.name = name
 
@@ -38,7 +50,6 @@ class LiangLog:
             if self.mysql.check_table_exist("program_logs") == False:
                 raise Exception("program_logs 数据表不存在")
 
-
     def print_log(self, level, content):
         """打印日志到控制台
 
@@ -47,13 +58,11 @@ class LiangLog:
             content(str): 日志信息
 
         """
-        formatted_log = "{} EXCEPTION: {}".format(code_location(depth=-4),content)
+        formatted_log = "{} EXCEPTION: {}".format(code_location(depth=-4), content)
         log = f"{level} {get_nowdatetime()} {formatted_log}"
         print(log)
 
-
-
-    def record_log_to_file(self,level, content):
+    def record_log_to_file(self, level, content):
         """将日志记录到文件
 
         Args:
@@ -72,8 +81,7 @@ class LiangLog:
         with open(file_path, "a", encoding="utf-8") as f:
             formatted_log = "{} EXCEPTION: {}".format(code_location(depth=-4), content)
             log = f"{level} {get_nowdatetime()} {formatted_log}"
-            f.write(log+"\n")
-
+            f.write(log + "\n")
 
     def record_log_to_db(self, level, content):
         """将日志记录到mysql
@@ -84,8 +92,15 @@ class LiangLog:
 
         """
         formatted_log = "{} EXCEPTION: {}".format(code_location(depth=-4), content)
-        self.mysql.insert_data("program_logs", {"datetime":get_nowdatetime(), "level":level, "name":self.name, "content":formatted_log})
-
+        self.mysql.insert_data(
+            "program_logs",
+            {
+                "datetime": get_nowdatetime(),
+                "level": level,
+                "name": self.name,
+                "content": formatted_log,
+            },
+        )
 
     def record_log(self, level, content):
         """记录日志总方法(推荐使用)

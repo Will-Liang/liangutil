@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import datetime
+import json
 import os
 import random
 import re
@@ -15,6 +16,7 @@ import pytz
 """
 liangutils 中存放一些工具方法
 """
+
 
 def is_filepath(path):
     """判断是否为文件路径
@@ -88,7 +90,7 @@ def print_log(level, content):
 
     """
     formatted_log = "{} EXCEPTION: {}".format(code_location(depth=-3), content)
-    printlog = "{} {} {}".format(level,get_nowdatetime(),formatted_log)
+    printlog = "{} {} {}".format(level, get_nowdatetime(), formatted_log)
     print(printlog)
 
 
@@ -107,7 +109,7 @@ def code_location(depth=-2):
     # 通常，调用栈列表的最后一帧是当前代码所在的位置，也就是 code_location() 函数本身的位置。而在 traceback.extract_stack() 返回的列表中，最后一帧的索引是 -1。而倒数第二帧的索引是 -2，依此类推。
     # 所以在代码中的 stack[-2] 就表示获取调用栈列表中倒数第二帧的信息，即 code_location() 函数被调用的位置所在的帧。然后从这个帧中获取文件名和行号信息，最终返回文件名和行号组成的字符串。
     # 注意：traceback.extract_stack() 函数会返回完整的调用栈信息，包含当前函数的调用。如果你在其他函数中调用了 code_location()，那么它返回的文件名和行号将是调用它的位置。
-    return filename+" line:"+str(lineno)
+    return filename + " line:" + str(lineno)
 
 
 def get_nowdatetime():
@@ -122,7 +124,9 @@ def get_nowdatetime():
     current_hour = now.strftime('%H')
     current_min = now.strftime('%M')
     current_sec = now.strftime('%S')
-    nowdatetime = current_date + " " + current_hour + ":" + current_min + ":" + current_sec
+    nowdatetime = (
+        current_date + " " + current_hour + ":" + current_min + ":" + current_sec
+    )
     return nowdatetime
 
 
@@ -169,9 +173,9 @@ def uncompress(src_file, dest_dir_path):
     """
     try:
         print(get_nowdatetime() + "starting uncompress: " + src_file)
-        if not os.path.exists(dest_dir_path) :
+        if not os.path.exists(dest_dir_path):
             os.mkdir(dest_dir_path)
-        if src_file.endswith('.tgz') or src_file.endswith('.tar') :
+        if src_file.endswith('.tgz') or src_file.endswith('.tar'):
             tar = tarfile.open(src_file)
             for name in tar.getnames():
                 tar.extract(name, dest_dir_path)
@@ -189,10 +193,13 @@ def uncompress(src_file, dest_dir_path):
             '''
             g_file = gzip.GzipFile(src_file)# 创建gzip对象
             with open(os.path.join(dest_dir_path, os.path.basename(src_file).split(".gz")[0]), "wb") as f:
-                f.write(g_file.read()) # gzip对象用read()打开后，写入open()建立的文件中。  
-            g_file.close()  # 关闭gzip对象  
+                f.write(g_file.read()) # gzip对象用read()打开后，写入open()建立的文件中。
+            g_file.close()  # 关闭gzip对象
             '''
-            with gzip.open(src_file, 'rb') as s_file, open(os.path.join(dest_dir_path, os.path.basename(src_file).split(".gz")[0]), 'wb') as d_file:
+            with gzip.open(src_file, 'rb') as s_file, open(
+                os.path.join(dest_dir_path, os.path.basename(src_file).split(".gz")[0]),
+                'wb',
+            ) as d_file:
                 shutil.copyfileobj(s_file, d_file, 65536)
         else:
             print("Incorrect file type")
@@ -223,7 +230,7 @@ def find_all_files(directory):
     return file_paths
 
 
-def random_sleep(lower_bound:int, upper_bound:int):
+def random_sleep(lower_bound: int, upper_bound: int):
     """随机睡眠若干秒
 
     Args:
@@ -235,5 +242,116 @@ def random_sleep(lower_bound:int, upper_bound:int):
     print(f"随机等待时间：{random_sleep_time:.2f}秒")
     time.sleep(random_sleep_time)
     print("随机等待时间结束")
+
+
+def file_to_json(file_path, encoding="utf-8"):
+    """读取json文件
+
+    Args:
+        file_path(str): 文件路径
+        encoding(str): 编码格式
+
+    Returns:
+        dict: 正确情况
+
+    """
+    try:
+        with open(file_path, "r", encoding=encoding) as f:
+            return json.load(f)
+    except Exception as e:
+        print(repr(e))
+        return None
+
+
+def file_to_json_line(file_path, encoding="utf-8"):
+    """逐行读取每行都是json的文件
+
+    Args:
+        file_path(str): 文件路径
+        encoding(str): 编码格式
+
+    Returns:
+        list: [{},{},{}]
+    """
+    try:
+        all_line = []
+        with open(file_path, "r", encoding=encoding) as f:
+            for line in f.readlines():
+                if line:
+                    try:
+                        all_line.append(json.loads(line.strip()))
+                    except Exception as e:
+                        print(repr(e))
+        return all_line
+    except Exception as e:
+        print(repr(e))
+        return None
+
+
+def json_to_line_file(outputfile, all_line, encoding="utf-8"):
+    """将一个列表中的每个dict逐行写入文件
+
+    Args:
+        outputfile(str):输出文件路径
+        all_line(list):存储dict的list
+        encoding(str):编码格式
+
+    Returns:
+        bool: True/False
+    """
+    try:
+        with open(outputfile, "w", encoding=encoding) as f_output:
+            for ip in all_line:
+                try:
+                    f_output.writelines(json.dumps(ip) + "\n")
+                except Exception as e:
+                    print(repr(e))
+        print("json_to_line_file(): " + outputfile + ", is OK!")
+        return True
+    except Exception as e:
+        print(repr(e))
+        return False
+
+
+def json_to_file(outputfile, json_data, encoding="utf-8"):
+    """将json写入文件
+
+    Args:
+        outputfile(str):输出文件路径
+        json_data(dict):json数据
+        encoding(str):编码格式
+
+    Returns:
+        bool: True/False
+    """
+    try:
+        with open(outputfile, "w", encoding=encoding) as f:
+            json.dump(json_data, f)
+        print("json_to_file: " + outputfile + ", is OK!")
+        return True
+    except Exception as e:
+        print(repr(e))
+        return False
+
+
+def json_to_file_format(outputfile, json_data, encoding="utf-8"):
+    """将json格式化写入文件
+
+    Args:
+        outputfile(str):输出文件路径
+        json_data(dict):json数据
+        encoding(str):编码格式
+
+    Returns:
+        bool: True/False
+    """
+    try:
+        with open(outputfile, "w", encoding=encoding) as f:
+            json.dump(json_data, f, sort_keys=True, ensure_ascii=False, indent=2)
+        print("json_to_file_format: " + outputfile + ", is OK!")
+        return True
+    except Exception as e:
+        print(repr(e))
+        return False
 
 
