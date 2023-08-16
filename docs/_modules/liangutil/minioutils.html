@@ -4,21 +4,21 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>liangutil.minioutils &mdash; liangutil 0.1.10 文档</title>
-      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="/liangutil/../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="/liangutil/../../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
-    <script src="../../_static/js/html5shiv.min.js"></script>
+    <script src="/liangutil/../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=bdd39a68"></script>
-        <script src="../../_static/doctools.js?v=888ff710"></script>
-        <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
-        <script src="../../_static/translations.js?v=beaddf03"></script>
-    <script src="../../_static/js/theme.js"></script>
-    <link rel="index" title="索引" href="../../genindex.html" />
-    <link rel="search" title="搜索" href="../../search.html" /> 
+        <script src="/liangutil/../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="/liangutil/../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../../" id="documentation_options" src="/liangutil/../../_static/documentation_options.js?v=bdd39a68"></script>
+        <script src="/liangutil/../../_static/doctools.js?v=888ff710"></script>
+        <script src="/liangutil/../../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="/liangutil/../../_static/translations.js?v=beaddf03"></script>
+    <script src="/liangutil/../../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="/liangutil/../../genindex.html" />
+    <link rel="search" title="搜索" href="/liangutil/../../search.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -29,7 +29,7 @@
 
           
           
-          <a href="../../index.html" class="icon icon-home">
+          <a href="/liangutil/../../index.html" class="icon icon-home">
             liangutil
           </a>
 <div role="search">
@@ -48,15 +48,15 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../index.html">liangutil</a>
+          <a href="/liangutil/../../index.html">liangutil</a>
       </nav>
 
       <div class="wy-nav-content">
         <div class="rst-content">
           <div role="navigation" aria-label="页面导航">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="../index.html">模块代码</a></li>
+      <li><a href="/liangutil/../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="/liangutil/../index.html">模块代码</a></li>
       <li class="breadcrumb-item active">liangutil.minioutils</li>
       <li class="wy-breadcrumbs-aside">
       </li>
@@ -75,12 +75,12 @@
 <span class="kn">from</span> <span class="nn">liangutil.redisutils</span> <span class="kn">import</span> <span class="n">RedisUtils</span>
 
 
-<div class="viewcode-block" id="MinIOUtils"><a class="viewcode-back" href="../../liangutil.html#liangutil.minioutils.MinIOUtils">[文档]</a><span class="k">class</span> <span class="nc">MinIOUtils</span><span class="p">:</span>
+<div class="viewcode-block" id="MinIOUtils"><a class="viewcode-back" href="/liangutil/../../liangutil.html#liangutil.minioutils.MinIOUtils">[文档]</a><span class="k">class</span> <span class="nc">MinIOUtils</span><span class="p">:</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ip_port</span><span class="p">,</span> <span class="n">access_key</span><span class="p">,</span> <span class="n">secret_key</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">minioClient</span> <span class="o">=</span> <span class="n">Minio</span><span class="p">(</span><span class="n">ip_port</span><span class="p">,</span> <span class="n">access_key</span><span class="p">,</span> <span class="n">secret_key</span><span class="p">,</span> <span class="n">secure</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
     <span class="c1"># 获取MinIO中的config配置文件</span>
-<div class="viewcode-block" id="MinIOUtils.get_jsonfile"><a class="viewcode-back" href="../../liangutil.html#liangutil.minioutils.MinIOUtils.get_jsonfile">[文档]</a>    <span class="k">def</span> <span class="nf">get_jsonfile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bucket_name</span><span class="p">,</span> <span class="n">filepath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<div class="viewcode-block" id="MinIOUtils.get_jsonfile"><a class="viewcode-back" href="/liangutil/../../liangutil.html#liangutil.minioutils.MinIOUtils.get_jsonfile">[文档]</a>    <span class="k">def</span> <span class="nf">get_jsonfile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bucket_name</span><span class="p">,</span> <span class="n">filepath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;获取MinIO中的json文件</span>
 
 <span class="sd">        Args:</span>
@@ -94,7 +94,7 @@
         <span class="n">json_file</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">minioClient</span><span class="o">.</span><span class="n">get_object</span><span class="p">(</span><span class="n">bucket_name</span><span class="p">,</span> <span class="n">filepath</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">json_file</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="MinIOUtils.upload_file_to_minio"><a class="viewcode-back" href="../../liangutil.html#liangutil.minioutils.MinIOUtils.upload_file_to_minio">[文档]</a>    <span class="k">def</span> <span class="nf">upload_file_to_minio</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bucket_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">file_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">current_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<div class="viewcode-block" id="MinIOUtils.upload_file_to_minio"><a class="viewcode-back" href="/liangutil/../../liangutil.html#liangutil.minioutils.MinIOUtils.upload_file_to_minio">[文档]</a>    <span class="k">def</span> <span class="nf">upload_file_to_minio</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bucket_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">file_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">current_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;将文件上传至MinIO</span>
 
 <span class="sd">        Args:</span>
@@ -121,9 +121,9 @@
     <p>&#169; 版权所有 2023, LiAng88。</p>
   </div>
 
-  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
-    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
+  利用 <a href="/liangutil/https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
+    <a href="/liangutil/https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="/liangutil/https://readthedocs.org">Read the Docs</a> 开发.
    
 
 </footer>

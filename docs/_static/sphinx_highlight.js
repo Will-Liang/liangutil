@@ -103,7 +103,7 @@ const SphinxHighlight = {
         .createRange()
         .createContextualFragment(
           '<p class="highlight-link">' +
-            '<a href="javascript:SphinxHighlight.hideSearchWords()">' +
+            '<a href="/liangutil/javascript:SphinxHighlight.hideSearchWords()">' +
             _("Hide Search Matches") +
             "</a></p>"
         )
