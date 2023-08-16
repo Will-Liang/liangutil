@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>liangutil.kafkautils &mdash; liangutil 0.1.10 文档</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=bdd39a68"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../../_static/translations.js?v=beaddf03"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../../genindex.html" />
+    <link rel="search" title="搜索" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            liangutil
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="搜索文档" aria-label="搜索文档" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">liangutil</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="页面导航">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">模块代码</a></li>
+      <li class="breadcrumb-item active">liangutil.kafkautils</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>liangutil.kafkautils 源代码</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="kn">from</span> <span class="nn">confluent_kafka</span> <span class="kn">import</span> <span class="n">Producer</span><span class="p">,</span> <span class="n">Consumer</span>
+
+<span class="kn">from</span> <span class="nn">liangutil.liangutils</span> <span class="kn">import</span> <span class="n">get_nowdatetime</span>
+
+
+<div class="viewcode-block" id="kafka_callback"><a class="viewcode-back" href="../../liangutil.html#liangutil.kafkautils.kafka_callback">[文档]</a><span class="k">def</span> <span class="nf">kafka_callback</span><span class="p">(</span><span class="n">err</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;kafka的回调函数(不要直接调用)&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">err</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Failed to deliver message: </span><span class="si">{0}</span><span class="s2"> || </span><span class="si">{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">err</span><span class="p">,</span> <span class="n">get_nowdatetime</span><span class="p">()))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span>
+            <span class="s2">&quot;Message produced success in : </span><span class="si">{0}</span><span class="s2"> || </span><span class="si">{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">msg</span><span class="o">.</span><span class="n">topic</span><span class="p">(),</span> <span class="n">get_nowdatetime</span><span class="p">()</span>
+            <span class="p">)</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="kafka_producer"><a class="viewcode-back" href="../../liangutil.html#liangutil.kafkautils.kafka_producer">[文档]</a><span class="k">def</span> <span class="nf">kafka_producer</span><span class="p">(</span><span class="n">topic</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">broker_ips</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;向kafka发送消息</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        topic(str): 将要发送的 Kafka 主题</span>
+<span class="sd">        message(str): 要发送的消息</span>
+<span class="sd">        key(str):用于分区的键</span>
+<span class="sd">        broker_ips(list): Kafka broker IP 地址列表</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># 用逗号分隔 broker_ips 列表以生成 bootstrap.servers 配置值。</span>
+    <span class="n">bootstrap_servers</span> <span class="o">=</span> <span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">broker_ips</span><span class="p">)</span>
+
+    <span class="c1"># 创建 Kafka 配置和生产者实例</span>
+    <span class="n">conf</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;bootstrap.servers&#39;</span><span class="p">:</span> <span class="n">bootstrap_servers</span><span class="p">}</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">Producer</span><span class="p">(</span><span class="n">conf</span><span class="p">)</span>
+    <span class="c1"># 生产并发送消息</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">produce</span><span class="p">(</span>
+        <span class="n">topic</span><span class="p">,</span>
+        <span class="n">value</span><span class="o">=</span><span class="n">message</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">),</span>
+        <span class="n">key</span><span class="o">=</span><span class="n">key</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">),</span>
+        <span class="n">callback</span><span class="o">=</span><span class="n">kafka_callback</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="c1"># 等待未完成的消息，确保所有消息都已发送</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">flush</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="kafka_consumer"><a class="viewcode-back" href="../../liangutil.html#liangutil.kafkautils.kafka_consumer">[文档]</a><span class="k">def</span> <span class="nf">kafka_consumer</span><span class="p">(</span>
+    <span class="n">broker_ips</span><span class="p">,</span>
+    <span class="n">topics</span><span class="p">,</span>
+    <span class="n">group_id</span><span class="p">,</span>
+    <span class="n">auto_offset_reset</span><span class="o">=</span><span class="s1">&#39;earliest&#39;</span><span class="p">,</span>
+    <span class="n">timeout</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">message_limit</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Kafka消费者</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        broker_ips(list):Kafka broker IP 地址列表</span>
+<span class="sd">        topics(list):要订阅的 Kafka 主题列表</span>
+<span class="sd">        group_id(str): 消费者组 ID</span>
+<span class="sd">        auto_offset_reset(str): 从主题开始的位置消费，可选值为 &#39;earliest&#39; 或 &#39;latest&#39;。</span>
+<span class="sd">        timeout(int): 消费者轮询超时时间</span>
+<span class="sd">        message_limit(int): 需要处理的消息数量限制</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dict: 消费者收到的记录列表，每个记录为一个字典，包含 key, value, topic, partition, offset 信息。</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># 定义 Kafka 配置</span>
+    <span class="n">conf</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;bootstrap.servers&#39;</span><span class="p">:</span> <span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">broker_ips</span><span class="p">),</span>
+        <span class="s1">&#39;group.id&#39;</span><span class="p">:</span> <span class="n">group_id</span><span class="p">,</span>
+        <span class="s1">&#39;auto.offset.reset&#39;</span><span class="p">:</span> <span class="n">auto_offset_reset</span><span class="p">,</span>
+    <span class="p">}</span>
+
+    <span class="c1"># 创建消费者</span>
+    <span class="n">consumer</span> <span class="o">=</span> <span class="n">Consumer</span><span class="p">(</span><span class="n">conf</span><span class="p">)</span>
+
+    <span class="c1"># 订阅主题</span>
+    <span class="n">consumer</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="n">topics</span><span class="p">)</span>
+
+    <span class="c1"># 定义一个列表，用于保存接收到的消息</span>
+    <span class="n">messages</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># 持续监听并处理消息，直到达到消息限制</span>
+    <span class="n">processed_messages</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="n">message_limit</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">processed_messages</span> <span class="o">&lt;</span> <span class="n">message_limit</span><span class="p">:</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="n">consumer</span><span class="o">.</span><span class="n">poll</span><span class="p">(</span><span class="n">timeout</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">msg</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1"># 在这里可以处理没有消息的情况（例如记录或异步处理）</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;kafka msg is null&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">msg</span><span class="o">.</span><span class="n">error</span><span class="p">():</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Kafka error: </span><span class="si">{</span><span class="n">msg</span><span class="o">.</span><span class="n">error</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">break</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">record</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="n">msg</span><span class="o">.</span><span class="n">key</span><span class="p">(),</span>
+                <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="n">msg</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span>
+                <span class="s1">&#39;topic&#39;</span><span class="p">:</span> <span class="n">msg</span><span class="o">.</span><span class="n">topic</span><span class="p">(),</span>
+                <span class="s1">&#39;partition&#39;</span><span class="p">:</span> <span class="n">msg</span><span class="o">.</span><span class="n">partition</span><span class="p">(),</span>
+                <span class="s1">&#39;offset&#39;</span><span class="p">:</span> <span class="n">msg</span><span class="o">.</span><span class="n">offset</span><span class="p">(),</span>
+            <span class="p">}</span>
+            <span class="n">messages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">record</span><span class="p">)</span>
+            <span class="n">processed_messages</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="c1"># 关闭消费者</span>
+    <span class="n">consumer</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">messages</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2023, LiAng88。</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
