@@ -355,7 +355,6 @@ def json_to_file_format(outputfile, json_data, encoding="utf-8"):
         return False
 
 
-
 def string_to_int(s):
     """将字符串转成整形
 
@@ -371,6 +370,7 @@ def string_to_int(s):
         return num
     except ValueError:
         return -1
+
 
 def string_to_float(s):
     """将字符串转成浮点型
