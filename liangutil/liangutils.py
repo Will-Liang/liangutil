@@ -355,3 +355,56 @@ def json_to_file_format(outputfile, json_data, encoding="utf-8"):
         return False
 
 
+
+def string_to_int(s):
+    """将字符串转成整形
+
+    Args:
+        s: 字符串
+
+    Returns:
+        int: 如果失败返回-1
+
+    """
+    try:
+        num = int(s)
+        return num
+    except ValueError:
+        return -1
+
+def string_to_float(s):
+    """将字符串转成浮点型
+
+    Args:
+        s: 字符串
+
+    Returns:
+        int: 如果失败返回-1.0
+
+    """
+    try:
+        num = float(s)
+        return num
+    except ValueError:
+        return -1.0
+
+def check_string_latitude_longitude(text):
+    """检查字符串是否符合纬度和经度的格式
+
+    Args:
+        text:精度,纬度
+
+    Returns:
+
+    """
+    try:
+        if "," in text:
+            ll = text.split(",")
+            latitude = string_to_float(ll[0], float_range=(-90, 90))
+            longitude = string_to_float(ll[1], float_range=(-180, 180))
+            if latitude != "" and longitude != "":
+                if latitude != 0 or longitude != 0:
+                    return str(latitude) + "," + str(longitude)
+    except Exception as e:
+        print_log("ERROR", repr(e))
+        return ""

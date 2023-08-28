@@ -85,6 +85,12 @@ pip install liangutil
 
 ### 8月
 
+**2023-08-28**
+
+`0.1.11`
+
+- liangutils中增加了string_to_int()和string_to_float()用于将字符串转成整形和浮点型，check_string_latitude_longitude()检查字符串的纬度经度。
+
 **2023-08-15**
 
 `0.1.10`
