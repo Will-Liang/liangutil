@@ -4,22 +4,22 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>liangutil package &mdash; liangutil 0.1.10 文档</title>
-      <link rel="stylesheet" href="/liangutil/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="/liangutil/css/theme.css" type="text/css" />
+  <title>liangutil package &mdash; liangutil 0.1.12 文档</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
-    <script src="/liangutil/js/html5shiv.min.js"></script>
+    <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="/liangutil/jquery.js?v=5d32c60e"></script>
-        <script src="/liangutil/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="./" id="documentation_options" src="/liangutil/documentation_options.js?v=bdd39a68"></script>
-        <script src="/liangutil/doctools.js?v=888ff710"></script>
-        <script src="/liangutil/sphinx_highlight.js?v=4825356b"></script>
-        <script src="/liangutil/translations.js?v=beaddf03"></script>
-    <script src="/liangutil/js/theme.js"></script>
-    <link rel="index" title="索引" href="/liangutil/genindex.html" />
-    <link rel="search" title="搜索" href="/liangutil/search.html" /> 
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=985fe25c"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="_static/translations.js?v=beaddf03"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="搜索" href="search.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -30,7 +30,7 @@
 
           
           
-          <a href="/liangutil/index.html" class="icon icon-home">
+          <a href="index.html" class="icon icon-home">
             liangutil
           </a>
 <div role="search">
@@ -43,80 +43,98 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
               <!-- Local TOC -->
               <div class="local-toc"><ul>
-<li><a class="reference internal" href="/liangutil/#">liangutil package</a><ul>
-<li><a class="reference internal" href="/liangutil/#submodules">Submodules</a></li>
-<li><a class="reference internal" href="/liangutil/#module-liangutil.kafkautils">liangutil.kafkautils module</a><ul>
-<li><a class="reference internal" href="/liangutil/#liangutil.kafkautils.kafka_callback"><code class="docutils literal notranslate"><span class="pre">kafka_callback()</span></code></a></li>
-<li><a class="reference internal" href="/liangutil/#liangutil.kafkautils.kafka_consumer"><code class="docutils literal notranslate"><span class="pre">kafka_consumer()</span></code></a></li>
-<li><a class="reference internal" href="/liangutil/#liangutil.kafkautils.kafka_producer"><code class="docutils literal notranslate"><span class="pre">kafka_producer()</span></code></a></li>
+<li><a class="reference internal" href="#">liangutil package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-liangutil.kafkautils">liangutil.kafkautils module</a><ul>
+<li><a class="reference internal" href="#liangutil.kafkautils.kafka_callback"><code class="docutils literal notranslate"><span class="pre">kafka_callback()</span></code></a></li>
+<li><a class="reference internal" href="#liangutil.kafkautils.kafka_consumer"><code class="docutils literal notranslate"><span class="pre">kafka_consumer()</span></code></a></li>
+<li><a class="reference internal" href="#liangutil.kafkautils.kafka_producer"><code class="docutils literal notranslate"><span class="pre">kafka_producer()</span></code></a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="/liangutil/#module-liangutil.lianglog">liangutil.lianglog module</a><ul>
-<li><a class="reference internal" href="/liangutil/#liangutil.lianglog.LiangLog"><code class="docutils literal notranslate"><span class="pre">LiangLog</span></code></a><ul>
-<li><a class="reference internal" href="/liangutil/#liangutil.lianglog.LiangLog.print_log"><code class="docutils literal notranslate"><span class="pre">LiangLog.print_log()</span></code></a></li>
-<li><a class="reference internal" href="/liangutil/#liangutil.lianglog.LiangLog.record_log"><code class="docutils literal notranslate"><span class="pre">LiangLog.record_log()</span></code></a></li>
-<li><a class="reference internal" href="/liangutil/#liangutil.lianglog.LiangLog.record_log_to_db"><code class="docutils literal notranslate"><span class="pre">LiangLog.record_log_to_db()</span></code></a></li>
-<li><a class="reference internal" href="/liangutil/#liangutil.lianglog.LiangLog.record_log_to_file"><code class="docutils literal notranslate"><span class="pre">LiangLog.record_log_to_file()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="reference internal" href="/liangutil/#module-liangutil.liangutils">liangutil.liangutils module</a><ul>
-<li><a class="reference internal" href="/liangutil/#liangutil.liangutils.check_path"><code class="docutils literal notranslate"><span class="pre">check_path()</span></code></a></li>
-<li><a class="reference internal" href="/liangutil/#liangutil.liangutils.code_location"><code class="docutils literal notranslate"><span class="pre">code_location()</span></code></a></li>
-<li><a class="reference internal" href="/liangutil/#liangutil.liangutils.file_to_json"><code class="docutils literal notranslate"><span class="pre">file_to_json()</span></code></a></li>
-<li><a class="reference internal" href="/liangutil/#liangutil.liangutils.file_to_json_line"><code class="docutils literal notranslate"><span class="pre">file_to_json_line()</span></code></a></li>
-<li><a class="reference internal" href="/liangutil/#liangutil.liangutils.find_all_files"><code class="docutils literal notranslate"><span class="pre">find_all_files()</span></code></a></li>
-<li><a class="reference internal" href="/liangutil/#liangutil.liangutils.get_dirpath"><code class="docutils literal notranslate"><span class="pre">get_dirpath()</span></code></a></li>
-<li><a class="reference internal" href="/liangutil/#liangutil.liangutils.get_nowdate"><code class="docutils literal notranslate"><span class="pre">get_nowdate()</span></code></a></li>
-<li><a class="reference internal" href="/liangutil/#liangutil.liangutils.get_nowdatetime"><code class="docutils literal notranslate"><span class="pre">get_nowdatetime()</span></code></a></li>
-<li><a class="reference internal" href="/liangutil/#liangutil.liangutils.get_nowtime"><code class="docutils literal notranslate"><span class="pre">get_nowtime()</span></code></a></li>
-<li><a class="reference internal" href="/liangutil/#liangutil.liangutils.is_filepath"><code class="docutils literal notranslate"><span class="pre">is_filepath()</span></code></a></li>
-<li><a class="reference internal" href="/liangutil/#liangutil.liangutils.json_to_file"><code class="docutils literal notranslate"><span class="pre">json_to_file()</span></code></a></li>
-<li><a class="reference internal" href="/liangutil/#liangutil.liangutils.json_to_file_format"><code class="docutils literal notranslate"><span class="pre">json_to_file_format()</span></code></a></li>
-<li><a class="reference internal" href="/liangutil/#liangutil.liangutils.json_to_line_file"><code class="docutils literal notranslate"><span class="pre">json_to_line_file()</span></code></a></li>
-<li><a class="reference internal" href="/liangutil/#liangutil.liangutils.print_log"><code class="docutils literal notranslate"><span class="pre">print_log()</span></code></a></li>
-<li><a class="reference internal" href="/liangutil/#liangutil.liangutils.random_sleep"><code class="docutils literal notranslate"><span class="pre">random_sleep()</span></code></a></li>
-<li><a class="reference internal" href="/liangutil/#liangutil.liangutils.uncompress"><code class="docutils literal notranslate"><span class="pre">uncompress()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="/liangutil/#module-liangutil.minioutils">liangutil.minioutils module</a><ul>
-<li><a class="reference internal" href="/liangutil/#liangutil.minioutils.MinIOUtils"><code class="docutils literal notranslate"><span class="pre">MinIOUtils</span></code></a><ul>
-<li><a class="reference internal" href="/liangutil/#liangutil.minioutils.MinIOUtils.get_jsonfile"><code class="docutils literal notranslate"><span class="pre">MinIOUtils.get_jsonfile()</span></code></a></li>
-<li><a class="reference internal" href="/liangutil/#liangutil.minioutils.MinIOUtils.upload_file_to_minio"><code class="docutils literal notranslate"><span class="pre">MinIOUtils.upload_file_to_minio()</span></code></a></li>
+<li><a class="reference internal" href="#module-liangutil.lianglog">liangutil.lianglog module</a><ul>
+<li><a class="reference internal" href="#liangutil.lianglog.LiangLog"><code class="docutils literal notranslate"><span class="pre">LiangLog</span></code></a><ul>
+<li><a class="reference internal" href="#liangutil.lianglog.LiangLog.print_log"><code class="docutils literal notranslate"><span class="pre">LiangLog.print_log()</span></code></a></li>
+<li><a class="reference internal" href="#liangutil.lianglog.LiangLog.record_log"><code class="docutils literal notranslate"><span class="pre">LiangLog.record_log()</span></code></a></li>
+<li><a class="reference internal" href="#liangutil.lianglog.LiangLog.record_log_to_db"><code class="docutils literal notranslate"><span class="pre">LiangLog.record_log_to_db()</span></code></a></li>
+<li><a class="reference internal" href="#liangutil.lianglog.LiangLog.record_log_to_file"><code class="docutils literal notranslate"><span class="pre">LiangLog.record_log_to_file()</span></code></a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a class="reference internal" href="/liangutil/#module-liangutil.redisutils">liangutil.redisutils module</a><ul>
-<li><a class="reference internal" href="/liangutil/#liangutil.redisutils.RedisUtils"><code class="docutils literal notranslate"><span class="pre">RedisUtils</span></code></a><ul>
-<li><a class="reference internal" href="/liangutil/#liangutil.redisutils.RedisUtils.close"><code class="docutils literal notranslate"><span class="pre">RedisUtils.close()</span></code></a></li>
-<li><a class="reference internal" href="/liangutil/#liangutil.redisutils.RedisUtils.enqueue_message"><code class="docutils literal notranslate"><span class="pre">RedisUtils.enqueue_message()</span></code></a></li>
+<li><a class="reference internal" href="#module-liangutil.liangutils">liangutil.liangutils module</a><ul>
+<li><a class="reference internal" href="#liangutil.liangutils.check_path"><code class="docutils literal notranslate"><span class="pre">check_path()</span></code></a></li>
+<li><a class="reference internal" href="#liangutil.liangutils.check_string_latitude_longitude"><code class="docutils literal notranslate"><span class="pre">check_string_latitude_longitude()</span></code></a></li>
+<li><a class="reference internal" href="#liangutil.liangutils.code_location"><code class="docutils literal notranslate"><span class="pre">code_location()</span></code></a></li>
+<li><a class="reference internal" href="#liangutil.liangutils.file_to_json"><code class="docutils literal notranslate"><span class="pre">file_to_json()</span></code></a></li>
+<li><a class="reference internal" href="#liangutil.liangutils.file_to_json_line"><code class="docutils literal notranslate"><span class="pre">file_to_json_line()</span></code></a></li>
+<li><a class="reference internal" href="#liangutil.liangutils.find_all_files"><code class="docutils literal notranslate"><span class="pre">find_all_files()</span></code></a></li>
+<li><a class="reference internal" href="#liangutil.liangutils.get_dirpath"><code class="docutils literal notranslate"><span class="pre">get_dirpath()</span></code></a></li>
+<li><a class="reference internal" href="#liangutil.liangutils.get_nowdate"><code class="docutils literal notranslate"><span class="pre">get_nowdate()</span></code></a></li>
+<li><a class="reference internal" href="#liangutil.liangutils.get_nowdatetime"><code class="docutils literal notranslate"><span class="pre">get_nowdatetime()</span></code></a></li>
+<li><a class="reference internal" href="#liangutil.liangutils.get_nowtime"><code class="docutils literal notranslate"><span class="pre">get_nowtime()</span></code></a></li>
+<li><a class="reference internal" href="#liangutil.liangutils.is_filepath"><code class="docutils literal notranslate"><span class="pre">is_filepath()</span></code></a></li>
+<li><a class="reference internal" href="#liangutil.liangutils.json_to_file"><code class="docutils literal notranslate"><span class="pre">json_to_file()</span></code></a></li>
+<li><a class="reference internal" href="#liangutil.liangutils.json_to_file_format"><code class="docutils literal notranslate"><span class="pre">json_to_file_format()</span></code></a></li>
+<li><a class="reference internal" href="#liangutil.liangutils.json_to_line_file"><code class="docutils literal notranslate"><span class="pre">json_to_line_file()</span></code></a></li>
+<li><a class="reference internal" href="#liangutil.liangutils.print_log"><code class="docutils literal notranslate"><span class="pre">print_log()</span></code></a></li>
+<li><a class="reference internal" href="#liangutil.liangutils.random_sleep"><code class="docutils literal notranslate"><span class="pre">random_sleep()</span></code></a></li>
+<li><a class="reference internal" href="#liangutil.liangutils.string_to_float"><code class="docutils literal notranslate"><span class="pre">string_to_float()</span></code></a></li>
+<li><a class="reference internal" href="#liangutil.liangutils.string_to_int"><code class="docutils literal notranslate"><span class="pre">string_to_int()</span></code></a></li>
+<li><a class="reference internal" href="#liangutil.liangutils.uncompress"><code class="docutils literal notranslate"><span class="pre">uncompress()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-liangutil.minioutils">liangutil.minioutils module</a><ul>
+<li><a class="reference internal" href="#liangutil.minioutils.MinIOUtils"><code class="docutils literal notranslate"><span class="pre">MinIOUtils</span></code></a><ul>
+<li><a class="reference internal" href="#liangutil.minioutils.MinIOUtils.get_jsonfile"><code class="docutils literal notranslate"><span class="pre">MinIOUtils.get_jsonfile()</span></code></a></li>
+<li><a class="reference internal" href="#liangutil.minioutils.MinIOUtils.upload_file_to_minio"><code class="docutils literal notranslate"><span class="pre">MinIOUtils.upload_file_to_minio()</span></code></a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a class="reference internal" href="/liangutil/#module-liangutil.requestutils">liangutil.requestutils module</a><ul>
-<li><a class="reference internal" href="/liangutil/#liangutil.requestutils.ChromeUtils"><code class="docutils literal notranslate"><span class="pre">ChromeUtils</span></code></a><ul>
-<li><a class="reference internal" href="/liangutil/#liangutil.requestutils.ChromeUtils.close"><code class="docutils literal notranslate"><span class="pre">ChromeUtils.close()</span></code></a></li>
-<li><a class="reference internal" href="/liangutil/#liangutil.requestutils.ChromeUtils.get_chrome_driver"><code class="docutils literal notranslate"><span class="pre">ChromeUtils.get_chrome_driver()</span></code></a></li>
-<li><a class="reference internal" href="/liangutil/#liangutil.requestutils.ChromeUtils.get_page_source"><code class="docutils literal notranslate"><span class="pre">ChromeUtils.get_page_source()</span></code></a></li>
-<li><a class="reference internal" href="/liangutil/#liangutil.requestutils.ChromeUtils.refresh_chrome"><code class="docutils literal notranslate"><span class="pre">ChromeUtils.refresh_chrome()</span></code></a></li>
+<li><a class="reference internal" href="#module-liangutil.mysqlutils">liangutil.mysqlutils module</a><ul>
+<li><a class="reference internal" href="#liangutil.mysqlutils.MySQLUtils"><code class="docutils literal notranslate"><span class="pre">MySQLUtils</span></code></a><ul>
+<li><a class="reference internal" href="#liangutil.mysqlutils.MySQLUtils.check_table_exist"><code class="docutils literal notranslate"><span class="pre">MySQLUtils.check_table_exist()</span></code></a></li>
+<li><a class="reference internal" href="#liangutil.mysqlutils.MySQLUtils.exists_data"><code class="docutils literal notranslate"><span class="pre">MySQLUtils.exists_data()</span></code></a></li>
+<li><a class="reference internal" href="#liangutil.mysqlutils.MySQLUtils.fetchall_to_dict_list"><code class="docutils literal notranslate"><span class="pre">MySQLUtils.fetchall_to_dict_list()</span></code></a></li>
+<li><a class="reference internal" href="#liangutil.mysqlutils.MySQLUtils.insert_data"><code class="docutils literal notranslate"><span class="pre">MySQLUtils.insert_data()</span></code></a></li>
+<li><a class="reference internal" href="#liangutil.mysqlutils.MySQLUtils.insert_datas"><code class="docutils literal notranslate"><span class="pre">MySQLUtils.insert_datas()</span></code></a></li>
+<li><a class="reference internal" href="#liangutil.mysqlutils.MySQLUtils.query_data"><code class="docutils literal notranslate"><span class="pre">MySQLUtils.query_data()</span></code></a></li>
+<li><a class="reference internal" href="#liangutil.mysqlutils.MySQLUtils.query_datas"><code class="docutils literal notranslate"><span class="pre">MySQLUtils.query_datas()</span></code></a></li>
+<li><a class="reference internal" href="#liangutil.mysqlutils.MySQLUtils.query_datas_dict_list"><code class="docutils literal notranslate"><span class="pre">MySQLUtils.query_datas_dict_list()</span></code></a></li>
+<li><a class="reference internal" href="#liangutil.mysqlutils.MySQLUtils.update_datas"><code class="docutils literal notranslate"><span class="pre">MySQLUtils.update_datas()</span></code></a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="/liangutil/#liangutil.requestutils.RequestUtils"><code class="docutils literal notranslate"><span class="pre">RequestUtils</span></code></a><ul>
-<li><a class="reference internal" href="/liangutil/#liangutil.requestutils.RequestUtils.file_download"><code class="docutils literal notranslate"><span class="pre">RequestUtils.file_download()</span></code></a></li>
-<li><a class="reference internal" href="/liangutil/#liangutil.requestutils.RequestUtils.file_download_github"><code class="docutils literal notranslate"><span class="pre">RequestUtils.file_download_github()</span></code></a></li>
-<li><a class="reference internal" href="/liangutil/#liangutil.requestutils.RequestUtils.file_download_once"><code class="docutils literal notranslate"><span class="pre">RequestUtils.file_download_once()</span></code></a></li>
-<li><a class="reference internal" href="/liangutil/#liangutil.requestutils.RequestUtils.get"><code class="docutils literal notranslate"><span class="pre">RequestUtils.get()</span></code></a></li>
-<li><a class="reference internal" href="/liangutil/#liangutil.requestutils.RequestUtils.get_header"><code class="docutils literal notranslate"><span class="pre">RequestUtils.get_header()</span></code></a></li>
-<li><a class="reference internal" href="/liangutil/#liangutil.requestutils.RequestUtils.post"><code class="docutils literal notranslate"><span class="pre">RequestUtils.post()</span></code></a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="/liangutil/#liangutil.requestutils.build_url"><code class="docutils literal notranslate"><span class="pre">build_url()</span></code></a></li>
+<li><a class="reference internal" href="#module-liangutil.redisutils">liangutil.redisutils module</a><ul>
+<li><a class="reference internal" href="#liangutil.redisutils.RedisUtils"><code class="docutils literal notranslate"><span class="pre">RedisUtils</span></code></a><ul>
+<li><a class="reference internal" href="#liangutil.redisutils.RedisUtils.close"><code class="docutils literal notranslate"><span class="pre">RedisUtils.close()</span></code></a></li>
+<li><a class="reference internal" href="#liangutil.redisutils.RedisUtils.enqueue_message"><code class="docutils literal notranslate"><span class="pre">RedisUtils.enqueue_message()</span></code></a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="/liangutil/#module-liangutil">Module contents</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-liangutil.requestutils">liangutil.requestutils module</a><ul>
+<li><a class="reference internal" href="#liangutil.requestutils.ChromeUtils"><code class="docutils literal notranslate"><span class="pre">ChromeUtils</span></code></a><ul>
+<li><a class="reference internal" href="#liangutil.requestutils.ChromeUtils.close"><code class="docutils literal notranslate"><span class="pre">ChromeUtils.close()</span></code></a></li>
+<li><a class="reference internal" href="#liangutil.requestutils.ChromeUtils.get_chrome_driver"><code class="docutils literal notranslate"><span class="pre">ChromeUtils.get_chrome_driver()</span></code></a></li>
+<li><a class="reference internal" href="#liangutil.requestutils.ChromeUtils.get_page_source"><code class="docutils literal notranslate"><span class="pre">ChromeUtils.get_page_source()</span></code></a></li>
+<li><a class="reference internal" href="#liangutil.requestutils.ChromeUtils.refresh_chrome"><code class="docutils literal notranslate"><span class="pre">ChromeUtils.refresh_chrome()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#liangutil.requestutils.RequestUtils"><code class="docutils literal notranslate"><span class="pre">RequestUtils</span></code></a><ul>
+<li><a class="reference internal" href="#liangutil.requestutils.RequestUtils.file_download"><code class="docutils literal notranslate"><span class="pre">RequestUtils.file_download()</span></code></a></li>
+<li><a class="reference internal" href="#liangutil.requestutils.RequestUtils.file_download_github"><code class="docutils literal notranslate"><span class="pre">RequestUtils.file_download_github()</span></code></a></li>
+<li><a class="reference internal" href="#liangutil.requestutils.RequestUtils.file_download_once"><code class="docutils literal notranslate"><span class="pre">RequestUtils.file_download_once()</span></code></a></li>
+<li><a class="reference internal" href="#liangutil.requestutils.RequestUtils.get"><code class="docutils literal notranslate"><span class="pre">RequestUtils.get()</span></code></a></li>
+<li><a class="reference internal" href="#liangutil.requestutils.RequestUtils.get_header"><code class="docutils literal notranslate"><span class="pre">RequestUtils.get_header()</span></code></a></li>
+<li><a class="reference internal" href="#liangutil.requestutils.RequestUtils.post"><code class="docutils literal notranslate"><span class="pre">RequestUtils.post()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#liangutil.requestutils.build_url"><code class="docutils literal notranslate"><span class="pre">build_url()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-liangutil">Module contents</a></li>
 </ul>
 </li>
 </ul>
@@ -127,17 +145,17 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="/liangutil/index.html">liangutil</a>
+          <a href="index.html">liangutil</a>
       </nav>
 
       <div class="wy-nav-content">
         <div class="rst-content">
           <div role="navigation" aria-label="页面导航">
   <ul class="wy-breadcrumbs">
-      <li><a href="/liangutil/index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
       <li class="breadcrumb-item active">liangutil package</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="/liangutil/_sources/liangutil.rst.txt" rel="nofollow"> 查看页面源码</a>
+            <a href="_sources/liangutil.rst.txt" rel="nofollow"> 查看页面源码</a>
       </li>
   </ul>
   <hr/>
@@ -146,21 +164,21 @@
            <div itemprop="articleBody">
              
   <section id="liangutil-package">
-<h1>liangutil package<a class="headerlink" href="/liangutil/#liangutil-package" title="此标题的永久链接"></a></h1>
+<h1>liangutil package<a class="headerlink" href="#liangutil-package" title="此标题的永久链接"></a></h1>
 <section id="submodules">
-<h2>Submodules<a class="headerlink" href="/liangutil/#submodules" title="此标题的永久链接"></a></h2>
+<h2>Submodules<a class="headerlink" href="#submodules" title="此标题的永久链接"></a></h2>
 </section>
 <section id="module-liangutil.kafkautils">
-<span id="liangutil-kafkautils-module"></span><h2>liangutil.kafkautils module<a class="headerlink" href="/liangutil/#module-liangutil.kafkautils" title="此标题的永久链接"></a></h2>
+<span id="liangutil-kafkautils-module"></span><h2>liangutil.kafkautils module<a class="headerlink" href="#module-liangutil.kafkautils" title="此标题的永久链接"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="liangutil.kafkautils.kafka_callback">
-<span class="sig-prename descclassname"><span class="pre">liangutil.kafkautils.</span></span><span class="sig-name descname"><span class="pre">kafka_callback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">err</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">msg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="/liangutil/_modules/liangutil/kafkautils.html#kafka_callback"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="/liangutil/#liangutil.kafkautils.kafka_callback" title="永久链接至目标"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">liangutil.kafkautils.</span></span><span class="sig-name descname"><span class="pre">kafka_callback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">err</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">msg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/kafkautils.html#kafka_callback"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.kafkautils.kafka_callback" title="永久链接至目标"></a></dt>
 <dd><p>kafka的回调函数(不要直接调用)</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="liangutil.kafkautils.kafka_consumer">
-<span class="sig-prename descclassname"><span class="pre">liangutil.kafkautils.</span></span><span class="sig-name descname"><span class="pre">kafka_consumer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">broker_ips</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">topics</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_offset_reset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'earliest'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message_limit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="/liangutil/_modules/liangutil/kafkautils.html#kafka_consumer"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="/liangutil/#liangutil.kafkautils.kafka_consumer" title="永久链接至目标"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">liangutil.kafkautils.</span></span><span class="sig-name descname"><span class="pre">kafka_consumer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">broker_ips</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">topics</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_offset_reset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'earliest'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message_limit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/kafkautils.html#kafka_consumer"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.kafkautils.kafka_consumer" title="永久链接至目标"></a></dt>
 <dd><p>Kafka消费者</p>
 <dl class="field-list simple">
 <dt class="field-odd">参数<span class="colon">:</span></dt>
@@ -184,7 +202,7 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="liangutil.kafkautils.kafka_producer">
-<span class="sig-prename descclassname"><span class="pre">liangutil.kafkautils.</span></span><span class="sig-name descname"><span class="pre">kafka_producer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">topic</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">broker_ips</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="/liangutil/_modules/liangutil/kafkautils.html#kafka_producer"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="/liangutil/#liangutil.kafkautils.kafka_producer" title="永久链接至目标"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">liangutil.kafkautils.</span></span><span class="sig-name descname"><span class="pre">kafka_producer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">topic</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">broker_ips</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/kafkautils.html#kafka_producer"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.kafkautils.kafka_producer" title="永久链接至目标"></a></dt>
 <dd><p>向kafka发送消息</p>
 <dl class="field-list simple">
 <dt class="field-odd">参数<span class="colon">:</span></dt>
@@ -200,15 +218,15 @@
 
 </section>
 <section id="module-liangutil.lianglog">
-<span id="liangutil-lianglog-module"></span><h2>liangutil.lianglog module<a class="headerlink" href="/liangutil/#module-liangutil.lianglog" title="此标题的永久链接"></a></h2>
+<span id="liangutil-lianglog-module"></span><h2>liangutil.lianglog module<a class="headerlink" href="#module-liangutil.lianglog" title="此标题的永久链接"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="liangutil.lianglog.LiangLog">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">liangutil.lianglog.</span></span><span class="sig-name descname"><span class="pre">LiangLog</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_print_console</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_record_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_record_db</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dir_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db_host</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db_port</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db_user</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db_pass</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="/liangutil/_modules/liangutil/lianglog.html#LiangLog"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="/liangutil/#liangutil.lianglog.LiangLog" title="永久链接至目标"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">liangutil.lianglog.</span></span><span class="sig-name descname"><span class="pre">LiangLog</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_print_console</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_record_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_record_db</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dir_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db_host</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db_port</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db_user</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db_pass</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/lianglog.html#LiangLog"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.lianglog.LiangLog" title="永久链接至目标"></a></dt>
 <dd><p>基类：<code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>LiangLog 记录日志类</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="liangutil.lianglog.LiangLog.print_log">
-<span class="sig-name descname"><span class="pre">print_log</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">content</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="/liangutil/_modules/liangutil/lianglog.html#LiangLog.print_log"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="/liangutil/#liangutil.lianglog.LiangLog.print_log" title="永久链接至目标"></a></dt>
+<span class="sig-name descname"><span class="pre">print_log</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">content</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/lianglog.html#LiangLog.print_log"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.lianglog.LiangLog.print_log" title="永久链接至目标"></a></dt>
 <dd><p>打印日志到控制台</p>
 <dl class="field-list simple">
 <dt class="field-odd">参数<span class="colon">:</span></dt>
@@ -222,7 +240,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="liangutil.lianglog.LiangLog.record_log">
-<span class="sig-name descname"><span class="pre">record_log</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">content</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="/liangutil/_modules/liangutil/lianglog.html#LiangLog.record_log"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="/liangutil/#liangutil.lianglog.LiangLog.record_log" title="永久链接至目标"></a></dt>
+<span class="sig-name descname"><span class="pre">record_log</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">content</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/lianglog.html#LiangLog.record_log"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.lianglog.LiangLog.record_log" title="永久链接至目标"></a></dt>
 <dd><p>记录日志总方法(推荐使用)</p>
 <dl class="field-list simple">
 <dt class="field-odd">参数<span class="colon">:</span></dt>
@@ -236,7 +254,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="liangutil.lianglog.LiangLog.record_log_to_db">
-<span class="sig-name descname"><span class="pre">record_log_to_db</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">content</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="/liangutil/_modules/liangutil/lianglog.html#LiangLog.record_log_to_db"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="/liangutil/#liangutil.lianglog.LiangLog.record_log_to_db" title="永久链接至目标"></a></dt>
+<span class="sig-name descname"><span class="pre">record_log_to_db</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">content</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/lianglog.html#LiangLog.record_log_to_db"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.lianglog.LiangLog.record_log_to_db" title="永久链接至目标"></a></dt>
 <dd><p>将日志记录到mysql</p>
 <dl class="field-list simple">
 <dt class="field-odd">参数<span class="colon">:</span></dt>
@@ -250,7 +268,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="liangutil.lianglog.LiangLog.record_log_to_file">
-<span class="sig-name descname"><span class="pre">record_log_to_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">content</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="/liangutil/_modules/liangutil/lianglog.html#LiangLog.record_log_to_file"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="/liangutil/#liangutil.lianglog.LiangLog.record_log_to_file" title="永久链接至目标"></a></dt>
+<span class="sig-name descname"><span class="pre">record_log_to_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">content</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/lianglog.html#LiangLog.record_log_to_file"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.lianglog.LiangLog.record_log_to_file" title="永久链接至目标"></a></dt>
 <dd><p>将日志记录到文件</p>
 <dl class="field-list simple">
 <dt class="field-odd">参数<span class="colon">:</span></dt>
@@ -266,10 +284,10 @@
 
 </section>
 <section id="module-liangutil.liangutils">
-<span id="liangutil-liangutils-module"></span><h2>liangutil.liangutils module<a class="headerlink" href="/liangutil/#module-liangutil.liangutils" title="此标题的永久链接"></a></h2>
+<span id="liangutil-liangutils-module"></span><h2>liangutil.liangutils module<a class="headerlink" href="#module-liangutil.liangutils" title="此标题的永久链接"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="liangutil.liangutils.check_path">
-<span class="sig-prename descclassname"><span class="pre">liangutil.liangutils.</span></span><span class="sig-name descname"><span class="pre">check_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="/liangutil/_modules/liangutil/liangutils.html#check_path"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="/liangutil/#liangutil.liangutils.check_path" title="永久链接至目标"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">liangutil.liangutils.</span></span><span class="sig-name descname"><span class="pre">check_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/liangutils.html#check_path"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.liangutils.check_path" title="永久链接至目标"></a></dt>
 <dd><p>检查目录是否存在</p>
 <p>如果目录不存在创建目录</p>
 <dl class="field-list simple">
@@ -286,8 +304,20 @@
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="liangutil.liangutils.check_string_latitude_longitude">
+<span class="sig-prename descclassname"><span class="pre">liangutil.liangutils.</span></span><span class="sig-name descname"><span class="pre">check_string_latitude_longitude</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/liangutils.html#check_string_latitude_longitude"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.liangutils.check_string_latitude_longitude" title="永久链接至目标"></a></dt>
+<dd><p>检查字符串是否符合纬度和经度的格式</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>text</strong> – 精度,纬度</p>
+</dd>
+</dl>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="liangutil.liangutils.code_location">
-<span class="sig-prename descclassname"><span class="pre">liangutil.liangutils.</span></span><span class="sig-name descname"><span class="pre">code_location</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">depth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="/liangutil/_modules/liangutil/liangutils.html#code_location"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="/liangutil/#liangutil.liangutils.code_location" title="永久链接至目标"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">liangutil.liangutils.</span></span><span class="sig-name descname"><span class="pre">code_location</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">depth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/liangutils.html#code_location"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.liangutils.code_location" title="永久链接至目标"></a></dt>
 <dd><p>得到调用该方法的文件名称和 代码行号</p>
 <dl class="field-list simple">
 <dt class="field-odd">参数<span class="colon">:</span></dt>
@@ -304,7 +334,7 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="liangutil.liangutils.file_to_json">
-<span class="sig-prename descclassname"><span class="pre">liangutil.liangutils.</span></span><span class="sig-name descname"><span class="pre">file_to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'utf-8'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="/liangutil/_modules/liangutil/liangutils.html#file_to_json"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="/liangutil/#liangutil.liangutils.file_to_json" title="永久链接至目标"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">liangutil.liangutils.</span></span><span class="sig-name descname"><span class="pre">file_to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'utf-8'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/liangutils.html#file_to_json"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.liangutils.file_to_json" title="永久链接至目标"></a></dt>
 <dd><p>读取json文件</p>
 <dl class="field-list simple">
 <dt class="field-odd">参数<span class="colon">:</span></dt>
@@ -324,7 +354,7 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="liangutil.liangutils.file_to_json_line">
-<span class="sig-prename descclassname"><span class="pre">liangutil.liangutils.</span></span><span class="sig-name descname"><span class="pre">file_to_json_line</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'utf-8'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="/liangutil/_modules/liangutil/liangutils.html#file_to_json_line"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="/liangutil/#liangutil.liangutils.file_to_json_line" title="永久链接至目标"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">liangutil.liangutils.</span></span><span class="sig-name descname"><span class="pre">file_to_json_line</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'utf-8'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/liangutils.html#file_to_json_line"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.liangutils.file_to_json_line" title="永久链接至目标"></a></dt>
 <dd><p>逐行读取每行都是json的文件</p>
 <dl class="field-list simple">
 <dt class="field-odd">参数<span class="colon">:</span></dt>
@@ -344,7 +374,7 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="liangutil.liangutils.find_all_files">
-<span class="sig-prename descclassname"><span class="pre">liangutil.liangutils.</span></span><span class="sig-name descname"><span class="pre">find_all_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="/liangutil/_modules/liangutil/liangutils.html#find_all_files"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="/liangutil/#liangutil.liangutils.find_all_files" title="永久链接至目标"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">liangutil.liangutils.</span></span><span class="sig-name descname"><span class="pre">find_all_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/liangutils.html#find_all_files"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.liangutils.find_all_files" title="永久链接至目标"></a></dt>
 <dd><p>根据目录寻找该目录下的所有子文件</p>
 <dl class="field-list simple">
 <dt class="field-odd">参数<span class="colon">:</span></dt>
@@ -361,7 +391,7 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="liangutil.liangutils.get_dirpath">
-<span class="sig-prename descclassname"><span class="pre">liangutil.liangutils.</span></span><span class="sig-name descname"><span class="pre">get_dirpath</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="/liangutil/_modules/liangutil/liangutils.html#get_dirpath"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="/liangutil/#liangutil.liangutils.get_dirpath" title="永久链接至目标"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">liangutil.liangutils.</span></span><span class="sig-name descname"><span class="pre">get_dirpath</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/liangutils.html#get_dirpath"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.liangutils.get_dirpath" title="永久链接至目标"></a></dt>
 <dd><p>获得目录路径</p>
 <p>如果是文件路径，提取父级目录路径（相对路径不要使用 ./ 开头）</p>
 <dl class="field-list simple">
@@ -379,7 +409,7 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="liangutil.liangutils.get_nowdate">
-<span class="sig-prename descclassname"><span class="pre">liangutil.liangutils.</span></span><span class="sig-name descname"><span class="pre">get_nowdate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">now</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="/liangutil/_modules/liangutil/liangutils.html#get_nowdate"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="/liangutil/#liangutil.liangutils.get_nowdate" title="永久链接至目标"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">liangutil.liangutils.</span></span><span class="sig-name descname"><span class="pre">get_nowdate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">now</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/liangutils.html#get_nowdate"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.liangutils.get_nowdate" title="永久链接至目标"></a></dt>
 <dd><p>获得现在的日期</p>
 <dl class="field-list simple">
 <dt class="field-odd">参数<span class="colon">:</span></dt>
@@ -396,7 +426,7 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="liangutil.liangutils.get_nowdatetime">
-<span class="sig-prename descclassname"><span class="pre">liangutil.liangutils.</span></span><span class="sig-name descname"><span class="pre">get_nowdatetime</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="/liangutil/_modules/liangutil/liangutils.html#get_nowdatetime"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="/liangutil/#liangutil.liangutils.get_nowdatetime" title="永久链接至目标"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">liangutil.liangutils.</span></span><span class="sig-name descname"><span class="pre">get_nowdatetime</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/liangutils.html#get_nowdatetime"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.liangutils.get_nowdatetime" title="永久链接至目标"></a></dt>
 <dd><p>获得亚洲上海时区现在的日期时间</p>
 <dl class="field-list simple">
 <dt class="field-odd">返回<span class="colon">:</span></dt>
@@ -410,7 +440,7 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="liangutil.liangutils.get_nowtime">
-<span class="sig-prename descclassname"><span class="pre">liangutil.liangutils.</span></span><span class="sig-name descname"><span class="pre">get_nowtime</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">now</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="/liangutil/_modules/liangutil/liangutils.html#get_nowtime"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="/liangutil/#liangutil.liangutils.get_nowtime" title="永久链接至目标"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">liangutil.liangutils.</span></span><span class="sig-name descname"><span class="pre">get_nowtime</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">now</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/liangutils.html#get_nowtime"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.liangutils.get_nowtime" title="永久链接至目标"></a></dt>
 <dd><p>获得现在的时间</p>
 <dl class="field-list simple">
 <dt class="field-odd">参数<span class="colon">:</span></dt>
@@ -427,7 +457,7 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="liangutil.liangutils.is_filepath">
-<span class="sig-prename descclassname"><span class="pre">liangutil.liangutils.</span></span><span class="sig-name descname"><span class="pre">is_filepath</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="/liangutil/_modules/liangutil/liangutils.html#is_filepath"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="/liangutil/#liangutil.liangutils.is_filepath" title="永久链接至目标"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">liangutil.liangutils.</span></span><span class="sig-name descname"><span class="pre">is_filepath</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/liangutils.html#is_filepath"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.liangutils.is_filepath" title="永久链接至目标"></a></dt>
 <dd><p>判断是否为文件路径</p>
 <p>相对路径不要使用 ./ 开头</p>
 <dl class="field-list simple">
@@ -446,7 +476,7 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="liangutil.liangutils.json_to_file">
-<span class="sig-prename descclassname"><span class="pre">liangutil.liangutils.</span></span><span class="sig-name descname"><span class="pre">json_to_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">outputfile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">json_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'utf-8'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="/liangutil/_modules/liangutil/liangutils.html#json_to_file"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="/liangutil/#liangutil.liangutils.json_to_file" title="永久链接至目标"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">liangutil.liangutils.</span></span><span class="sig-name descname"><span class="pre">json_to_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">outputfile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">json_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'utf-8'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/liangutils.html#json_to_file"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.liangutils.json_to_file" title="永久链接至目标"></a></dt>
 <dd><p>将json写入文件</p>
 <dl class="field-list simple">
 <dt class="field-odd">参数<span class="colon">:</span></dt>
@@ -467,7 +497,7 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="liangutil.liangutils.json_to_file_format">
-<span class="sig-prename descclassname"><span class="pre">liangutil.liangutils.</span></span><span class="sig-name descname"><span class="pre">json_to_file_format</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">outputfile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">json_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'utf-8'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="/liangutil/_modules/liangutil/liangutils.html#json_to_file_format"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="/liangutil/#liangutil.liangutils.json_to_file_format" title="永久链接至目标"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">liangutil.liangutils.</span></span><span class="sig-name descname"><span class="pre">json_to_file_format</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">outputfile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">json_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'utf-8'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/liangutils.html#json_to_file_format"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.liangutils.json_to_file_format" title="永久链接至目标"></a></dt>
 <dd><p>将json格式化写入文件</p>
 <dl class="field-list simple">
 <dt class="field-odd">参数<span class="colon">:</span></dt>
@@ -488,7 +518,7 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="liangutil.liangutils.json_to_line_file">
-<span class="sig-prename descclassname"><span class="pre">liangutil.liangutils.</span></span><span class="sig-name descname"><span class="pre">json_to_line_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">outputfile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_line</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'utf-8'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="/liangutil/_modules/liangutil/liangutils.html#json_to_line_file"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="/liangutil/#liangutil.liangutils.json_to_line_file" title="永久链接至目标"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">liangutil.liangutils.</span></span><span class="sig-name descname"><span class="pre">json_to_line_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">outputfile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_line</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'utf-8'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/liangutils.html#json_to_line_file"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.liangutils.json_to_line_file" title="永久链接至目标"></a></dt>
 <dd><p>将一个列表中的每个dict逐行写入文件</p>
 <dl class="field-list simple">
 <dt class="field-odd">参数<span class="colon">:</span></dt>
@@ -509,7 +539,7 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="liangutil.liangutils.print_log">
-<span class="sig-prename descclassname"><span class="pre">liangutil.liangutils.</span></span><span class="sig-name descname"><span class="pre">print_log</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">content</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="/liangutil/_modules/liangutil/liangutils.html#print_log"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="/liangutil/#liangutil.liangutils.print_log" title="永久链接至目标"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">liangutil.liangutils.</span></span><span class="sig-name descname"><span class="pre">print_log</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">content</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/liangutils.html#print_log"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.liangutils.print_log" title="永久链接至目标"></a></dt>
 <dd><p>打印日志</p>
 <dl class="field-list simple">
 <dt class="field-odd">参数<span class="colon">:</span></dt>
@@ -523,7 +553,7 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="liangutil.liangutils.random_sleep">
-<span class="sig-prename descclassname"><span class="pre">liangutil.liangutils.</span></span><span class="sig-name descname"><span class="pre">random_sleep</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lower_bound</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">upper_bound</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="/liangutil/_modules/liangutil/liangutils.html#random_sleep"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="/liangutil/#liangutil.liangutils.random_sleep" title="永久链接至目标"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">liangutil.liangutils.</span></span><span class="sig-name descname"><span class="pre">random_sleep</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lower_bound</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">upper_bound</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/liangutils.html#random_sleep"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.liangutils.random_sleep" title="永久链接至目标"></a></dt>
 <dd><p>随机睡眠若干秒</p>
 <dl class="field-list simple">
 <dt class="field-odd">参数<span class="colon">:</span></dt>
@@ -536,8 +566,42 @@
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="liangutil.liangutils.string_to_float">
+<span class="sig-prename descclassname"><span class="pre">liangutil.liangutils.</span></span><span class="sig-name descname"><span class="pre">string_to_float</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/liangutils.html#string_to_float"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.liangutils.string_to_float" title="永久链接至目标"></a></dt>
+<dd><p>将字符串转成浮点型</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>s</strong> – 字符串</p>
+</dd>
+<dt class="field-even">返回<span class="colon">:</span></dt>
+<dd class="field-even"><p>如果失败返回-1.0</p>
+</dd>
+<dt class="field-odd">返回类型<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="liangutil.liangutils.string_to_int">
+<span class="sig-prename descclassname"><span class="pre">liangutil.liangutils.</span></span><span class="sig-name descname"><span class="pre">string_to_int</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/liangutils.html#string_to_int"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.liangutils.string_to_int" title="永久链接至目标"></a></dt>
+<dd><p>将字符串转成整形</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>s</strong> – 字符串</p>
+</dd>
+<dt class="field-even">返回<span class="colon">:</span></dt>
+<dd class="field-even"><p>如果失败返回-1</p>
+</dd>
+<dt class="field-odd">返回类型<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="liangutil.liangutils.uncompress">
-<span class="sig-prename descclassname"><span class="pre">liangutil.liangutils.</span></span><span class="sig-name descname"><span class="pre">uncompress</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">src_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dest_dir_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="/liangutil/_modules/liangutil/liangutils.html#uncompress"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="/liangutil/#liangutil.liangutils.uncompress" title="永久链接至目标"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">liangutil.liangutils.</span></span><span class="sig-name descname"><span class="pre">uncompress</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">src_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dest_dir_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/liangutils.html#uncompress"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.liangutils.uncompress" title="永久链接至目标"></a></dt>
 <dd><p>解压文件(支持zip,tgz,tar,rar,gz)</p>
 <dl class="field-list simple">
 <dt class="field-odd">参数<span class="colon">:</span></dt>
@@ -557,14 +621,14 @@
 
 </section>
 <section id="module-liangutil.minioutils">
-<span id="liangutil-minioutils-module"></span><h2>liangutil.minioutils module<a class="headerlink" href="/liangutil/#module-liangutil.minioutils" title="此标题的永久链接"></a></h2>
+<span id="liangutil-minioutils-module"></span><h2>liangutil.minioutils module<a class="headerlink" href="#module-liangutil.minioutils" title="此标题的永久链接"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="liangutil.minioutils.MinIOUtils">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">liangutil.minioutils.</span></span><span class="sig-name descname"><span class="pre">MinIOUtils</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ip_port</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">access_key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">secret_key</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="/liangutil/_modules/liangutil/minioutils.html#MinIOUtils"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="/liangutil/#liangutil.minioutils.MinIOUtils" title="永久链接至目标"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">liangutil.minioutils.</span></span><span class="sig-name descname"><span class="pre">MinIOUtils</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ip_port</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">access_key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">secret_key</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/minioutils.html#MinIOUtils"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.minioutils.MinIOUtils" title="永久链接至目标"></a></dt>
 <dd><p>基类：<code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="liangutil.minioutils.MinIOUtils.get_jsonfile">
-<span class="sig-name descname"><span class="pre">get_jsonfile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bucket_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filepath</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="/liangutil/_modules/liangutil/minioutils.html#MinIOUtils.get_jsonfile"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="/liangutil/#liangutil.minioutils.MinIOUtils.get_jsonfile" title="永久链接至目标"></a></dt>
+<span class="sig-name descname"><span class="pre">get_jsonfile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bucket_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filepath</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="_modules/liangutil/minioutils.html#MinIOUtils.get_jsonfile"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.minioutils.MinIOUtils.get_jsonfile" title="永久链接至目标"></a></dt>
 <dd><p>获取MinIO中的json文件</p>
 <dl class="field-list simple">
 <dt class="field-odd">参数<span class="colon">:</span></dt>
@@ -581,7 +645,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="liangutil.minioutils.MinIOUtils.upload_file_to_minio">
-<span class="sig-name descname"><span class="pre">upload_file_to_minio</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bucket_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">current_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="/liangutil/_modules/liangutil/minioutils.html#MinIOUtils.upload_file_to_minio"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="/liangutil/#liangutil.minioutils.MinIOUtils.upload_file_to_minio" title="永久链接至目标"></a></dt>
+<span class="sig-name descname"><span class="pre">upload_file_to_minio</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bucket_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">current_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/minioutils.html#MinIOUtils.upload_file_to_minio"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.minioutils.MinIOUtils.upload_file_to_minio" title="永久链接至目标"></a></dt>
 <dd><p>将文件上传至MinIO</p>
 <dl class="field-list simple">
 <dt class="field-odd">参数<span class="colon">:</span></dt>
@@ -597,21 +661,183 @@
 </dd></dl>
 
 </section>
+<section id="module-liangutil.mysqlutils">
+<span id="liangutil-mysqlutils-module"></span><h2>liangutil.mysqlutils module<a class="headerlink" href="#module-liangutil.mysqlutils" title="此标题的永久链接"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="liangutil.mysqlutils.MySQLUtils">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">liangutil.mysqlutils.</span></span><span class="sig-name descname"><span class="pre">MySQLUtils</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">host</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">username</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">database</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/mysqlutils.html#MySQLUtils"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.mysqlutils.MySQLUtils" title="永久链接至目标"></a></dt>
+<dd><p>基类：<code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>MySQLUtils 基于 pymysql 库进行封装</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="liangutil.mysqlutils.MySQLUtils.check_table_exist">
+<span class="sig-name descname"><span class="pre">check_table_exist</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">table_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/mysqlutils.html#MySQLUtils.check_table_exist"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.mysqlutils.MySQLUtils.check_table_exist" title="永久链接至目标"></a></dt>
+<dd><p>根据表名检查表是否存在</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>table_name</strong> (<em>str</em>) – 表名</p>
+</dd>
+<dt class="field-even">返回<span class="colon">:</span></dt>
+<dd class="field-even"><p>存在返回True，否则返回False</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="liangutil.mysqlutils.MySQLUtils.exists_data">
+<span class="sig-name descname"><span class="pre">exists_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">table_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">condition</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/mysqlutils.html#MySQLUtils.exists_data"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.mysqlutils.MySQLUtils.exists_data" title="永久链接至目标"></a></dt>
+<dd><p>是否存在该数据</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>table_name</strong> (<em>str</em>) – 表名</p></li>
+<li><p><strong>columns</strong> (<em>list</em>) – 要查询的列名列表，如果为[]，则查询所有列</p></li>
+<li><p><strong>condition</strong> (<em>str</em>) – 查询条件</p></li>
+</ul>
+</dd>
+<dt class="field-even">返回<span class="colon">:</span></dt>
+<dd class="field-even"><p>存在True，否则False</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="liangutil.mysqlutils.MySQLUtils.fetchall_to_dict_list">
+<span class="sig-name descname"><span class="pre">fetchall_to_dict_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cursor</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/mysqlutils.html#MySQLUtils.fetchall_to_dict_list"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.mysqlutils.MySQLUtils.fetchall_to_dict_list" title="永久链接至目标"></a></dt>
+<dd><p>将pymysql的fetchall查询结果转换为装有dict类型的列表</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cursor</strong> – pymysql游标对象</p>
+</dd>
+<dt class="field-even">返回<span class="colon">:</span></dt>
+<dd class="field-even"><p>装有字典类型的列表</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="liangutil.mysqlutils.MySQLUtils.insert_data">
+<span class="sig-name descname"><span class="pre">insert_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">table_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/mysqlutils.html#MySQLUtils.insert_data"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.mysqlutils.MySQLUtils.insert_data" title="永久链接至目标"></a></dt>
+<dd><p>插入一条数据</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>table_name</strong> (<em>str</em>) – 表名</p></li>
+<li><p><strong>data</strong> (<em>dict</em>) – 要插入的数据，以字段名为键，字段值为值。</p></li>
+</ul>
+</dd>
+<dt class="field-even">返回<span class="colon">:</span></dt>
+<dd class="field-even"><p>插入成功返回”True”</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="liangutil.mysqlutils.MySQLUtils.insert_datas">
+<span class="sig-name descname"><span class="pre">insert_datas</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">table_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_list</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/mysqlutils.html#MySQLUtils.insert_datas"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.mysqlutils.MySQLUtils.insert_datas" title="永久链接至目标"></a></dt>
+<dd><p>插入一条数据</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>table_name</strong> (<em>str</em>) – 表名</p></li>
+<li><p><strong>data</strong> (<em>list</em>) – 要插入的数据列表，以字段名为键，字段值为值。</p></li>
+</ul>
+</dd>
+<dt class="field-even">返回<span class="colon">:</span></dt>
+<dd class="field-even"><p>插入成功返回”True”</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="liangutil.mysqlutils.MySQLUtils.query_data">
+<span class="sig-name descname"><span class="pre">query_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">table_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">condition</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/mysqlutils.html#MySQLUtils.query_data"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.mysqlutils.MySQLUtils.query_data" title="永久链接至目标"></a></dt>
+<dd><p>随机查询单条数据</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>table_name</strong> (<em>str</em>) – 表名</p></li>
+<li><p><strong>columns</strong> (<em>list</em>) – 要查询的列名列表，如果为[]，则查询所有列</p></li>
+<li><p><strong>condition</strong> (<em>str</em>) – 查询条件</p></li>
+</ul>
+</dd>
+<dt class="field-even">返回<span class="colon">:</span></dt>
+<dd class="field-even"><p>查询结果</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="liangutil.mysqlutils.MySQLUtils.query_datas">
+<span class="sig-name descname"><span class="pre">query_datas</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">table_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">condition</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/mysqlutils.html#MySQLUtils.query_datas"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.mysqlutils.MySQLUtils.query_datas" title="永久链接至目标"></a></dt>
+<dd><p>查询数据</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>table_name</strong> (<em>str</em>) – 表名</p></li>
+<li><p><strong>columns</strong> (<em>list</em>) – 要查询的列名列表，如果为[]，则查询所有列</p></li>
+<li><p><strong>condition</strong> (<em>str</em>) – 查询条件</p></li>
+</ul>
+</dd>
+<dt class="field-even">返回<span class="colon">:</span></dt>
+<dd class="field-even"><p>查询结果(元组)，每条记录为一个元组</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="liangutil.mysqlutils.MySQLUtils.query_datas_dict_list">
+<span class="sig-name descname"><span class="pre">query_datas_dict_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">table_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">condition</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/mysqlutils.html#MySQLUtils.query_datas_dict_list"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.mysqlutils.MySQLUtils.query_datas_dict_list" title="永久链接至目标"></a></dt>
+<dd><p>查询数据</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>table_name</strong> (<em>str</em>) – 表名</p></li>
+<li><p><strong>columns</strong> (<em>list</em>) – 要查询的列名列表，如果为[]，则查询所有列</p></li>
+<li><p><strong>condition</strong> (<em>str</em>) – 查询条件</p></li>
+</ul>
+</dd>
+<dt class="field-even">返回<span class="colon">:</span></dt>
+<dd class="field-even"><p>查询结果 [{},{},{}]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="liangutil.mysqlutils.MySQLUtils.update_datas">
+<span class="sig-name descname"><span class="pre">update_datas</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">table_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">condition</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/mysqlutils.html#MySQLUtils.update_datas"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.mysqlutils.MySQLUtils.update_datas" title="永久链接至目标"></a></dt>
+<dd><p>更新数据</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>table_name</strong> (<em>str</em>) – 表名</p></li>
+<li><p><strong>data</strong> (<em>dict</em>) – 要更新的数据，以字段名为键，字段值为值。</p></li>
+<li><p><strong>condition</strong> (<em>str</em>) – 更新条件</p></li>
+</ul>
+</dd>
+<dt class="field-even">返回<span class="colon">:</span></dt>
+<dd class="field-even"><p>更新成功返回 “True”，失败返回异常</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
 <section id="module-liangutil.redisutils">
-<span id="liangutil-redisutils-module"></span><h2>liangutil.redisutils module<a class="headerlink" href="/liangutil/#module-liangutil.redisutils" title="此标题的永久链接"></a></h2>
+<span id="liangutil-redisutils-module"></span><h2>liangutil.redisutils module<a class="headerlink" href="#module-liangutil.redisutils" title="此标题的永久链接"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="liangutil.redisutils.RedisUtils">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">liangutil.redisutils.</span></span><span class="sig-name descname"><span class="pre">RedisUtils</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">host</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dbnum</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="/liangutil/_modules/liangutil/redisutils.html#RedisUtils"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="/liangutil/#liangutil.redisutils.RedisUtils" title="永久链接至目标"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">liangutil.redisutils.</span></span><span class="sig-name descname"><span class="pre">RedisUtils</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">host</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dbnum</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/redisutils.html#RedisUtils"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.redisutils.RedisUtils" title="永久链接至目标"></a></dt>
 <dd><p>基类：<code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>RedisUtils 基于 redis 库进行封装</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="liangutil.redisutils.RedisUtils.close">
-<span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="/liangutil/_modules/liangutil/redisutils.html#RedisUtils.close"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="/liangutil/#liangutil.redisutils.RedisUtils.close" title="永久链接至目标"></a></dt>
+<span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/redisutils.html#RedisUtils.close"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.redisutils.RedisUtils.close" title="永久链接至目标"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="liangutil.redisutils.RedisUtils.enqueue_message">
-<span class="sig-name descname"><span class="pre">enqueue_message</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stream_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="/liangutil/_modules/liangutil/redisutils.html#RedisUtils.enqueue_message"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="/liangutil/#liangutil.redisutils.RedisUtils.enqueue_message" title="永久链接至目标"></a></dt>
+<span class="sig-name descname"><span class="pre">enqueue_message</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stream_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/redisutils.html#RedisUtils.enqueue_message"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.redisutils.RedisUtils.enqueue_message" title="永久链接至目标"></a></dt>
 <dd><p>向Redis流插入数据</p>
 <dl class="field-list simple">
 <dt class="field-odd">参数<span class="colon">:</span></dt>
@@ -627,21 +853,21 @@
 
 </section>
 <section id="module-liangutil.requestutils">
-<span id="liangutil-requestutils-module"></span><h2>liangutil.requestutils module<a class="headerlink" href="/liangutil/#module-liangutil.requestutils" title="此标题的永久链接"></a></h2>
+<span id="liangutil-requestutils-module"></span><h2>liangutil.requestutils module<a class="headerlink" href="#module-liangutil.requestutils" title="此标题的永久链接"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="liangutil.requestutils.ChromeUtils">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">liangutil.requestutils.</span></span><span class="sig-name descname"><span class="pre">ChromeUtils</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_ssl_verify</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_chrome_headless</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_undetected_chromedriver</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">proxy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="/liangutil/_modules/liangutil/requestutils.html#ChromeUtils"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="/liangutil/#liangutil.requestutils.ChromeUtils" title="永久链接至目标"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">liangutil.requestutils.</span></span><span class="sig-name descname"><span class="pre">ChromeUtils</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_ssl_verify</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_chrome_headless</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_undetected_chromedriver</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">proxy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/requestutils.html#ChromeUtils"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.requestutils.ChromeUtils" title="永久链接至目标"></a></dt>
 <dd><p>基类：<code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>ChromeUtils 基于 selenium 库进行的封装</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="liangutil.requestutils.ChromeUtils.close">
-<span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="/liangutil/_modules/liangutil/requestutils.html#ChromeUtils.close"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="/liangutil/#liangutil.requestutils.ChromeUtils.close" title="永久链接至目标"></a></dt>
+<span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/requestutils.html#ChromeUtils.close"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.requestutils.ChromeUtils.close" title="永久链接至目标"></a></dt>
 <dd><p>关闭Chrome驱动</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="liangutil.requestutils.ChromeUtils.get_chrome_driver">
-<span class="sig-name descname"><span class="pre">get_chrome_driver</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">proxy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="/liangutil/_modules/liangutil/requestutils.html#ChromeUtils.get_chrome_driver"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="/liangutil/#liangutil.requestutils.ChromeUtils.get_chrome_driver" title="永久链接至目标"></a></dt>
+<span class="sig-name descname"><span class="pre">get_chrome_driver</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">proxy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/requestutils.html#ChromeUtils.get_chrome_driver"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.requestutils.ChromeUtils.get_chrome_driver" title="永久链接至目标"></a></dt>
 <dd><p>获得一个chrome驱动</p>
 <dl class="field-list simple">
 <dt class="field-odd">参数<span class="colon">:</span></dt>
@@ -655,7 +881,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="liangutil.requestutils.ChromeUtils.get_page_source">
-<span class="sig-name descname"><span class="pre">get_page_source</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_sleep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">retry_count</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">proxy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="/liangutil/_modules/liangutil/requestutils.html#ChromeUtils.get_page_source"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="/liangutil/#liangutil.requestutils.ChromeUtils.get_page_source" title="永久链接至目标"></a></dt>
+<span class="sig-name descname"><span class="pre">get_page_source</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_sleep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">retry_count</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">proxy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/requestutils.html#ChromeUtils.get_page_source"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.requestutils.ChromeUtils.get_page_source" title="永久链接至目标"></a></dt>
 <dd><p>获得网页源码</p>
 <dl class="field-list simple">
 <dt class="field-odd">参数<span class="colon">:</span></dt>
@@ -677,7 +903,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="liangutil.requestutils.ChromeUtils.refresh_chrome">
-<span class="sig-name descname"><span class="pre">refresh_chrome</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="/liangutil/_modules/liangutil/requestutils.html#ChromeUtils.refresh_chrome"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="/liangutil/#liangutil.requestutils.ChromeUtils.refresh_chrome" title="永久链接至目标"></a></dt>
+<span class="sig-name descname"><span class="pre">refresh_chrome</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/requestutils.html#ChromeUtils.refresh_chrome"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.requestutils.ChromeUtils.refresh_chrome" title="永久链接至目标"></a></dt>
 <dd><p>重启浏览器</p>
 <dl class="field-list simple">
 <dt class="field-odd">返回<span class="colon">:</span></dt>
@@ -693,12 +919,12 @@
 
 <dl class="py class">
 <dt class="sig sig-object py" id="liangutil.requestutils.RequestUtils">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">liangutil.requestutils.</span></span><span class="sig-name descname"><span class="pre">RequestUtils</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_ssl_verify</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_choice_agent</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">proxies</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">proxy_host</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="/liangutil/_modules/liangutil/requestutils.html#RequestUtils"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="/liangutil/#liangutil.requestutils.RequestUtils" title="永久链接至目标"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">liangutil.requestutils.</span></span><span class="sig-name descname"><span class="pre">RequestUtils</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_ssl_verify</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_choice_agent</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">proxies</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">proxy_host</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/requestutils.html#RequestUtils"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.requestutils.RequestUtils" title="永久链接至目标"></a></dt>
 <dd><p>基类：<code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>RequestUtils 基于 requests 库进行的封装</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="liangutil.requestutils.RequestUtils.file_download">
-<span class="sig-name descname"><span class="pre">file_download</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_zip_extract</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">retry</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_wget</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">github_author</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">github_project</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="/liangutil/_modules/liangutil/requestutils.html#RequestUtils.file_download"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="/liangutil/#liangutil.requestutils.RequestUtils.file_download" title="永久链接至目标"></a></dt>
+<span class="sig-name descname"><span class="pre">file_download</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_zip_extract</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">retry</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_wget</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">github_author</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">github_project</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/requestutils.html#RequestUtils.file_download"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.requestutils.RequestUtils.file_download" title="永久链接至目标"></a></dt>
 <dd><p>下载文件主方法(推荐调用)</p>
 <dl class="field-list simple">
 <dt class="field-odd">参数<span class="colon">:</span></dt>
@@ -724,7 +950,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="liangutil.requestutils.RequestUtils.file_download_github">
-<span class="sig-name descname"><span class="pre">file_download_github</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">github_author</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">github_project</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="/liangutil/_modules/liangutil/requestutils.html#RequestUtils.file_download_github"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="/liangutil/#liangutil.requestutils.RequestUtils.file_download_github" title="永久链接至目标"></a></dt>
+<span class="sig-name descname"><span class="pre">file_download_github</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">github_author</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">github_project</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/requestutils.html#RequestUtils.file_download_github"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.requestutils.RequestUtils.file_download_github" title="永久链接至目标"></a></dt>
 <dd><p>下载代码仓库</p>
 <dl class="field-list simple">
 <dt class="field-odd">参数<span class="colon">:</span></dt>
@@ -745,7 +971,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="liangutil.requestutils.RequestUtils.file_download_once">
-<span class="sig-name descname"><span class="pre">file_download_once</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="/liangutil/_modules/liangutil/requestutils.html#RequestUtils.file_download_once"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="/liangutil/#liangutil.requestutils.RequestUtils.file_download_once" title="永久链接至目标"></a></dt>
+<span class="sig-name descname"><span class="pre">file_download_once</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/requestutils.html#RequestUtils.file_download_once"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.requestutils.RequestUtils.file_download_once" title="永久链接至目标"></a></dt>
 <dd><p>从指定URL下载单个文件的方法</p>
 <dl class="field-list simple">
 <dt class="field-odd">参数<span class="colon">:</span></dt>
@@ -762,7 +988,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="liangutil.requestutils.RequestUtils.get">
-<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">headers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">retry_count</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_response_json</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_sleep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">proxies</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="/liangutil/_modules/liangutil/requestutils.html#RequestUtils.get"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="/liangutil/#liangutil.requestutils.RequestUtils.get" title="永久链接至目标"></a></dt>
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">headers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">retry_count</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_response_json</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_sleep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">proxies</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/requestutils.html#RequestUtils.get"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.requestutils.RequestUtils.get" title="永久链接至目标"></a></dt>
 <dd><p>Get 请求</p>
 <dl class="field-list simple">
 <dt class="field-odd">参数<span class="colon">:</span></dt>
@@ -788,7 +1014,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="liangutil.requestutils.RequestUtils.get_header">
-<span class="sig-name descname"><span class="pre">get_header</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">is_choice_agent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="/liangutil/_modules/liangutil/requestutils.html#RequestUtils.get_header"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="/liangutil/#liangutil.requestutils.RequestUtils.get_header" title="永久链接至目标"></a></dt>
+<span class="sig-name descname"><span class="pre">get_header</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">is_choice_agent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/requestutils.html#RequestUtils.get_header"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.requestutils.RequestUtils.get_header" title="永久链接至目标"></a></dt>
 <dd><p>获得 USER-AGENT</p>
 <dl class="field-list simple">
 <dt class="field-odd">参数<span class="colon">:</span></dt>
@@ -805,7 +1031,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="liangutil.requestutils.RequestUtils.post">
-<span class="sig-name descname"><span class="pre">post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">headers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">retry_count</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_response_json</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_sleep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">proxies</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="/liangutil/_modules/liangutil/requestutils.html#RequestUtils.post"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="/liangutil/#liangutil.requestutils.RequestUtils.post" title="永久链接至目标"></a></dt>
+<span class="sig-name descname"><span class="pre">post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">headers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">retry_count</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_response_json</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_sleep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">proxies</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/requestutils.html#RequestUtils.post"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.requestutils.RequestUtils.post" title="永久链接至目标"></a></dt>
 <dd><p>Post 请求</p>
 <dl class="field-list simple">
 <dt class="field-odd">参数<span class="colon">:</span></dt>
@@ -834,7 +1060,7 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="liangutil.requestutils.build_url">
-<span class="sig-prename descclassname"><span class="pre">liangutil.requestutils.</span></span><span class="sig-name descname"><span class="pre">build_url</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base_url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="/liangutil/_modules/liangutil/requestutils.html#build_url"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="/liangutil/#liangutil.requestutils.build_url" title="永久链接至目标"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">liangutil.requestutils.</span></span><span class="sig-name descname"><span class="pre">build_url</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base_url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/liangutil/requestutils.html#build_url"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#liangutil.requestutils.build_url" title="永久链接至目标"></a></dt>
 <dd><p>构建url，将参数拼接在url后面</p>
 <dl class="field-list simple">
 <dt class="field-odd">参数<span class="colon">:</span></dt>
@@ -854,7 +1080,7 @@
 
 </section>
 <section id="module-liangutil">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="/liangutil/#module-liangutil" title="此标题的永久链接"></a></h2>
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-liangutil" title="此标题的永久链接"></a></h2>
 </section>
 </section>
 
@@ -869,9 +1095,9 @@
     <p>&#169; 版权所有 2023, LiAng88。</p>
   </div>
 
-  利用 <a href="/liangutil/https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
-    <a href="/liangutil/https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
-    由 <a href="/liangutil/https://readthedocs.org">Read the Docs</a> 开发.
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
    
 
 </footer>

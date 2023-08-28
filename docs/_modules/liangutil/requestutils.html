@@ -3,22 +3,22 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>liangutil.requestutils &mdash; liangutil 0.1.10 文档</title>
-      <link rel="stylesheet" href="/liangutil/../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="/liangutil/../../_static/css/theme.css" type="text/css" />
+  <title>liangutil.requestutils &mdash; liangutil 0.1.12 文档</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
-    <script src="/liangutil/../../_static/js/html5shiv.min.js"></script>
+    <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="/liangutil/../../_static/jquery.js?v=5d32c60e"></script>
-        <script src="/liangutil/../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../../" id="documentation_options" src="/liangutil/../../_static/documentation_options.js?v=bdd39a68"></script>
-        <script src="/liangutil/../../_static/doctools.js?v=888ff710"></script>
-        <script src="/liangutil/../../_static/sphinx_highlight.js?v=4825356b"></script>
-        <script src="/liangutil/../../_static/translations.js?v=beaddf03"></script>
-    <script src="/liangutil/../../_static/js/theme.js"></script>
-    <link rel="index" title="索引" href="/liangutil/../../genindex.html" />
-    <link rel="search" title="搜索" href="/liangutil/../../search.html" /> 
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=985fe25c"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../../_static/translations.js?v=beaddf03"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../../genindex.html" />
+    <link rel="search" title="搜索" href="../../search.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -29,7 +29,7 @@
 
           
           
-          <a href="/liangutil/../../index.html" class="icon icon-home">
+          <a href="../../index.html" class="icon icon-home">
             liangutil
           </a>
 <div role="search">
@@ -48,15 +48,15 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="/liangutil/../../index.html">liangutil</a>
+          <a href="../../index.html">liangutil</a>
       </nav>
 
       <div class="wy-nav-content">
         <div class="rst-content">
           <div role="navigation" aria-label="页面导航">
   <ul class="wy-breadcrumbs">
-      <li><a href="/liangutil/../../index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="/liangutil/../index.html">模块代码</a></li>
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">模块代码</a></li>
       <li class="breadcrumb-item active">liangutil.requestutils</li>
       <li class="wy-breadcrumbs-aside">
       </li>
@@ -91,7 +91,7 @@
 
 
 <span class="c1"># 封装requests请求</span>
-<div class="viewcode-block" id="RequestUtils"><a class="viewcode-back" href="/liangutil/../../liangutil.html#liangutil.requestutils.RequestUtils">[文档]</a><span class="k">class</span> <span class="nc">RequestUtils</span><span class="p">:</span>
+<div class="viewcode-block" id="RequestUtils"><a class="viewcode-back" href="../../liangutil.html#liangutil.requestutils.RequestUtils">[文档]</a><span class="k">class</span> <span class="nc">RequestUtils</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    RequestUtils 基于 requests 库进行的封装</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -127,7 +127,7 @@
             <span class="k">else</span> <span class="kc">None</span>
         <span class="p">)</span>
 
-<div class="viewcode-block" id="RequestUtils.get_header"><a class="viewcode-back" href="/liangutil/../../liangutil.html#liangutil.requestutils.RequestUtils.get_header">[文档]</a>    <span class="k">def</span> <span class="nf">get_header</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">is_choice_agent</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="RequestUtils.get_header"><a class="viewcode-back" href="../../liangutil.html#liangutil.requestutils.RequestUtils.get_header">[文档]</a>    <span class="k">def</span> <span class="nf">get_header</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">is_choice_agent</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;获得 USER-AGENT</span>
 
 <span class="sd">        Args:</span>
@@ -177,7 +177,7 @@
             <span class="n">header</span><span class="p">[</span><span class="s2">&quot;User-Agent&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ua</span>
         <span class="k">return</span> <span class="n">header</span></div>
 
-<div class="viewcode-block" id="RequestUtils.get"><a class="viewcode-back" href="/liangutil/../../liangutil.html#liangutil.requestutils.RequestUtils.get">[文档]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span>
+<div class="viewcode-block" id="RequestUtils.get"><a class="viewcode-back" href="../../liangutil.html#liangutil.requestutils.RequestUtils.get">[文档]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">url</span><span class="p">,</span>
         <span class="n">headers</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
@@ -253,7 +253,7 @@
 
         <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="n">status_code</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="n">url</span><span class="p">}</span></div>
 
-<div class="viewcode-block" id="RequestUtils.post"><a class="viewcode-back" href="/liangutil/../../liangutil.html#liangutil.requestutils.RequestUtils.post">[文档]</a>    <span class="k">def</span> <span class="nf">post</span><span class="p">(</span>
+<div class="viewcode-block" id="RequestUtils.post"><a class="viewcode-back" href="../../liangutil.html#liangutil.requestutils.RequestUtils.post">[文档]</a>    <span class="k">def</span> <span class="nf">post</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">url</span><span class="p">,</span>
         <span class="n">headers</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
@@ -334,7 +334,7 @@
 
         <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="n">status_code</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="n">url</span><span class="p">}</span></div>
 
-<div class="viewcode-block" id="RequestUtils.file_download_once"><a class="viewcode-back" href="/liangutil/../../liangutil.html#liangutil.requestutils.RequestUtils.file_download_once">[文档]</a>    <span class="k">def</span> <span class="nf">file_download_once</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+<div class="viewcode-block" id="RequestUtils.file_download_once"><a class="viewcode-back" href="../../liangutil.html#liangutil.requestutils.RequestUtils.file_download_once">[文档]</a>    <span class="k">def</span> <span class="nf">file_download_once</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;从指定URL下载单个文件的方法</span>
 
 <span class="sd">        Args:</span>
@@ -361,7 +361,7 @@
                     <span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">get_header</span><span class="p">(),</span> <span class="n">stream</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">timeout</span>
                 <span class="p">)</span>  <span class="c1"># stream=True</span></div>
 
-<div class="viewcode-block" id="RequestUtils.file_download_github"><a class="viewcode-back" href="/liangutil/../../liangutil.html#liangutil.requestutils.RequestUtils.file_download_github">[文档]</a>    <span class="k">def</span> <span class="nf">file_download_github</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">github_author</span><span class="p">,</span> <span class="n">github_project</span><span class="p">,</span> <span class="n">file_path</span><span class="p">):</span>
+<div class="viewcode-block" id="RequestUtils.file_download_github"><a class="viewcode-back" href="../../liangutil.html#liangutil.requestutils.RequestUtils.file_download_github">[文档]</a>    <span class="k">def</span> <span class="nf">file_download_github</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">github_author</span><span class="p">,</span> <span class="n">github_project</span><span class="p">,</span> <span class="n">file_path</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;下载代码仓库</span>
 
 <span class="sd">        Args:</span>
@@ -402,7 +402,7 @@
             <span class="k">return</span> <span class="kc">True</span>
         <span class="k">return</span> <span class="kc">False</span></div>
 
-<div class="viewcode-block" id="RequestUtils.file_download"><a class="viewcode-back" href="/liangutil/../../liangutil.html#liangutil.requestutils.RequestUtils.file_download">[文档]</a>    <span class="k">def</span> <span class="nf">file_download</span><span class="p">(</span>
+<div class="viewcode-block" id="RequestUtils.file_download"><a class="viewcode-back" href="../../liangutil.html#liangutil.requestutils.RequestUtils.file_download">[文档]</a>    <span class="k">def</span> <span class="nf">file_download</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">url</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
         <span class="n">file_path</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
@@ -504,7 +504,7 @@
 <span class="c1"># https://selenium-python.readthedocs.io/page-objects.html</span>
 <span class="c1"># https://www.selenium.dev/zh-cn/documentation/</span>
 <span class="c1"># 封装 selenium</span>
-<div class="viewcode-block" id="ChromeUtils"><a class="viewcode-back" href="/liangutil/../../liangutil.html#liangutil.requestutils.ChromeUtils">[文档]</a><span class="k">class</span> <span class="nc">ChromeUtils</span><span class="p">:</span>
+<div class="viewcode-block" id="ChromeUtils"><a class="viewcode-back" href="../../liangutil.html#liangutil.requestutils.ChromeUtils">[文档]</a><span class="k">class</span> <span class="nc">ChromeUtils</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    ChromeUtils 基于 selenium 库进行的封装</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -526,7 +526,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">proxy</span> <span class="o">=</span> <span class="n">proxy</span>  <span class="c1"># http://xxxxxx</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">driver</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_chrome_driver</span><span class="p">(</span><span class="n">proxy</span><span class="p">)</span>
 
-<div class="viewcode-block" id="ChromeUtils.get_chrome_driver"><a class="viewcode-back" href="/liangutil/../../liangutil.html#liangutil.requestutils.ChromeUtils.get_chrome_driver">[文档]</a>    <span class="k">def</span> <span class="nf">get_chrome_driver</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">proxy</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="ChromeUtils.get_chrome_driver"><a class="viewcode-back" href="../../liangutil.html#liangutil.requestutils.ChromeUtils.get_chrome_driver">[文档]</a>    <span class="k">def</span> <span class="nf">get_chrome_driver</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">proxy</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;获得一个chrome驱动</span>
 
 <span class="sd">        Args:</span>
@@ -588,7 +588,7 @@
 
         <span class="k">return</span> <span class="n">driver</span></div>
 
-<div class="viewcode-block" id="ChromeUtils.refresh_chrome"><a class="viewcode-back" href="/liangutil/../../liangutil.html#liangutil.requestutils.ChromeUtils.refresh_chrome">[文档]</a>    <span class="k">def</span> <span class="nf">refresh_chrome</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="ChromeUtils.refresh_chrome"><a class="viewcode-back" href="../../liangutil.html#liangutil.requestutils.ChromeUtils.refresh_chrome">[文档]</a>    <span class="k">def</span> <span class="nf">refresh_chrome</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;重启浏览器</span>
 
 <span class="sd">        Returns:</span>
@@ -611,7 +611,7 @@
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ERROR&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">))</span>
         <span class="k">return</span> <span class="kc">False</span></div>
 
-<div class="viewcode-block" id="ChromeUtils.get_page_source"><a class="viewcode-back" href="/liangutil/../../liangutil.html#liangutil.requestutils.ChromeUtils.get_page_source">[文档]</a>    <span class="k">def</span> <span class="nf">get_page_source</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">time_sleep</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">retry_count</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">proxy</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+<div class="viewcode-block" id="ChromeUtils.get_page_source"><a class="viewcode-back" href="../../liangutil.html#liangutil.requestutils.ChromeUtils.get_page_source">[文档]</a>    <span class="k">def</span> <span class="nf">get_page_source</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">time_sleep</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">retry_count</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">proxy</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;获得网页源码</span>
 
 <span class="sd">        Args:</span>
@@ -672,14 +672,14 @@
 
         <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">current_url</span><span class="p">}</span></div>
 
-<div class="viewcode-block" id="ChromeUtils.close"><a class="viewcode-back" href="/liangutil/../../liangutil.html#liangutil.requestutils.ChromeUtils.close">[文档]</a>    <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="ChromeUtils.close"><a class="viewcode-back" href="../../liangutil.html#liangutil.requestutils.ChromeUtils.close">[文档]</a>    <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;关闭Chrome驱动&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">driver</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">driver</span> <span class="o">=</span> <span class="kc">None</span></div></div>
 
 
-<div class="viewcode-block" id="build_url"><a class="viewcode-back" href="/liangutil/../../liangutil.html#liangutil.requestutils.build_url">[文档]</a><span class="k">def</span> <span class="nf">build_url</span><span class="p">(</span><span class="n">base_url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
+<div class="viewcode-block" id="build_url"><a class="viewcode-back" href="../../liangutil.html#liangutil.requestutils.build_url">[文档]</a><span class="k">def</span> <span class="nf">build_url</span><span class="p">(</span><span class="n">base_url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;构建url，将参数拼接在url后面</span>
 
 <span class="sd">    Args:</span>
@@ -703,9 +703,9 @@
     <p>&#169; 版权所有 2023, LiAng88。</p>
   </div>
 
-  利用 <a href="/liangutil/https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
-    <a href="/liangutil/https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
-    由 <a href="/liangutil/https://readthedocs.org">Read the Docs</a> 开发.
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
    
 
 </footer>

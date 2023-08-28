@@ -3,22 +3,22 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>liangutil.kafkautils &mdash; liangutil 0.1.10 文档</title>
-      <link rel="stylesheet" href="/liangutil/../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="/liangutil/../../_static/css/theme.css" type="text/css" />
+  <title>liangutil.kafkautils &mdash; liangutil 0.1.12 文档</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
-    <script src="/liangutil/../../_static/js/html5shiv.min.js"></script>
+    <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="/liangutil/../../_static/jquery.js?v=5d32c60e"></script>
-        <script src="/liangutil/../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../../" id="documentation_options" src="/liangutil/../../_static/documentation_options.js?v=bdd39a68"></script>
-        <script src="/liangutil/../../_static/doctools.js?v=888ff710"></script>
-        <script src="/liangutil/../../_static/sphinx_highlight.js?v=4825356b"></script>
-        <script src="/liangutil/../../_static/translations.js?v=beaddf03"></script>
-    <script src="/liangutil/../../_static/js/theme.js"></script>
-    <link rel="index" title="索引" href="/liangutil/../../genindex.html" />
-    <link rel="search" title="搜索" href="/liangutil/../../search.html" /> 
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=985fe25c"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../../_static/translations.js?v=beaddf03"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../../genindex.html" />
+    <link rel="search" title="搜索" href="../../search.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -29,7 +29,7 @@
 
           
           
-          <a href="/liangutil/../../index.html" class="icon icon-home">
+          <a href="../../index.html" class="icon icon-home">
             liangutil
           </a>
 <div role="search">
@@ -48,15 +48,15 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="/liangutil/../../index.html">liangutil</a>
+          <a href="../../index.html">liangutil</a>
       </nav>
 
       <div class="wy-nav-content">
         <div class="rst-content">
           <div role="navigation" aria-label="页面导航">
   <ul class="wy-breadcrumbs">
-      <li><a href="/liangutil/../../index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="/liangutil/../index.html">模块代码</a></li>
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">模块代码</a></li>
       <li class="breadcrumb-item active">liangutil.kafkautils</li>
       <li class="wy-breadcrumbs-aside">
       </li>
@@ -73,7 +73,7 @@
 <span class="kn">from</span> <span class="nn">liangutil.liangutils</span> <span class="kn">import</span> <span class="n">get_nowdatetime</span>
 
 
-<div class="viewcode-block" id="kafka_callback"><a class="viewcode-back" href="/liangutil/../../liangutil.html#liangutil.kafkautils.kafka_callback">[文档]</a><span class="k">def</span> <span class="nf">kafka_callback</span><span class="p">(</span><span class="n">err</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
+<div class="viewcode-block" id="kafka_callback"><a class="viewcode-back" href="../../liangutil.html#liangutil.kafkautils.kafka_callback">[文档]</a><span class="k">def</span> <span class="nf">kafka_callback</span><span class="p">(</span><span class="n">err</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;kafka的回调函数(不要直接调用)&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">err</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Failed to deliver message: </span><span class="si">{0}</span><span class="s2"> || </span><span class="si">{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">err</span><span class="p">,</span> <span class="n">get_nowdatetime</span><span class="p">()))</span>
@@ -85,7 +85,7 @@
         <span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="kafka_producer"><a class="viewcode-back" href="/liangutil/../../liangutil.html#liangutil.kafkautils.kafka_producer">[文档]</a><span class="k">def</span> <span class="nf">kafka_producer</span><span class="p">(</span><span class="n">topic</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">broker_ips</span><span class="p">):</span>
+<div class="viewcode-block" id="kafka_producer"><a class="viewcode-back" href="../../liangutil.html#liangutil.kafkautils.kafka_producer">[文档]</a><span class="k">def</span> <span class="nf">kafka_producer</span><span class="p">(</span><span class="n">topic</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">broker_ips</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;向kafka发送消息</span>
 
 <span class="sd">    Args:</span>
@@ -112,7 +112,7 @@
     <span class="n">p</span><span class="o">.</span><span class="n">flush</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="kafka_consumer"><a class="viewcode-back" href="/liangutil/../../liangutil.html#liangutil.kafkautils.kafka_consumer">[文档]</a><span class="k">def</span> <span class="nf">kafka_consumer</span><span class="p">(</span>
+<div class="viewcode-block" id="kafka_consumer"><a class="viewcode-back" href="../../liangutil.html#liangutil.kafkautils.kafka_consumer">[文档]</a><span class="k">def</span> <span class="nf">kafka_consumer</span><span class="p">(</span>
     <span class="n">broker_ips</span><span class="p">,</span>
     <span class="n">topics</span><span class="p">,</span>
     <span class="n">group_id</span><span class="p">,</span>
@@ -187,9 +187,9 @@
     <p>&#169; 版权所有 2023, LiAng88。</p>
   </div>
 
-  利用 <a href="/liangutil/https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
-    <a href="/liangutil/https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
-    由 <a href="/liangutil/https://readthedocs.org">Read the Docs</a> 开发.
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
    
 
 </footer>
